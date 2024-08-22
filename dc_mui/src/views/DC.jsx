@@ -24,9 +24,7 @@ const DC = () =>  {
   const [activeKey, setActiveKey] = useState(1)
 return (
   <>
-
-
-  
+   <h1>Data Center</h1>
   <DataTable DataList ={data} columnss ={columns} collections = {""} noAdds={false} noEdit={false}/>
   </>
 

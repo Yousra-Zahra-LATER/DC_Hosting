@@ -45,8 +45,8 @@ const DataTable = (props ) => {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-  };
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+      };
 
   const addRowToCollection =(newRow)=> {
     try {
@@ -113,18 +113,15 @@ const DataTable = (props ) => {
 
         onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
         options={{
-<<<<<<< HEAD
-          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: props.isgrouping,exportButton: true, sorting: true,
-=======
-          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: false,exportButton: true, sorting: true, filtering: true,
+          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: false,exportButton: true, sorting: true,
          
->>>>>>> 04f33b09ecf67f4ac8e70a6176e35cc2e6092ed3
           rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
           headerStyle: {
-            backgroundColor: 'blue',
-            color: '#FFF'
+            backgroundColor: '',
+            color: 'black',
+            fontWeight: 'bold'
           }
         }}
        
