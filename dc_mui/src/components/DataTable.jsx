@@ -20,7 +20,7 @@ const DataTable = (props ) => {
   const [noAdd, setnoAdd] = useState(props.noAdds);
   const [noEdit, setnoEdit] = useState(props.noEdit);
   const [selectedRow, setSelectedRow] = useState(null);
-  
+  const [hoveredRow, setHoveredRow] = useState(null);
   const typeUser = props.type;
   
   
@@ -115,11 +115,15 @@ const DataTable = (props ) => {
           rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
+          rowStyle: rowData => ({
+            backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : (hoveredRow === rowData.tableData.id) ? '#F5F5F5' : '#FFF',
+          }),
           headerStyle: {
-            backgroundColor: '#01579b',
+            backgroundColor: 'red',
             color: '#FFF'
           }
         }}
+        onRowHover={(event, rowData) => setHoveredRow(rowData.tableData.id)}
     //     localization={{
     //       body: {
     //           emptyDataSourceMessage: "Pas d'enregistreent à afficher",
