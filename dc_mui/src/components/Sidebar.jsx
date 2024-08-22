@@ -40,6 +40,9 @@ import RouterIcon from "@mui/icons-material/Router";
 import ShieldIcon from "@mui/icons-material/Shield";
 import StorageIcon from "@mui/icons-material/Storage";
 import DevicesIcon from "@mui/icons-material/Devices";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
 
 const drawerWidth = 200;
 const DrawerIconColor = '#1E2A5E';
@@ -71,7 +74,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  backgroundColor: AppBarColor,
+  backgroundColor: DrawerColor,
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
@@ -128,6 +131,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [openD, setOpenD] = useState(false);
   const [nestedOpen, setNestedOpen] = useState(false); // State for nested list
+  const [AccountOpen, setAccountOpen] = useState(false);
   const [ipamOpen, setIpamOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -155,6 +159,10 @@ export default function MiniDrawer() {
 
   const handleNestedClick1 = () => {
     setOpenD(!openD);
+  };
+
+  const handleAccountClick = () => {
+    setAccountOpen(!AccountOpen);
   };
 
   const handleNestedClick = () => {
@@ -517,6 +525,75 @@ export default function MiniDrawer() {
               </ListItemButton>
             </List>
           </Collapse>
+
+          <CustomListItem disablePadding>
+            <ListItemButton
+             onClick={() => navigate('/')}
+              sx={{
+                maxHeight: 42,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                  
+                }}
+              >
+                <PersonIcon sx={{ color: DrawerIconColor }} />
+              </ListItemIcon>
+              <CustomListItemText
+                primary="Client"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </CustomListItem>
+
+          <CustomListItem disablePadding>
+            <ListItemButton
+              onClick={handleAccountClick}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+              <AccountCircleIcon sx={{ color: DrawerIconColor }} />
+              </ListItemIcon>
+              
+          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
+              {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
+            </ListItemButton>
+          </CustomListItem>
+          <Collapse in={AccountOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
+                <ListItemIcon>
+                  < PersonIcon sx={{ color: DrawerIconColor }}/>
+                </ListItemIcon>
+                <CustomListItemText primary="Profile" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/auth')}>
+                <ListItemIcon>
+                  <LockIcon sx={{ color: DrawerIconColor }}/>
+                </ListItemIcon>
+                <CustomListItemText primary="Authentication" />
+              </ListItemButton>
+             
+            </List>
+          </Collapse>
+
+
         </List>
         <Divider />
       </Drawer>

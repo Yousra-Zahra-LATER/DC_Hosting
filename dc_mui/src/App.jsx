@@ -6,6 +6,8 @@ import MiniDrawer from './components/Sidebar';
 import Box from '@mui/material/Box';
 import DC from './views/DC';
 import VM from './views/VM';
+import Cluster from './views/Cluster';
+import Authentication from './views/Auuthentication';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
             <Route path="/profile" element={<Profile />} /> 
             <Route path="/dc" element={<DC/>} />
             <Route path="/vm" element={<VM/>} /> 
+            <Route path="/cluster" element={<Cluster/>} /> 
+            <Route path="/auth" element={<Authentication/>} /> 
           </Routes>
         </Box>
       </Box>
