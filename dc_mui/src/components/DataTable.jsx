@@ -4,10 +4,11 @@ import MaterialTable,{MTableEditField,AutoComplete} from 'material-table';
 import { ThemeProvider } from '@mui/styles'
 import { createTheme } from '@mui/material';
 
+
 import { AddBox, ArrowDownward,Check, 
-  ChevronLeft, ChevronRight, Clear, DeleteOutline, 
+  ChevronLeft, ChevronRight, Clear, 
    Edit,  FilterList,  FirstPage, LastPage,
-    Remove, SaveAlt,  Search , ViewColumn } from "@material-ui/icons";
+    Remove, SaveAlt,  Search , ViewColumn ,Delete as DeleteIcon,} from "@material-ui/icons";
 
 
 
@@ -20,7 +21,6 @@ const DataTable = (props ) => {
   const [noAdd, setnoAdd] = useState(props.noAdds);
   const [noEdit, setnoEdit] = useState(props.noEdit);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [hoveredRow, setHoveredRow] = useState(null);
   const typeUser = props.type;
   
   
@@ -30,9 +30,11 @@ const DataTable = (props ) => {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => (
+      <DeleteIcon {...props} ref={ref} style={{ color: '#D32F2F' }} />  // Colorier le bouton delete en rouge
+    )),
     DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} style={{ color: '#666666' }}/>),
     Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
@@ -111,19 +113,17 @@ const DataTable = (props ) => {
 
         onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
         options={{
-          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: true,exportButton: true, sorting: true,
+          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: false,exportButton: true, sorting: true, filtering: true,
+         
           rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
-          rowStyle: rowData => ({
-            backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : (hoveredRow === rowData.tableData.id) ? '#F5F5F5' : '#FFF',
-          }),
           headerStyle: {
-            backgroundColor: 'red',
+            backgroundColor: 'blue',
             color: '#FFF'
           }
         }}
-        onRowHover={(event, rowData) => setHoveredRow(rowData.tableData.id)}
+       
     //     localization={{
     //       body: {
     //           emptyDataSourceMessage: "Pas d'enregistreent à afficher",
