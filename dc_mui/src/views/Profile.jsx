@@ -56,7 +56,7 @@ const AdminProfileUpdate = () => {
     <Container component="main" maxWidth="md"> {/* Changer maxWidth pour élargir la boîte */}
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -65,8 +65,10 @@ const AdminProfileUpdate = () => {
           padding: 3, // Padding interne de la boîte
         }}
       >
-        <Typography component="h1" variant="h5">
-          Update Admin Profile
+        <Typography component="h1" variant="h5"  sx={{
+           marginBottom: 5,
+          }}>
+          Update My Profile
         </Typography>
         <Box
           component="form"
