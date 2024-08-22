@@ -11,7 +11,6 @@ import { AddBox, ArrowDownward,Check,
     Remove, SaveAlt,  Search , ViewColumn ,Delete as DeleteIcon,} from "@material-ui/icons";
 
 
-
 const DataTable = (props ) => {
 
   let [data, setData] = useState(props.DataList);
@@ -113,15 +112,16 @@ const DataTable = (props ) => {
 
         onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
         options={{
-          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: false,exportButton: true, sorting: true,
-         
-          rowStyle: rowData => ({
+<<<<<<< HEAD
+          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: props.isgrouping,exportButton: true, sorting: true,
+=======
+          
+>>>>>>> rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
           headerStyle: {
-            backgroundColor: '',
-            color: 'black',
-            fontWeight: 'bold'
+            backgroundColor: 'blue',
+            color: '#FFF'
           }
         }}
        
