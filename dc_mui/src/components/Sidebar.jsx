@@ -47,8 +47,8 @@ import LockIcon from '@mui/icons-material/Lock';
 const drawerWidth = 250;
 const DrawerIconColor = '#1E2A5E';
 const AppBarColor = '#F7F7F8';
-const DrawerColor = '#55679C';
-const ListItemColor = '#e3f2fd';
+const DrawerColor = '#D1E9F6';
+const ListItemColor = '#55679C';
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -183,17 +183,24 @@ export default function MiniDrawer() {
 
   const CustomListItemText = styled(ListItemText)(({ theme }) => ({
     fontFamily: 'Exo 2, sans-serif !important',
-    fontWeight: 500, // Adjust as needed
+    fontWeight: 200, // Adjust as needed
+   
   }));
 
   const CustomListItem = styled(ListItem)(({ theme }) => ({
     
     borderRadius: '2px',
+   
+    transition: 'transform 0.3s ease, background-color 0.3s ease',
     '&:hover': {
+      transform: 'scale(0.96)',
       backgroundColor: ListItemColor , // Slightly darker blue for hover effect
+      color :'white',
       boxShadow: `0 6px 12px rgba(0, 0, 0, 0.2)`, // Darker shadow color on hover
     },
   }));
+
+  
   
   return (
     <>
@@ -216,7 +223,6 @@ export default function MiniDrawer() {
               alt="Logo"
               style={{
                 width: "40px",
-                
               }}
             />
           </IconButton>
@@ -324,7 +330,7 @@ export default function MiniDrawer() {
 
         
         <List>
-          <CustomListItem disablePadding>
+          <CustomListItem disablePadding >
             <ListItemButton
              onClick={() => navigate('/')}
               sx={{
@@ -338,10 +344,10 @@ export default function MiniDrawer() {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
-                  
+                  color: 'inherit'
                 }}
               >
-                <DashboardIcon sx={{ color: DrawerIconColor , fontSize: 18}} />
+                <DashboardIcon sx={{ color: DrawerIconColor , fontSize: 18, }} />
               </ListItemIcon>
               <CustomListItemText
                 primary="Dashboard"
@@ -395,7 +401,7 @@ export default function MiniDrawer() {
               </ListItemIcon>
 
               <CustomListItemText primary="Devices" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
-              {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
+              {open && <>{openD ? <ExpandLess  sx={{ color: DrawerIconColor,fontSize: 16 }}/> : <ExpandMore sx={{ color: DrawerIconColor,fontSize: 16 }}/>}</>}
             </ListItemButton>
           </CustomListItem>
           <Collapse in={openD} timeout="auto" unmountOnExit>
@@ -438,7 +444,7 @@ export default function MiniDrawer() {
               <MemoryIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
             </ListItemIcon>
             <CustomListItemText primary="Virtualization" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
-            {open && <>{nestedOpen ? <ExpandLess /> : <ExpandMore />}</>}
+            {open && <>{nestedOpen ? <ExpandLess sx={{ color: DrawerIconColor,fontSize: 16 }}/> : <ExpandMore sx={{ color: DrawerIconColor,fontSize: 16 }}/>}</>}
           </ListItemButton>
           </CustomListItem>
           <Collapse in={nestedOpen} timeout="auto" unmountOnExit>
@@ -478,7 +484,7 @@ export default function MiniDrawer() {
                   <NetworkCheckIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
                 </ListItemIcon>
                 <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0,fontSize: 18 }}/>
-                {open && <>{ipamOpen ? <ExpandLess /> : <ExpandMore />}</>}
+                {open && <>{ipamOpen ? <ExpandLess sx={{ color: DrawerIconColor,fontSize: 16 }}/> : <ExpandMore sx={{ color: DrawerIconColor,fontSize: 16 }}/>}</>}
               </ListItemButton>
               </CustomListItem>
             </Tooltip>
@@ -500,7 +506,7 @@ export default function MiniDrawer() {
                 <NetworkCheckIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
               <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0,fontSize: 18 }}/>
-              {open && <>{ipamOpen ? <ExpandLess /> : <ExpandMore />}</>}
+              {open && <>{ipamOpen ? <ExpandLess sx={{ color: DrawerIconColor,fontSize: 16 }}/> : <ExpandMore sx={{ color: DrawerIconColor,fontSize: 16 }}/>}</>}
             </ListItemButton>
             </CustomListItem>
           )}
@@ -547,7 +553,7 @@ export default function MiniDrawer() {
             </ListItemButton>
           </CustomListItem>
 
-          <CustomListItem >
+          <CustomListItem disablePadding>
             <ListItemButton
              onClick={() => navigate('/profile')}
               sx={{
@@ -564,18 +570,18 @@ export default function MiniDrawer() {
                   
                 }}
               >
-              <AccountCircleIcon sx={{ color: DrawerIconColor }} />
+              <AccountCircleIcon sx={{ color: DrawerIconColor , fontsize : 16}} />
               </ListItemIcon>
               
-          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
-              {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
+          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0,fontSize: 18  }} />
+              {/* {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>} */}
             </ListItemButton>
           </CustomListItem>
-          <Collapse in={AccountOpen} timeout="auto" unmountOnExit>
+          <Collapse timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
+              <ListItemButton onClick={() => navigate('/profile')}>
                 <ListItemIcon>
-                  < PersonIcon sx={{ color: DrawerIconColor }}/>
+                  < PersonIcon sx={{ color: DrawerIconColor , fontsize : 18}}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Profile" />
               </ListItemButton>
