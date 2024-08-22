@@ -483,13 +483,28 @@ function useCreateServer() {
     },
     onMutate: (newServerInfo) => {
       queryClient.setQueryData(["Servers"], (prevServers) => {
-        const ServersArray = Array.isArray(prevServers) ? prevServers : [];
-        return [...ServersArray, newServerInfo];
-      });
-    },
-  });
-}
+        const serversArray = Array.isArray(prevServers)
+        ? prevServers
+        : [];
 
+      // Determine the next ID by finding the maximum existing ID and adding 1
+      const maxId =
+      serversArray.length > 0
+          ? Math.max(...serversArray.map((server) => server.id))
+          : 0;
+      const nextId = maxId + 1;
+
+      return [
+        ...serversArray,
+        {
+          ...newServerInfo,
+          id: nextId, // Use the incremented ID
+        },
+      ];
+    });
+  },
+});
+}
 function useUpdateServer() {
   const queryClient = useQueryClient();
 
