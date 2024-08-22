@@ -22,10 +22,11 @@ import 'jspdf-autotable'; // For table export with jsPDF
 import Papa from 'papaparse';
 // Liste statique des utilisateurs
 const staticData = [
-  { id: '1', vmname: 'VM-A1', ram: '16GB', disk: '500GB', cpu: 'Intel Xeon', ip: '192.168.0.10', nameclient: 'ClientX', nameserver: 'Server1', site: 'DC-25', os: 'Windows Server 2019', namecluster: 'ClusterA', status: 'Active', role: 'Administrator' },
-  { id: '2', vmname: 'VM-B2', ram: '32GB', disk: '1TB', cpu: 'AMD Ryzen 9', ip: '192.168.0.11', nameclient: 'ClientY', nameserver: 'Server2', site: 'DC-25', os: 'Ubuntu 22.04', namecluster: 'ClusterB', status: 'Inactive', role: 'User' },
-  { id: '3', vmname: 'VM-C3', ram: '64GB', disk: '2TB', cpu: 'Intel i9', ip: '192.168.0.12', nameclient: 'ClientZ', nameserver: 'Server3', site: 'DC-16', os: 'macOS Ventura', namecluster: 'ClusterC', status: 'Active', role: 'User' },
+  { id: '1', name: 'Cluster A', status: 'Active', site: 'DC-25', nbserver: 5, nbvm: 20 },
+  { id: '2', name: 'Cluster B', status: 'Inactive', site: 'DC-16', nbserver: 3, nbvm: 15 },
+  { id: '3', name: 'Cluster C', status: 'Active', site: 'DC-16', nbserver: 8, nbvm: 30 },
 ];
+
 
 
 const usStates = [
@@ -38,18 +39,11 @@ const usStates = [
 const exportToCSV = (data) => {
   const csvData = data.map((item) => ({
     Id: item.id,
-    VMName: item.vmname,
-    RAM: item.ram,
-    Disk: item.disk,
-    CPU: item.cpu,
-    IP: item.ip,
-    ClientName: item.nameclient,
-    ServerName: item.nameserver,
-    Site: item.site,
-    OS: item.os,
-    ClusterName: item.namecluster,
+    Name: item.name,
     Status: item.status,
-    Role: item.role,
+    Site: item.site,
+    NumberOfServers: item.nbserver,
+    NumberOfVMs: item.nbvm,
   }));
 
   const csv = Papa.unparse(csvData, {
@@ -62,7 +56,7 @@ const exportToCSV = (data) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'servers.csv';
+  a.download = 'clusters.csv';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -71,37 +65,33 @@ const exportToCSV = (data) => {
 
 const exportToPDF = (data) => {
   const doc = new jsPDF();
-  doc.text('Server Data', 14, 16);
+  doc.text('Cluster Data', 14, 16);
   doc.autoTable({
-    head: [['Id', 'VM Name', 'RAM', 'Disk', 'CPU', 'IP Address', 'Client Name', 'Server Name', 'Site', 'OS', 'Cluster Name', 'Status', 'Role']],
-    body: data.map((item) => [item.id, item.vmname, item.ram, item.disk, item.cpu, item.ip, item.nameclient, item.nameserver, item.site, item.os, item.namecluster, item.status, item.role]),
+    head: [['Id', 'Name', 'Status', 'Site', 'Number of Servers', 'Number of VMs']],
+    body: data.map((item) => [item.id, item.name, item.status, item.site, item.nbserver, item.nbvm]),
     startY: 30,
   });
-  doc.save('servers.pdf');
+  doc.save('clusters.pdf');
 };
+
+
+
 
 
 const Example = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
-  const columns = useMemo(
+const columns = useMemo(
     () => [
       { accessorKey: 'id', header: 'Id', enableEditing: false, size: 80 },
-      { accessorKey: 'vmname', header: 'VM Name' },
-      { accessorKey: 'ram', header: 'RAM' },
-      { accessorKey: 'disk', header: 'Disk' },
-      { accessorKey: 'cpu', header: 'CPU' },
-      { accessorKey: 'ip', header: 'IP Address' },
-      { accessorKey: 'nameclient', header: 'Client Name' },
-      { accessorKey: 'nameserver', header: 'Server Name' },
-      { accessorKey: 'site', header: 'Site' },
-      { accessorKey: 'os', header: 'OS' },
-      { accessorKey: 'namecluster', header: 'Cluster Name' },
+      { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'status', header: 'Status' },
-      { accessorKey: 'role', header: 'Role' },
+      { accessorKey: 'site', header: 'Site' },
+      { accessorKey: 'nbserver', header: 'Number of Servers' },
+      { accessorKey: 'nbvm', header: 'Number of VMs' },
     ],
     [validationErrors]
-  );
+);
   
 
   const { mutateAsync: createUser, isPending: isCreatingUser } = useCreateUser();
@@ -154,7 +144,7 @@ const Example = () => {
     onEditingRowSave: handleSaveUser,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Create VM</DialogTitle>
+        <DialogTitle variant="h3">Add Cluster</DialogTitle>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {internalEditComponents}
         </DialogContent>
@@ -191,7 +181,7 @@ const Example = () => {
     renderTopToolbarCustomActions: ({ table }) => (
       <Box sx={{ display: 'flex', gap: '1rem' }}>
         <Button variant="contained" onClick={() => table.setCreatingRow(true)}>
-          Create VM
+          Create Cluster
         </Button>
         <Button
           variant="outlined"
@@ -229,38 +219,10 @@ function useGetUsers() {
 }
 
 function useCreateUser() {
-  const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: async (user) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return Promise.resolve();
-    },
-    onMutate: (newUserInfo) => {
-      queryClient.setQueryData(['users'], (prevUsers) => {
-        // Ensure prevUsers is an array or default to an empty array if it's undefined
-        const usersArray = Array.isArray(prevUsers) ? prevUsers : [];
-
-        // Determine the next ID by finding the maximum existing ID and adding 1
-        const maxId = usersArray.length > 0 
-          ? Math.max(...usersArray.map(user => user.id)) 
-          : 0;
-        const nextId = maxId + 1;
-
-        return [
-          ...usersArray,
-          {
-            ...newUserInfo,
-            id: nextId, // Use the incremented ID
-          },
-        ];
-      });
-    },
+    mutationFn: (newUser) => new Promise((resolve) => setTimeout(resolve, 1000)),
   });
 }
-
-
-
 
 function useUpdateUser() {
   return useMutation({
@@ -282,21 +244,18 @@ function useDeleteUser() {
 
 const validateUser = (values) => {
   const errors = {};
-  // if (!values.firstName) errors.firstName = 'First name is required';
-  // if (!values.lastName) errors.lastName = 'Last name is required';
-  // if (!values.email) errors.email = 'Email is required';
-  // if (!values.state) errors.state = 'State is required';
+  if (!values.firstName) errors.firstName = 'First name is required';
+  if (!values.lastName) errors.lastName = 'Last name is required';
+  if (!values.email) errors.email = 'Email is required';
+  if (!values.state) errors.state = 'State is required';
   return errors;
 };
 
 const App = () => {
   return (
-   <>
-    <h1 style={{marginBottom:'20px'}}>vm</h1>
     <QueryClientProvider client={new QueryClient()}>
       <Example />
     </QueryClientProvider>
-    </> 
   );
 };
 
