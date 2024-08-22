@@ -571,7 +571,7 @@ export default function MiniDrawer() {
               {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
             </ListItemButton>
           </CustomListItem>
-          <Collapse in={AccountOpen} timeout="auto" unmountOnExit>
+          <Collapse timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
                 <ListItemIcon>

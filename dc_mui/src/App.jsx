@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './views/Profile';
 import Dashboard from './views/Dashboard';
 import Server from './views/Server';
+import Routeur from './views/Router';
 import MiniDrawer from './components/Sidebar';
 import Box from '@mui/material/Box';
 import DC from './views/DC';
@@ -22,6 +23,7 @@ function App() {
             <Route path="/profile" element={<Profile />} /> 
             <Route path="/dc" element={<DC/>} />
             <Route path="/server" element={<Server/>}/> 
+            <Route path="/router" element={<Routeur/>}/> 
             <Route path="/vm" element={<VM/>} /> 
             <Route path="/cluster" element={<Cluster/>} /> 
             <Route path="/auth" element={<Authentication/>} /> 
