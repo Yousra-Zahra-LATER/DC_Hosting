@@ -229,10 +229,38 @@ function useGetUsers() {
 }
 
 function useCreateUser() {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (newUser) => new Promise((resolve) => setTimeout(resolve, 1000)),
+    mutationFn: async (user) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return Promise.resolve();
+    },
+    onMutate: (newUserInfo) => {
+      queryClient.setQueryData(['users'], (prevUsers) => {
+        // Ensure prevUsers is an array or default to an empty array if it's undefined
+        const usersArray = Array.isArray(prevUsers) ? prevUsers : [];
+
+        // Determine the next ID by finding the maximum existing ID and adding 1
+        const maxId = usersArray.length > 0 
+          ? Math.max(...usersArray.map(user => user.id)) 
+          : 0;
+        const nextId = maxId + 1;
+
+        return [
+          ...usersArray,
+          {
+            ...newUserInfo,
+            id: nextId, // Use the incremented ID
+          },
+        ];
+      });
+    },
   });
 }
+
+
+
 
 function useUpdateUser() {
   return useMutation({
@@ -263,9 +291,12 @@ const validateUser = (values) => {
 
 const App = () => {
   return (
+   <>
+    <h1 style={{marginBottom:'20px'}}>vm</h1>
     <QueryClientProvider client={new QueryClient()}>
       <Example />
     </QueryClientProvider>
+    </> 
   );
 };
 
