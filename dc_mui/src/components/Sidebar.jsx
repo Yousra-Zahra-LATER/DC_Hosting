@@ -44,7 +44,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 
-const drawerWidth = 200;
+const drawerWidth = 250;
 const DrawerIconColor = '#1E2A5E';
 const AppBarColor = '#55679C';
 const DrawerColor = '#F7F7F8';
