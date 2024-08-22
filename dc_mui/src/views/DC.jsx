@@ -31,7 +31,12 @@ import Papa from "papaparse";
 
 // Liste statique des centres de données
 const staticData = [
-  {id: "1",name: "Data Center 25",location: "Constantine",status: "Active"},
+  {
+    id: "1",
+    name: "Data Center 25",
+    location: "Constantine",
+    status: "Active",
+  },
   { id: "2", name: "Data Center 16", location: "Alger", status: "Inactive" },
   { id: "3", name: "Data Center 31", location: "Oran", status: "Active" },
 ];
@@ -256,7 +261,6 @@ function useGetDataCenters() {
 function useCreateDataCenter() {
   const queryClient = useQueryClient(); // Ajoutez cette ligne pour obtenir queryClient
 
-
   return useMutation({
     mutationFn: async (dataCenter) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -264,29 +268,29 @@ function useCreateDataCenter() {
     },
     onMutate: (newDataCenterInfo) => {
       queryClient.setQueryData(["dataCenters"], (prevDataCenters) => {
-        
-          // Ensure prevUsers is an array or default to an empty array if it's undefined
-          const dataCentersArray = Array.isArray(prevDataCenters) ? prevDataCenters : [];
-  
-          // Determine the next ID by finding the maximum existing ID and adding 1
-          const maxId = dataCentersArray.length > 0 
-            ? Math.max(...dataCentersArray.map(dataCenter => dataCenter.id)) 
+        // Ensure prevUsers is an array or default to an empty array if it's undefined
+        const dataCentersArray = Array.isArray(prevDataCenters)
+          ? prevDataCenters
+          : [];
+
+        // Determine the next ID by finding the maximum existing ID and adding 1
+        const maxId =
+          dataCentersArray.length > 0
+            ? Math.max(...dataCentersArray.map((dataCenter) => dataCenter.id))
             : 0;
-          const nextId = maxId + 1;
-  
-          return [
-            ...dataCentersArray,
-            {
-              ...newDataCenterInfo,
-              id: nextId, // Use the incremented ID
-            },
-          ];
-        });
-      },
-    });
+        const nextId = maxId + 1;
 
-
-  }
+        return [
+          ...dataCentersArray,
+          {
+            ...newDataCenterInfo,
+            id: nextId, // Use the incremented ID
+          },
+        ];
+      });
+    },
+  });
+}
 
 function useUpdateDataCenter() {
   const queryClient = useQueryClient();

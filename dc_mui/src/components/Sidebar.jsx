@@ -131,7 +131,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [openD, setOpenD] = useState(false);
   const [nestedOpen, setNestedOpen] = useState(false); // State for nested list
-  const [AccountOpen, setAccountOpen] = useState(false);
+
   const [ipamOpen, setIpamOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -161,9 +161,7 @@ export default function MiniDrawer() {
     setOpenD(!openD);
   };
 
-  const handleAccountClick = () => {
-    setAccountOpen(!AccountOpen);
-  };
+ 
 
   const handleNestedClick = () => {
     setNestedOpen(!nestedOpen);
@@ -551,9 +549,9 @@ export default function MiniDrawer() {
 
           <CustomListItem >
             <ListItemButton
-              onClick={handleAccountClick}
+             onClick={() => navigate('/profile')}
               sx={{
-                minHeight: 48,
+                maxHeight: 42,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
@@ -563,12 +561,13 @@ export default function MiniDrawer() {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
+                  
                 }}
               >
-              <AccountCircleIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
+              <AccountCircleIcon sx={{ color: DrawerIconColor }} />
               </ListItemIcon>
               
-          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
+          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
               {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
             </ListItemButton>
           </CustomListItem>
@@ -576,13 +575,13 @@ export default function MiniDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
                 <ListItemIcon>
-                  < PersonIcon sx={{ color: DrawerIconColor ,fontSize: 18}}/>
+                  < PersonIcon sx={{ color: DrawerIconColor }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Profile" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/auth')}>
                 <ListItemIcon>
-                  <LockIcon sx={{ color: DrawerIconColor ,fontSize: 18}}/>
+                  <LockIcon sx={{ color: DrawerIconColor }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Authentication" />
               </ListItemButton>

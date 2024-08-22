@@ -147,7 +147,12 @@ const Example = () => {
     muiToolbarAlertBannerProps: isLoadingUsersError
       ? { color: 'error', children: 'Error loading data' }
       : undefined,
-    muiTableContainerProps: { sx: { minHeight: '500px' } },
+      muiTableContainerProps: {
+        sx: {
+          minHeight: "300px",
+          maxHeight: "600px", // Hauteur maximale pour activer le défilement
+        },
+      },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateUser,
     onEditingRowCancel: () => setValidationErrors({}),
