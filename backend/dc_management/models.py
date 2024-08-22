@@ -100,6 +100,11 @@ class Serveur(models.Model):
     OS_type = models.CharField(max_length=255)
     Ilo_ad = models.CharField(max_length=255)
     ID_Device = models.OneToOneField(Device, on_delete=models.CASCADE)
+    cluster
+    status
+    site
+    emplacement u et rack
+    brand
     
 class Device_history(models.Model):
     From = models.DateField()
