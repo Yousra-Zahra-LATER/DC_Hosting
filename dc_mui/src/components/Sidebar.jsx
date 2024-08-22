@@ -46,8 +46,8 @@ import LockIcon from '@mui/icons-material/Lock';
 
 const drawerWidth = 250;
 const DrawerIconColor = '#1E2A5E';
-const AppBarColor = '#55679C';
-const DrawerColor = '#F7F7F8';
+const AppBarColor = '#F7F7F8';
+const DrawerColor = '#55679C';
 const ListItemColor = '#e3f2fd';
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -73,8 +73,8 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
-  backgroundColor: DrawerColor,
+  justifyContent: "flex-start",
+  backgroundColor: 'DrawerColor',
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
@@ -190,10 +190,7 @@ export default function MiniDrawer() {
 
   const CustomListItem = styled(ListItem)(({ theme }) => ({
     
-    borderRadius: '8px',
-    backgroundColor: ListItemColor, // Light blue color
-    boxShadow: `0 4px 20px rgba(0, 0, 10, 0.1)`, // Custom shadow color to simulate a blurred border
-    margin: '8px 2px', // Margin of 16px on left and right, 8px on top and bottom
+    borderRadius: '2px',
     '&:hover': {
       backgroundColor: ListItemColor , // Slightly darker blue for hover effect
       boxShadow: `0 6px 12px rgba(0, 0, 0, 0.2)`, // Darker shadow color on hover
@@ -213,11 +210,17 @@ export default function MiniDrawer() {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 3,
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <img
+              src={logo}
+              alt="Logo"
+              style={{
+                width: "40px",
+                
+              }}
+            />
           </IconButton>
           <Typography
             variant="h6"
@@ -225,22 +228,12 @@ export default function MiniDrawer() {
             component="div"
             sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}
           >
-            <img
-              src={logo}
-              alt="Logo"
-              style={{
-                width: "50px",
-                marginRight: "8px",
-                transition: "width 0.3s",
-              }}
-            />
-            DC AT
           </Typography>
           <IconButton color="inherit">
-            <NotificationsIcon />
+            <NotificationsIcon sx={{ color : DrawerIconColor }} />
           </IconButton>
           <Box
-            sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
+            sx={{ display: "flex", alignItems: "center", textAlign: "center"}}
           >
             <Tooltip title="Account settings">
               <IconButton
@@ -293,7 +286,7 @@ export default function MiniDrawer() {
               <Avatar /> Profile
             </MenuItem>
 
-            <Divider />
+            
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <PersonAdd fontSize="small" />
@@ -319,15 +312,19 @@ export default function MiniDrawer() {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+          <img
+              src={logo}
+              alt="Logo"
+              style={{
+                width: "50px",
+                marginRight: "8px",
+                transition: "width 0.3s",
+              }}/>
+              <p>DC-Hosting</p>
           </IconButton>
         </DrawerHeader>
 
-        <Divider />
+        
         <List>
           <CustomListItem disablePadding>
             <ListItemButton
@@ -346,11 +343,11 @@ export default function MiniDrawer() {
                   
                 }}
               >
-                <DashboardIcon sx={{ color: DrawerIconColor }} />
+                <DashboardIcon sx={{ color: DrawerIconColor , fontSize: 18}} />
               </ListItemIcon>
               <CustomListItemText
                 primary="Dashboard"
-                sx={{ opacity: open ? 1 : 0 }}
+                sx={{ opacity: open ? 1 : 0 , fontSize: 16, }}
               />
             </ListItemButton>
           </CustomListItem>
@@ -371,11 +368,11 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <LocationCityIcon sx={{ color: DrawerIconColor }} />
+                <LocationCityIcon sx={{ color: DrawerIconColor ,fontSize: 18}} />
               </ListItemIcon>
               <CustomListItemText
                 primary="Data Center"
-                sx={{ opacity: open ? 1 : 0 }}
+                sx={{ opacity: open ? 1 : 0,fontSize: 20 }}
               />
             </ListItemButton>
           </CustomListItem>
@@ -396,10 +393,10 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <DevicesIcon sx={{ color: DrawerIconColor }} />
+                <DevicesIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
 
-              <CustomListItemText primary="Devices" sx={{ opacity: open ? 1 : 0 }} />
+              <CustomListItemText primary="Devices" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
               {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
             </ListItemButton>
           </CustomListItem>
@@ -407,19 +404,19 @@ export default function MiniDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/server')}>
                 <ListItemIcon>
-                  <StorageIcon sx={{ color: DrawerIconColor }}/>
+                  <StorageIcon sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Server" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/router')}>
                 <ListItemIcon>
-                  <RouterIcon sx={{ color: DrawerIconColor }}/>
+                  <RouterIcon sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Router" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/firewall')}>
                 <ListItemIcon>
-                  <ShieldIcon sx={{ color: DrawerIconColor }}/>
+                  <ShieldIcon sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Firewall" />
               </ListItemButton>
@@ -440,9 +437,9 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-              <MemoryIcon sx={{ color: DrawerIconColor }} />
+              <MemoryIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
             </ListItemIcon>
-            <CustomListItemText primary="Virtualization" sx={{ opacity: open ? 1 : 0 }} />
+            <CustomListItemText primary="Virtualization" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
             {open && <>{nestedOpen ? <ExpandLess /> : <ExpandMore />}</>}
           </ListItemButton>
           </CustomListItem>
@@ -450,13 +447,13 @@ export default function MiniDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/vm')}>
                 <ListItemIcon>
-                  <ComputerIcon sx={{ color: DrawerIconColor }}/>
+                  <ComputerIcon sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="VM" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/cluster')}>
                 <ListItemIcon>
-                  <GroupIcon  sx={{ color: DrawerIconColor }}/>
+                  <GroupIcon  sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Cluster" />
               </ListItemButton>
@@ -480,9 +477,9 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                  <NetworkCheckIcon sx={{ color: DrawerIconColor }} />
+                  <NetworkCheckIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
                 </ListItemIcon>
-                <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0 }}/>
+                <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0,fontSize: 18 }}/>
                 {open && <>{ipamOpen ? <ExpandLess /> : <ExpandMore />}</>}
               </ListItemButton>
               </CustomListItem>
@@ -502,9 +499,9 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-                <NetworkCheckIcon sx={{ color: DrawerIconColor }} />
+                <NetworkCheckIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
-              <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0 }}/>
+              <CustomListItemText primary="IPAM"  sx={{ opacity: open ? 1 : 0,fontSize: 18 }}/>
               {open && <>{ipamOpen ? <ExpandLess /> : <ExpandMore />}</>}
             </ListItemButton>
             </CustomListItem>
@@ -513,13 +510,13 @@ export default function MiniDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 3.2 }} onClick={() => navigate('/ip')}>
                 <ListItemIcon>
-                  <NetworkCheckIcon  sx={{ color: DrawerIconColor }} />
+                  <NetworkCheckIcon  sx={{ color: DrawerIconColor,fontSize: 18 }} />
                 </ListItemIcon>
                 <CustomListItemText primary="Adresse IP" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 3.2 }} onClick={() => navigate('/rip')}>
                 <ListItemIcon>
-                  <PublicIcon sx={{ color: DrawerIconColor }}/>
+                  <PublicIcon sx={{ color: DrawerIconColor,fontSize: 18 }}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Plages d'adresse IP" />
               </ListItemButton>
@@ -543,16 +540,16 @@ export default function MiniDrawer() {
                   
                 }}
               >
-                <PersonIcon sx={{ color: DrawerIconColor }} />
+                <PersonIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
               <CustomListItemText
                 primary="Client"
-                sx={{ opacity: open ? 1 : 0 }}
+                sx={{ opacity: open ? 1 : 0,fontSize: 18 }}
               />
             </ListItemButton>
           </CustomListItem>
 
-          <CustomListItem disablePadding>
+          <CustomListItem >
             <ListItemButton
               onClick={handleAccountClick}
               sx={{
@@ -568,10 +565,10 @@ export default function MiniDrawer() {
                   justifyContent: "center",
                 }}
               >
-              <AccountCircleIcon sx={{ color: DrawerIconColor }} />
+              <AccountCircleIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
               
-          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
+          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0,fontSize: 18 }} />
               {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
             </ListItemButton>
           </CustomListItem>
@@ -579,13 +576,13 @@ export default function MiniDrawer() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
                 <ListItemIcon>
-                  < PersonIcon sx={{ color: DrawerIconColor }}/>
+                  < PersonIcon sx={{ color: DrawerIconColor ,fontSize: 18}}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Profile" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/auth')}>
                 <ListItemIcon>
-                  <LockIcon sx={{ color: DrawerIconColor }}/>
+                  <LockIcon sx={{ color: DrawerIconColor ,fontSize: 18}}/>
                 </ListItemIcon>
                 <CustomListItemText primary="Authentication" />
               </ListItemButton>
@@ -595,7 +592,7 @@ export default function MiniDrawer() {
 
 
         </List>
-        <Divider />
+        
       </Drawer>
     </Box>
     </>
