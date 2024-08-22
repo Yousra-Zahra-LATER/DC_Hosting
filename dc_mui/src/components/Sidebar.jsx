@@ -80,6 +80,8 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: '#1E2A5E', // Navbar background color
+  color: '#ffffff', // Navbar text color
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -99,11 +101,19 @@ const Drawer = styled(MuiDrawer, {
   boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
+    "& .MuiDrawer-paper": {
+      ...openedMixin(theme),
+      backgroundColor: '#1E2A5E', // Sidebar background color
+      color: '#ffffff', // Sidebar text color
+    },
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
+    "& .MuiDrawer-paper": {
+      ...closedMixin(theme),
+      backgroundColor: '#1E2A5E', // Sidebar background color
+      color: '#ffffff', // Sidebar text color
+    },
   }),
 }));
 
@@ -152,7 +162,7 @@ export default function MiniDrawer() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{ backgroundColor: 'white' }}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: '#3795BD' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -283,6 +293,9 @@ export default function MiniDrawer() {
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
+                '&:hover': {
+                  backgroundColor: '#444', // Background color on hover
+                }
               }}
             >
               <ListItemIcon
@@ -290,6 +303,7 @@ export default function MiniDrawer() {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
+                   color: '#ffffff', // Icon color
                 }}
               >
                 <DashboardIcon sx={{ color: "#212121" }} />
