@@ -112,11 +112,8 @@ const DataTable = (props ) => {
 
         onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
         options={{
-<<<<<<< HEAD
           actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: props.isgrouping,exportButton: true, sorting: true,
-=======
-          
->>>>>>> rowStyle: rowData => ({
+          rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
           headerStyle: {
