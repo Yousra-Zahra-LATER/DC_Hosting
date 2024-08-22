@@ -131,7 +131,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = useState(false);
   const [openD, setOpenD] = useState(false);
   const [nestedOpen, setNestedOpen] = useState(false); // State for nested list
-  const [AccountOpen, setAccountOpen] = useState(false);
+
   const [ipamOpen, setIpamOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
@@ -161,9 +161,7 @@ export default function MiniDrawer() {
     setOpenD(!openD);
   };
 
-  const handleAccountClick = () => {
-    setAccountOpen(!AccountOpen);
-  };
+ 
 
   const handleNestedClick = () => {
     setNestedOpen(!nestedOpen);
@@ -554,9 +552,9 @@ export default function MiniDrawer() {
 
           <CustomListItem disablePadding>
             <ListItemButton
-              onClick={handleAccountClick}
+             onClick={() => navigate('/profile')}
               sx={{
-                minHeight: 48,
+                maxHeight: 42,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
@@ -566,32 +564,18 @@ export default function MiniDrawer() {
                   minWidth: 0,
                   mr: open ? 3 : "auto",
                   justifyContent: "center",
+                  
                 }}
               >
-              <AccountCircleIcon sx={{ color: DrawerIconColor }} />
+                <LockIcon sx={{ color: DrawerIconColor }} />
               </ListItemIcon>
-              
-          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0 }} />
-              {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>}
+              <CustomListItemText
+                primary="My Account"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </CustomListItem>
-          <Collapse in={AccountOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/profile')}>
-                <ListItemIcon>
-                  < PersonIcon sx={{ color: DrawerIconColor }}/>
-                </ListItemIcon>
-                <CustomListItemText primary="Profile" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} onClick={() => navigate('/auth')}>
-                <ListItemIcon>
-                  <LockIcon sx={{ color: DrawerIconColor }}/>
-                </ListItemIcon>
-                <CustomListItemText primary="Authentication" />
-              </ListItemButton>
-             
-            </List>
-          </Collapse>
+         
 
 
         </List>

@@ -31,9 +31,57 @@ import Papa from "papaparse";
 
 // Liste statique des centres de données
 const staticData = [
-  { id: '1', name: 'Server A', site: 'Site 1', brand: 'Brand X', rack: 'Rack 1', uPosition: 'U1', ram: '32GB', storage: '1TB', cpu: '8 cores', iso: 'ISO1', cluster: 'Cluster A', status: 'Active', ilo: '192.168.1.1', ip: '192.168.1.10',serialNumber:'fgsgfdfdf' },
-  { id: '2', name: 'Server B', site: 'Site 2', brand: 'Brand Y', rack: 'Rack 2', uPosition: 'U2', ram: '64GB', storage: '2TB', cpu: '16 cores', iso: 'ISO2', cluster: 'Cluster B', status: 'Inactive', ilo: '192.168.1.2', ip: '192.168.1.11' ,serialNumber:'fgsgfdfdf'},
-  { id: '3', name: 'Server C', site: 'Site 3', brand: 'Brand Z', rack: 'Rack 3', uPosition: 'U3', ram: '128GB', storage: '4TB', cpu: '32 cores', iso: 'ISO3', cluster: 'Cluster C', status: 'Active', ilo: '192.168.1.3', ip: '192.168.1.12',serialNumber:'fgsgfdfdf' },
+  {
+    id: "1",
+    name: "Server A",
+    site: "Site 1",
+    brand: "Brand X",
+    rack: "Rack 1",
+    uPosition: "U1",
+    ram: "32GB",
+    storage: "1TB",
+    cpu: "8 cores",
+    iso: "ISO1",
+    cluster: "Cluster A",
+    status: "Active",
+    ilo: "192.168.1.1",
+    ip: "192.168.1.10",
+    serialNumber: "fgsgfdfdf",
+  },
+  {
+    id: "2",
+    name: "Server B",
+    site: "Site 2",
+    brand: "Brand Y",
+    rack: "Rack 2",
+    uPosition: "U2",
+    ram: "64GB",
+    storage: "2TB",
+    cpu: "16 cores",
+    iso: "ISO2",
+    cluster: "Cluster B",
+    status: "Inactive",
+    ilo: "192.168.1.2",
+    ip: "192.168.1.11",
+    serialNumber: "fgsgfdfdf",
+  },
+  {
+    id: "3",
+    name: "Server C",
+    site: "Site 3",
+    brand: "Brand Z",
+    rack: "Rack 3",
+    uPosition: "U3",
+    ram: "128GB",
+    storage: "4TB",
+    cpu: "32 cores",
+    iso: "ISO3",
+    cluster: "Cluster C",
+    status: "Active",
+    ilo: "192.168.1.3",
+    ip: "192.168.1.12",
+    serialNumber: "fgsgfdfdf",
+  },
 ];
 
 const exportToCSV = (data) => {
@@ -52,7 +100,7 @@ const exportToCSV = (data) => {
     Status: item.status,
     ILO: item.ilo,
     IP_Address: item.ip,
-    serialNumber: item.serialNumber
+    serialNumber: item.serialNumber,
   }));
 
   const csv = Papa.unparse(csvData, {
@@ -76,40 +124,214 @@ const exportToPDF = (data) => {
   const doc = new jsPDF();
   doc.text("Server Data", 14, 16);
   doc.autoTable({
-    head: [["Id", "Name", "Site", "Brand", "Rack", "U Position", "RAM", "Storage", "CPU", "ISO", "Cluster", "Status", "ILO", "IP Address","Serial Number"]],
-    body: data.map((item) => [item.id, item.name, item.site, item.brand, item.rack, item.uPosition, item.ram, item.storage, item.cpu, item.iso, item.cluster, item.status, item.ilo, item.ip, item.serialNumber]),
+    head: [
+      [
+        "Id",
+        "Name",
+        "Site",
+        "Brand",
+        "Rack",
+        "U Position",
+        "RAM",
+        "Storage",
+        "CPU",
+        "ISO",
+        "Cluster",
+        "Status",
+        "ILO",
+        "IP Address",
+        "Serial Number",
+      ],
+    ],
+    body: data.map((item) => [
+      item.id,
+      item.name,
+      item.site,
+      item.brand,
+      item.rack,
+      item.uPosition,
+      item.ram,
+      item.storage,
+      item.cpu,
+      item.iso,
+      item.cluster,
+      item.status,
+      item.ilo,
+      item.ip,
+      item.serialNumber,
+    ]),
     startY: 30,
   });
   doc.save("servers.pdf");
 };
 
-
-
 const ServerTable = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
-  
   const columns = useMemo(
     () => [
       { accessorKey: "id", header: "Id", enableEditing: false, size: 80 },
-      { accessorKey: "name", header: "Name", muiEditTextFieldProps: { required: true, error: !!validationErrors?.name, helperText: validationErrors?.name, onFocus: () => setValidationErrors({ ...validationErrors, name: undefined }) }},
-      { accessorKey: "site", header: "Site", muiEditTextFieldProps: { required: true, error: !!validationErrors?.site, helperText: validationErrors?.site, onFocus: () => setValidationErrors({ ...validationErrors, site: undefined }) }},
-      { accessorKey: "brand", header: "Brand", muiEditTextFieldProps: { required: true, error: !!validationErrors?.brand, helperText: validationErrors?.brand, onFocus: () => setValidationErrors({ ...validationErrors, brand: undefined }) }},
-      { accessorKey: "rack", header: "Rack", muiEditTextFieldProps: { required: true, error: !!validationErrors?.rack, helperText: validationErrors?.rack, onFocus: () => setValidationErrors({ ...validationErrors, rack: undefined }) }},
-      { accessorKey: "uPosition", header: "U Position", muiEditTextFieldProps: { required: true, error: !!validationErrors?.uPosition, helperText: validationErrors?.uPosition, onFocus: () => setValidationErrors({ ...validationErrors, uPosition: undefined }) }},
-      { accessorKey: "ram", header: "RAM", muiEditTextFieldProps: { required: true, error: !!validationErrors?.ram, helperText: validationErrors?.ram, onFocus: () => setValidationErrors({ ...validationErrors, ram: undefined }) }},
-      { accessorKey: "storage", header: "Storage", muiEditTextFieldProps: { required: true, error: !!validationErrors?.storage, helperText: validationErrors?.storage, onFocus: () => setValidationErrors({ ...validationErrors, storage: undefined }) }},
-      { accessorKey: "cpu", header: "CPU", muiEditTextFieldProps: { required: true, error: !!validationErrors?.cpu, helperText: validationErrors?.cpu, onFocus: () => setValidationErrors({ ...validationErrors, cpu: undefined }) }},
-      { accessorKey: "iso", header: "ISO", muiEditTextFieldProps: { required: true, error: !!validationErrors?.iso, helperText: validationErrors?.iso, onFocus: () => setValidationErrors({ ...validationErrors, iso: undefined }) }},
-      { accessorKey: "cluster", header: "Cluster", muiEditTextFieldProps: { required: true, error: !!validationErrors?.cluster, helperText: validationErrors?.cluster, onFocus: () => setValidationErrors({ ...validationErrors, cluster: undefined }) }},
-      { accessorKey: "status", header: "Status", muiEditTextFieldProps: { required: true, error: !!validationErrors?.status, helperText: validationErrors?.status, onFocus: () => setValidationErrors({ ...validationErrors, status: undefined }) }},
-      { accessorKey: "ilo", header: "ILO", muiEditTextFieldProps: { required: true, error: !!validationErrors?.ilo, helperText: validationErrors?.ilo, onFocus: () => setValidationErrors({ ...validationErrors, ilo: undefined }) }},
-      { accessorKey: "ip", header: "IP", muiEditTextFieldProps: { required: true, error: !!validationErrors?.ip, helperText: validationErrors?.ip, onFocus: () => setValidationErrors({ ...validationErrors, ip: undefined }) }},
-      { accessorKey: "serialNumber", header: "Serial Number", muiEditTextFieldProps: { required: true, error: !!validationErrors?.serialNumber, helperText: validationErrors?.serialNumber, onFocus: () => setValidationErrors({ ...validationErrors, serialNumber: undefined }) }},
+      {
+        accessorKey: "name",
+        header: "Name",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.name,
+          helperText: validationErrors?.name,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, name: undefined }),
+        },
+      },
+      {
+        accessorKey: "site",
+        header: "Site",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.site,
+          helperText: validationErrors?.site,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, site: undefined }),
+        },
+      },
+      {
+        accessorKey: "brand",
+        header: "Brand",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.brand,
+          helperText: validationErrors?.brand,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, brand: undefined }),
+        },
+      },
+      {
+        accessorKey: "rack",
+        header: "Rack",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.rack,
+          helperText: validationErrors?.rack,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, rack: undefined }),
+        },
+      },
+      {
+        accessorKey: "uPosition",
+        header: "U Position",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.uPosition,
+          helperText: validationErrors?.uPosition,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, uPosition: undefined }),
+        },
+      },
+      {
+        accessorKey: "ram",
+        header: "RAM",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.ram,
+          helperText: validationErrors?.ram,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, ram: undefined }),
+        },
+      },
+      {
+        accessorKey: "storage",
+        header: "Storage",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.storage,
+          helperText: validationErrors?.storage,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, storage: undefined }),
+        },
+      },
+      {
+        accessorKey: "cpu",
+        header: "CPU",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.cpu,
+          helperText: validationErrors?.cpu,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, cpu: undefined }),
+        },
+      },
+      {
+        accessorKey: "iso",
+        header: "ISO",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.iso,
+          helperText: validationErrors?.iso,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, iso: undefined }),
+        },
+      },
+      {
+        accessorKey: "cluster",
+        header: "Cluster",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.cluster,
+          helperText: validationErrors?.cluster,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, cluster: undefined }),
+        },
+      },
+      {
+        accessorKey: "status",
+        header: "Status",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.status,
+          helperText: validationErrors?.status,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, status: undefined }),
+        },
+      },
+      {
+        accessorKey: "ilo",
+        header: "ILO",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.ilo,
+          helperText: validationErrors?.ilo,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, ilo: undefined }),
+        },
+      },
+      {
+        accessorKey: "ip",
+        header: "IP",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.ip,
+          helperText: validationErrors?.ip,
+          onFocus: () =>
+            setValidationErrors({ ...validationErrors, ip: undefined }),
+        },
+      },
+      {
+        accessorKey: "serialNumber",
+        header: "Serial Number",
+        muiEditTextFieldProps: {
+          required: true,
+          error: !!validationErrors?.serialNumber,
+          helperText: validationErrors?.serialNumber,
+          onFocus: () =>
+            setValidationErrors({
+              ...validationErrors,
+              serialNumber: undefined,
+            }),
+        },
+      },
     ],
     [validationErrors]
   );
-  
+
   const { mutateAsync: createServer, isPending: isCreatingServer } =
     useCreateServer();
   const {
@@ -161,13 +383,12 @@ const ServerTable = () => {
     muiToolbarAlertBannerProps: isLoadingServersError
       ? { color: "error", children: "Error loading data" }
       : undefined,
-      muiTableContainerProps: {
-        sx: {
-          minHeight: "300px",
-          maxHeight: "600px", // Hauteur maximale pour activer le défilement
-         
-        },
+    muiTableContainerProps: {
+      sx: {
+        minHeight: "300px",
+        maxHeight: "600px", // Hauteur maximale pour activer le défilement
       },
+    },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateServer,
     onEditingRowCancel: () => setValidationErrors({}),
@@ -217,10 +438,7 @@ const ServerTable = () => {
         <Button variant="contained" onClick={() => table.setCreatingRow(true)}>
           Create New Server
         </Button>
-        <Button
-          variant="outlined"
-          onClick={() => exportToCSV(fetchedServers)}
-        >
+        <Button variant="outlined" onClick={() => exportToCSV(fetchedServers)}>
           Export as CSV
         </Button>
 
@@ -235,8 +453,7 @@ const ServerTable = () => {
     ),
     state: {
       isLoading: isLoadingServers,
-      isSaving:
-        isCreatingServer || isUpdatingServer || isDeletingServer,
+      isSaving: isCreatingServer || isUpdatingServer || isDeletingServer,
       showAlertBanner: isLoadingServersError,
       showProgressBars: isFetchingServers,
     },
@@ -258,18 +475,15 @@ function useGetServers() {
 
 function useCreateServer() {
   const queryClient = useQueryClient();
- 
+
   return useMutation({
-    
     mutationFn: async (Server) => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       return Promise.resolve();
     },
     onMutate: (newServerInfo) => {
       queryClient.setQueryData(["Servers"], (prevServers) => {
-        const ServersArray = Array.isArray(prevServers)
-          ? prevServers
-          : [];
+        const ServersArray = Array.isArray(prevServers) ? prevServers : [];
         return [...ServersArray, newServerInfo];
       });
     },
@@ -286,13 +500,9 @@ function useUpdateServer() {
     },
     onMutate: (updatedServerInfo) => {
       queryClient.setQueryData(["Servers"], (prevServers) => {
-        const ServersArray = Array.isArray(prevServers)
-          ? prevServers
-          : [];
+        const ServersArray = Array.isArray(prevServers) ? prevServers : [];
         return ServersArray.map((Server) =>
-          Server.id === updatedServerInfo.id
-            ? updatedServerInfo
-            : Server
+          Server.id === updatedServerInfo.id ? updatedServerInfo : Server
         );
       });
     },
@@ -309,12 +519,8 @@ function useDeleteServer() {
     },
     onMutate: (deletedServerId) => {
       queryClient.setQueryData(["Servers"], (prevServers) => {
-        const ServersArray = Array.isArray(prevServers)
-          ? prevServers
-          : [];
-        return ServersArray.filter(
-          (Server) => Server.id !== deletedServerId
-        );
+        const ServersArray = Array.isArray(prevServers) ? prevServers : [];
+        return ServersArray.filter((Server) => Server.id !== deletedServerId);
       });
     },
   });
@@ -340,7 +546,6 @@ function validateServer(values) {
 }
 // Créez un thème avec vos personnalisations
 
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -348,9 +553,7 @@ function App() {
     <>
       <h2>Server</h2>
       <QueryClientProvider client={queryClient}>
-      
-          <ServerTable />
-      
+        <ServerTable />
       </QueryClientProvider>
     </>
   );
