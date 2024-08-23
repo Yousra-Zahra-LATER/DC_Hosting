@@ -43,7 +43,7 @@ import DevicesIcon from "@mui/icons-material/Devices";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-
+import SearchIcon from '@mui/icons-material/Search';
 const drawerWidth = 250;
 const DrawerIconColor = '#1E2A5E';
 const AppBarColor = '#F7F7F8';
@@ -240,6 +240,7 @@ export default function MiniDrawer() {
               }}
             />
           </IconButton>
+          
           <Typography
             variant="h6"
             noWrap
