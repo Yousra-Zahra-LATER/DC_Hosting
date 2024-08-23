@@ -159,7 +159,7 @@ const Example = () => {
     onEditingRowSave: handleSaveUser,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Create VM</DialogTitle>
+        <DialogTitle variant="h6">Create VM</DialogTitle>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {internalEditComponents}
         </DialogContent>
@@ -297,7 +297,7 @@ const validateUser = (values) => {
 const App = () => {
   return (
    <>
-    <h1 style={{marginBottom:'20px'}}>vm</h1>
+    <h1 style={{marginBottom:'20px'}}>Virtual machines</h1>
     <QueryClientProvider client={new QueryClient()}>
       <Example />
     </QueryClientProvider>

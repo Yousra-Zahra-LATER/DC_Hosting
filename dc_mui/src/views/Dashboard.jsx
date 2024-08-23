@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+// import { Box, Typography } from '@mui/material';
+// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const data = [
   { name: 'Jan', uv: 4000, pv: 2400 },
@@ -15,7 +15,7 @@ const Dashboard = () => {
    <>
    
     <h1>Welcome to Dashboard</h1>
-    <Box sx={{ padding: 3 }}>
+    {/* <Box sx={{ padding: 3 }}>
       <Typography variant="h4" gutterBottom>
         Dashboard
       </Typography>
@@ -28,7 +28,7 @@ const Dashboard = () => {
         <Line type="monotone" dataKey="uv" stroke="#8884d8" />
         <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
       </LineChart>
-    </Box>
+    </Box> */}
     </>
   );
 };

@@ -10,6 +10,7 @@ import DC from './views/DC';
 import VM from './views/VM';
 import Cluster from './views/Cluster';
 import Authentication from './views/Auuthentication';
+import ServerDetail from './views/ServerDetails';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/vm" element={<VM/>} /> 
             <Route path="/cluster" element={<Cluster/>} /> 
             <Route path="/auth" element={<Authentication/>} /> 
+            <Route path="/serverDetail" element={<ServerDetail/>} /> 
           </Routes>
         </Box>
       </Box>

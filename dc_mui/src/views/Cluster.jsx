@@ -28,7 +28,6 @@ const staticData = [
 ];
 
 
-
 const usStates = [
   { value: 'CA', label: 'California' },
   { value: 'NY', label: 'New York' },
@@ -42,8 +41,9 @@ const exportToCSV = (data) => {
     Name: item.name,
     Status: item.status,
     Site: item.site,
-    NumberOfServers: item.nbserver,
-    NumberOfVMs: item.nbvm,
+    NBServer: item.nbserver,
+    NBVM: item.nbvm,
+  
   }));
 
   const csv = Papa.unparse(csvData, {
@@ -56,7 +56,7 @@ const exportToCSV = (data) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'clusters.csv';
+  a.download = 'servers.csv';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -65,33 +65,38 @@ const exportToCSV = (data) => {
 
 const exportToPDF = (data) => {
   const doc = new jsPDF();
-  doc.text('Cluster Data', 14, 16);
+  doc.text('Server Data', 14, 16);
   doc.autoTable({
-    head: [['Id', 'Name', 'Status', 'Site', 'Number of Servers', 'Number of VMs']],
-    body: data.map((item) => [item.id, item.name, item.status, item.site, item.nbserver, item.nbvm]),
+    head: [['Id', 'Name', 'Status', 'Site', 'NBServer', 'NBVM']],
+    body: data.map((item) => [
+      item.id,
+      item.name,
+      item.status,
+      item.site,
+      item.nbserver,
+      item.nbvm,
+      ]),
     startY: 30,
   });
-  doc.save('clusters.pdf');
+  doc.save('servers.pdf');
 };
-
-
-
 
 
 const Example = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
-const columns = useMemo(
+  const columns = useMemo(
     () => [
-      { accessorKey: 'id', header: 'Id', enableEditing: false, size: 80 },
+
+      { accessorKey: 'id', header: 'ID', enableEditing: false, size: 80 },
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'status', header: 'Status' },
       { accessorKey: 'site', header: 'Site' },
-      { accessorKey: 'nbserver', header: 'Number of Servers' },
-      { accessorKey: 'nbvm', header: 'Number of VMs' },
+      { accessorKey: 'nbserver', header: 'NB Server' },
+      { accessorKey: 'nbvm', header: 'NB VM' }
     ],
     [validationErrors]
-);
+  );
   
 
   const { mutateAsync: createUser, isPending: isCreatingUser } = useCreateUser();
@@ -137,14 +142,19 @@ const columns = useMemo(
     muiToolbarAlertBannerProps: isLoadingUsersError
       ? { color: 'error', children: 'Error loading data' }
       : undefined,
-    muiTableContainerProps: { sx: { minHeight: '500px' } },
+      muiTableContainerProps: {
+        sx: {
+          minHeight: "300px",
+          maxHeight: "600px", // Hauteur maximale pour activer le défilement
+        },
+      },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateUser,
     onEditingRowCancel: () => setValidationErrors({}),
     onEditingRowSave: handleSaveUser,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Add Cluster</DialogTitle>
+        <DialogTitle variant="h6">Create Cluster</DialogTitle>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {internalEditComponents}
         </DialogContent>
@@ -219,10 +229,38 @@ function useGetUsers() {
 }
 
 function useCreateUser() {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (newUser) => new Promise((resolve) => setTimeout(resolve, 1000)),
+    mutationFn: async (user) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return Promise.resolve();
+    },
+    onMutate: (newUserInfo) => {
+      queryClient.setQueryData(['users'], (prevUsers) => {
+        // Ensure prevUsers is an array or default to an empty array if it's undefined
+        const usersArray = Array.isArray(prevUsers) ? prevUsers : [];
+
+        // Determine the next ID by finding the maximum existing ID and adding 1
+        const maxId = usersArray.length > 0 
+          ? Math.max(...usersArray.map(user => user.id)) 
+          : 0;
+        const nextId = maxId + 1;
+
+        return [
+          ...usersArray,
+          {
+            ...newUserInfo,
+            id: nextId, // Use the incremented ID
+          },
+        ];
+      });
+    },
   });
 }
+
+
+
 
 function useUpdateUser() {
   return useMutation({
@@ -253,9 +291,12 @@ const validateUser = (values) => {
 
 const App = () => {
   return (
+   <>
+    <h1 style={{marginBottom:'20px'}}>Cluster</h1>
     <QueryClientProvider client={new QueryClient()}>
       <Example />
     </QueryClientProvider>
+    </> 
   );
 };
 
