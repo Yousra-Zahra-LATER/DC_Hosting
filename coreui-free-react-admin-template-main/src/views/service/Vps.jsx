@@ -201,7 +201,7 @@ const VPSConfiguration = () => {
               </div>
             </CCardBody>
           </CCard>
-          <CCard className='mb-4 shadow-md'>
+          <CCard className='mb-4 shadow-md '>
             <CCardBody>
               <div className="mb-4">
                 <CFormCheck
@@ -215,8 +215,9 @@ const VPSConfiguration = () => {
           </CCard>
         </CCol>
         <CCol md="4">
-          <div style={{ position: 'sticky', bottom: 0 }}>
-          <CCard className='shadow-md'>
+          <div style={{ position: 'fixed', bottom: 0 }}>
+          <CCard className="shadow-md w-80 mb-5">
+
               <CCardHeader>Summary</CCardHeader>
               <CCardBody>
                 <p>

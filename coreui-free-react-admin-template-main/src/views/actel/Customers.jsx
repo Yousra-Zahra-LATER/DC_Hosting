@@ -5,6 +5,7 @@ import { Button,Box} from '@mui/material';
 import { Person } from "@material-ui/icons";
 import CustomerDetail from './Customerdetail';
 import ModalContent  from '../../components/ModalContent';
+import { CCol, CRow } from '@coreui/react';
 
 const Customers = () =>  {
   const columns=[
@@ -18,8 +19,8 @@ const Customers = () =>  {
     
   ];
   const data=[
-    { id : '10',name: 'Later', surname: 'Zahra Yousra', phone: '0666666666',regnum :'547896', Type: 63, approuved : false },
-    { id : '11',name: 'Slimani', surname: 'Rokia', phone: '0666666666',regnum :'547896', Type: 34 ,approuved : true},
+    { id : '1',name: 'Client 1', surname: 'Mohammed', phone: '0666666456',regnum :'547845', Type: 63, approuved : false },
+    { id : '2',name: 'Client 2', surname: 'Ahmed', phone: '0666666666',regnum :'547896', Type: 34 ,approuved : true},
   ] ;
 
   const [open, setOpen] = useState(false);
@@ -43,9 +44,22 @@ const Customers = () =>  {
 
 return (
   <>
+   <CRow className="justify-content-between align-items-center mb-3">
+          <CCol className="mb-2">
+            <h2 style={{ fontSize: '22px' }}>List Of Clients</h2>
+            <div
+              style={{
+                width: '138px',
+                height: '1px',
+                backgroundColor: '#4B49B6',
+                marginTop: '9px',
+              }}
+            ></div>
+          </CCol>
+        </CRow>
       <div>
         <Box pb={1}>
-          <Button variant="contained" startIcon={<Person />} onClick={handleClickOpen}>
+          <Button variant="contained" startIcon={<Person />} onClick={handleClickOpen} className='mb-2'>
           Customer detail
           </Button>
         </Box>

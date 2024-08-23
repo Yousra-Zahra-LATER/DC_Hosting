@@ -38,7 +38,7 @@
     "classnames": "^2.5.1",
     "core-js": "^3.37.1",
     "coreui": "^0.4.2-alpha2",
-    "dayjs": "^1.11.12",
+    "dayjs": "^1.11.13",
     "material-table": "^2.0.5",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",

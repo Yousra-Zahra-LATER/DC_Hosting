@@ -19,7 +19,7 @@ import {
   CCol,
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
-import { cilTrash, cilInfo } from '@coreui/icons';
+import { cilTrash, cilMagnifyingGlass } from '@coreui/icons';
 
 const Support = () => {
   const [tickets, setTickets] = useState([
@@ -138,7 +138,7 @@ const Support = () => {
                     onClick={() => openDetailsModal(ticket)}
                     style={{ cursor: 'pointer', color: 'blue', marginRight: '10px' }}
                   >
-                    <CIcon icon={cilInfo} />
+                    <CIcon icon={cilMagnifyingGlass} />
                   </span>
                   <span
                     onClick={() => confirmDeleteTicket(index)}

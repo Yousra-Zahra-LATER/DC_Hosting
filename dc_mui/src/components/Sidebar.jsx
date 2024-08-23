@@ -43,7 +43,8 @@ import DevicesIcon from "@mui/icons-material/Devices";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-import SearchIcon from '@mui/icons-material/Search';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 const drawerWidth = 250;
 const DrawerIconColor = '#1E2A5E';
 const AppBarColor = '#F7F7F8';
@@ -240,7 +241,7 @@ export default function MiniDrawer() {
               }}
             />
           </IconButton>
-          
+         
           <Typography
             variant="h6"
             noWrap
@@ -541,10 +542,11 @@ export default function MiniDrawer() {
               </CustomListItemButton>
             </List>
           </Collapse>
-
+           {!open ? (
+          <Tooltip title="Client" placement="right">
           <CustomListItem disablePadding>
             <CustomListItemButton
-             onClick={() => navigate('/')}
+             onClick={() => navigate('/client')}
               sx={{
                 maxHeight: 42,
                 justifyContent: open ? "initial" : "center",
@@ -559,7 +561,7 @@ export default function MiniDrawer() {
                   
                 }}
               >
-                <PersonIcon sx={{ color: DrawerIconColor,fontSize: 18 }} />
+                <Diversity3Icon sx={{ color: DrawerIconColor,fontSize: 18 }} />
               </ListItemIcon>
               <CustomListItemText
                 primary="Client"
@@ -567,7 +569,91 @@ export default function MiniDrawer() {
               />
             </CustomListItemButton>
           </CustomListItem>
+   </Tooltip>
+     ) : (
+      <CustomListItem disablePadding>
+      <CustomListItemButton
+       onClick={() => navigate('/client')}
+        sx={{
+          maxHeight: 42,
+          justifyContent: open ? "initial" : "center",
+          px: 2.5,
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: open ? 3 : "auto",
+            justifyContent: "center",
+            
+          }}
+        >
+          <Diversity3Icon sx={{ color: DrawerIconColor,fontSize: 18 }} />
+        </ListItemIcon>
+        <CustomListItemText
+          primary="Client"
+          sx={{ opacity: open ? 1 : 0,fontSize: 18 }}
+        />
+      </CustomListItemButton>
+    </CustomListItem>
+     )}
 
+  {!open ? (
+      <Tooltip title="Tasks" placement="right">
+          <CustomListItem disablePadding>
+            <CustomListItemButton
+             onClick={() => navigate('/tasks')}
+              sx={{
+                maxHeight: 42,
+                justifyContent: open ? "initial" : "center",
+                
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                  
+                }}
+              >
+              <AddTaskIcon  sx={{ color: DrawerIconColor , fontsize : 18}} />
+              </ListItemIcon>
+              
+          <CustomListItemText primary="Tasks" sx={{ opacity: open ? 1 : 0,fontSize: 18  }} />
+              {/* {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>} */}
+            </CustomListItemButton>
+          </CustomListItem>
+   </Tooltip>
+  ) : (
+   <CustomListItem disablePadding>
+            <CustomListItemButton
+             onClick={() => navigate('/tasks')}
+              sx={{
+                maxHeight: 42,
+                justifyContent: open ? "initial" : "center",
+                
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                  
+                }}
+              >
+              <AddTaskIcon  sx={{ color: DrawerIconColor , fontsize : 18}} />
+              </ListItemIcon>
+              
+          <CustomListItemText primary="Tasks" sx={{ opacity: open ? 1 : 0,fontSize: 18  }} />
+              {/* {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>} */}
+            </CustomListItemButton>
+          </CustomListItem>
+ )}
+
+{!open ? (
+   <Tooltip title="Account" placement="right">
           <CustomListItem disablePadding>
             <CustomListItemButton
              onClick={() => navigate('/profile')}
@@ -592,6 +678,36 @@ export default function MiniDrawer() {
               {/* {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>} */}
             </CustomListItemButton>
           </CustomListItem>
+          </Tooltip>
+
+) : (
+
+  <CustomListItem disablePadding>
+            <CustomListItemButton
+             onClick={() => navigate('/profile')}
+              sx={{
+                maxHeight: 42,
+                justifyContent: open ? "initial" : "center",
+                
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                  
+                }}
+              >
+              <AccountCircleIcon sx={{ color: DrawerIconColor , fontsize : 18}} />
+              </ListItemIcon>
+              
+          <CustomListItemText primary="Account" sx={{ opacity: open ? 1 : 0,fontSize: 18  }} />
+              {/* {open && <>{openD ? <ExpandLess /> : <ExpandMore />}</>} */}
+            </CustomListItemButton>
+          </CustomListItem>
+
+)}
           <Collapse timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <CustomListItemButton onClick={() => navigate('/profile')}>

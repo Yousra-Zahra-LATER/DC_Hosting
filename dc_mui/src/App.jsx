@@ -11,6 +11,9 @@ import VM from './views/VM';
 import Cluster from './views/Cluster';
 import Authentication from './views/Auuthentication';
 import ServerDetail from './views/ServerDetails';
+import ClientDetail from './views/ClientDetail';
+import Tasks from './views/Tasks';
+import Clients from './views/Clients';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -21,6 +24,8 @@ function App() {
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop:'65px',overflow:'auto'}}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/tasks" element={<Tasks />} /> 
+            <Route path="/client" element={<Clients/>} /> 
             <Route path="/profile" element={<Profile />} /> 
             <Route path="/dc" element={<DC/>} />
             <Route path="/server" element={<Server/>}/> 
@@ -29,6 +34,7 @@ function App() {
             <Route path="/cluster" element={<Cluster/>} /> 
             <Route path="/auth" element={<Authentication/>} /> 
             <Route path="/serverDetail" element={<ServerDetail/>} /> 
+            <Route path="/clientDetail" element={<ClientDetail/>} /> 
           </Routes>
         </Box>
       </Box>
