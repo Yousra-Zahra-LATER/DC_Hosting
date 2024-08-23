@@ -33,79 +33,45 @@ import jsPDF from "jspdf"; // PDF export library
 import "jspdf-autotable"; // For table export with jsPDF
 import Papa from "papaparse";
 
-
 // Liste statique des centres de données
 const staticData = [
   {
-    id: "1",
-    name: "Server A",
-    site: "Site 1",
-    brand: "Brand X",
+    DateBegin: "20/05/2024",
+    DateEND: "30/05/2024",
+    site: "DC-25",
     rack: "Rack 1",
     uPosition: "U1",
-    ram: "32GB",
-    storage: "1TB",
-    cpu: "8 cores",
-    iso: "ISO1",
     cluster: "Cluster A",
     status: "Active",
     ilo: "192.168.1.1",
     ip: "192.168.1.10",
-    serialNumber: "fgsgfdfdf",
   },
   {
-    id: "2",
-    name: "Server B",
-    site: "Site 2",
-    brand: "Brand Y",
+    DateBegin: "10/01/2024", // Added to match structure
+    DateEND: "23/08/2024", // Renamed from 'name'
+    site: "DC-25",
     rack: "Rack 2",
     uPosition: "U2",
-    ram: "64GB",
-    storage: "2TB",
-    cpu: "16 cores",
-    iso: "ISO2",
     cluster: "Cluster B",
     status: "Inactive",
     ilo: "192.168.1.2",
     ip: "192.168.1.11",
-    serialNumber: "fgsgfdfdf",
   },
-  {
-    id: "3",
-    name: "Server C",
-    site: "Site 3",
-    brand: "Brand Z",
-    rack: "Rack 3",
-    uPosition: "U3",
-    ram: "128GB",
-    storage: "4TB",
-    cpu: "32 cores",
-    iso: "ISO3",
-    cluster: "Cluster C",
-    status: "Active",
-    ilo: "192.168.1.3",
-    ip: "192.168.1.12",
-    serialNumber: "fgsgfdfdf",
-  },
+  
 ];
+
 
 const exportToCSV = (data) => {
   const csvData = data.map((item) => ({
-    Id: item.id,
-    Name: item.name,
+    DateBegin: item.id,
+    DateEND: item.name,
     Site: item.site,
-    Brand: item.brand,
     Rack: item.rack,
     U_Position: item.uPosition,
-    RAM: item.ram,
-    Storage: item.storage,
-    CPU: item.cpu,
-    ISO: item.iso,
     Cluster: item.cluster,
     Status: item.status,
     ILO: item.ilo,
     IP_Address: item.ip,
-    serialNumber: item.serialNumber,
   }));
 
   const csv = Papa.unparse(csvData, {
@@ -131,39 +97,27 @@ const exportToPDF = (data) => {
   doc.autoTable({
     head: [
       [
-        "Id",
-        "Name",
+        "DateBegin",
+        "DateEND",
         "Site",
-        "Brand",
         "Rack",
         "U Position",
-        "RAM",
-        "Storage",
-        "CPU",
-        "ISO",
         "Cluster",
         "Status",
         "ILO",
         "IP Address",
-        "Serial Number",
       ],
     ],
     body: data.map((item) => [
-      item.id,
-      item.name,
+      item.DateBegin,
+      item.DateEND,
       item.site,
-      item.brand,
       item.rack,
       item.uPosition,
-      item.ram,
-      item.storage,
-      item.cpu,
-      item.iso,
       item.cluster,
       item.status,
       item.ilo,
       item.ip,
-      item.serialNumber,
     ]),
     startY: 30,
   });
@@ -176,10 +130,10 @@ const ServerTable = () => {
 
   const columns = useMemo(
     () => [
-      { accessorKey: "id", header: "Id", enableEditing: false, size: 80 },
+      { accessorKey: "DateBegin", header: "Date begin", },
       {
-        accessorKey: "name",
-        header: "Name",
+        accessorKey: "DateEND",
+        header: "Date end",
         muiEditTextFieldProps: {
           required: true,
           error: !!validationErrors?.name,
@@ -199,17 +153,7 @@ const ServerTable = () => {
             setValidationErrors({ ...validationErrors, site: undefined }),
         },
       },
-      {
-        accessorKey: "brand",
-        header: "Brand",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.brand,
-          helperText: validationErrors?.brand,
-          onFocus: () =>
-            setValidationErrors({ ...validationErrors, brand: undefined }),
-        },
-      },
+
       {
         accessorKey: "rack",
         header: "Rack",
@@ -232,50 +176,7 @@ const ServerTable = () => {
             setValidationErrors({ ...validationErrors, uPosition: undefined }),
         },
       },
-      {
-        accessorKey: "ram",
-        header: "RAM",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.ram,
-          helperText: validationErrors?.ram,
-          onFocus: () =>
-            setValidationErrors({ ...validationErrors, ram: undefined }),
-        },
-      },
-      {
-        accessorKey: "storage",
-        header: "Storage",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.storage,
-          helperText: validationErrors?.storage,
-          onFocus: () =>
-            setValidationErrors({ ...validationErrors, storage: undefined }),
-        },
-      },
-      {
-        accessorKey: "cpu",
-        header: "CPU",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.cpu,
-          helperText: validationErrors?.cpu,
-          onFocus: () =>
-            setValidationErrors({ ...validationErrors, cpu: undefined }),
-        },
-      },
-      {
-        accessorKey: "iso",
-        header: "ISO",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.iso,
-          helperText: validationErrors?.iso,
-          onFocus: () =>
-            setValidationErrors({ ...validationErrors, iso: undefined }),
-        },
-      },
+
       {
         accessorKey: "cluster",
         header: "Cluster",
@@ -320,20 +221,7 @@ const ServerTable = () => {
             setValidationErrors({ ...validationErrors, ip: undefined }),
         },
       },
-      {
-        accessorKey: "serialNumber",
-        header: "Serial Number",
-        muiEditTextFieldProps: {
-          required: true,
-          error: !!validationErrors?.serialNumber,
-          helperText: validationErrors?.serialNumber,
-          onFocus: () =>
-            setValidationErrors({
-              ...validationErrors,
-              serialNumber: undefined,
-            }),
-        },
-      },
+ 
     ],
     [validationErrors]
   );
@@ -428,11 +316,11 @@ const ServerTable = () => {
     ),
     renderRowActions: ({ row, table }) => (
       <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Tooltip title="Edit">
+        {/* <Tooltip title="Edit">
           <IconButton onClick={() => table.setEditingRow(row)}>
             <EditIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title="Delete">
           <IconButton color="error" onClick={() => openDeleteConfirmModal(row)}>
             <DeleteIcon />
@@ -442,9 +330,7 @@ const ServerTable = () => {
     ),
     renderTopToolbarCustomActions: ({ table }) => (
       <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Button variant="contained" onClick={() => table.setCreatingRow(true)}>
-          Create New Server
-        </Button>
+        
         <Button variant="outlined" onClick={() => exportToCSV(fetchedServers)}>
           Export as CSV
         </Button>
@@ -457,13 +343,6 @@ const ServerTable = () => {
           Export as PDF
         </Button>
 
-        <Button
-          variant="outlined"
-          onClick={() => navigate('/serverDetail')}
-          startIcon={<DetailIcon />}
-        >
-          Details
-        </Button>
       </Box>
     ),
     state: {
@@ -578,12 +457,12 @@ function validateServer(values) {
 
 const queryClient = new QueryClient();
 
-function App() {
+function HistoryServer() {
   
 
   return (
     <>
-      <h2>Server</h2>
+     
       <QueryClientProvider client={queryClient}>
         <ServerTable />
       </QueryClientProvider>
@@ -591,4 +470,4 @@ function App() {
   );
 }
 
-export default App;
+export default HistoryServer;

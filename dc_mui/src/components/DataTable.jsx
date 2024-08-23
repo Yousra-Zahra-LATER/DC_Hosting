@@ -15,7 +15,7 @@ const DataTable = (props ) => {
 
   let [data, setData] = useState(props.DataList);
 
-  const [columns, setcolumns] = useState(props.columnss);
+  const [columns, setcolumns] = useState(props.columns);
   const [collection, setcollection] = useState(props.collections);
   const [noAdd, setnoAdd] = useState(props.noAdds);
   const [noEdit, setnoEdit] = useState(props.noEdit);
@@ -23,7 +23,52 @@ const DataTable = (props ) => {
   const typeUser = props.type;
   
   
-  const theme = createTheme({});
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1976d2', // Primary color
+      },
+      secondary: {
+        main: '#dc004e', // Secondary color
+      },
+    },
+    typography: {
+      fontFamily: 'Arial, sans-serif',
+      h6: {
+        fontSize: '1.25rem', // Adjust Typography for table headers
+      },
+    },
+    components: {
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            fontSize: '14px', // Adjust font size for table cells
+          },
+        },
+      },
+      MuiTableHead: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#f5f5f5', // Header background color
+          },
+        },
+      },
+      MuiTableSortLabel: {
+        styleOverrides: {
+          root: {
+            color: '#1976d2', // Sort label color
+          },
+        },
+      },
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            border: '1px solid #ddd', // Table container border
+          },
+        },
+      },
+    },
+  });
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -119,8 +164,8 @@ const DataTable = (props ) => {
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
           headerStyle: {
-            backgroundColor: 'blue',
-            color: '#FFF'
+            backgroundColor: '#D1E9F6',
+            color: '#55679C'
           }
         }}
        
