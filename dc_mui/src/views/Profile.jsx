@@ -66,7 +66,7 @@ const AdminProfileUpdate = () => {
         }}
       >
         <Typography component="h1" variant="h5"  sx={{
-           marginBottom: 5,
+           marginBottom: 5
           }}>
           Update My Profile
         </Typography>
@@ -165,37 +165,39 @@ const AdminProfileUpdate = () => {
             </Grid>
           </Grid>
           <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              mt: 3,
-            }}
-          >
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                width: { xs: '100%', sm: '250px' }, // Largeur responsive
-                height: '40px', // Hauteur du bouton
-                mb: 2, // Marge en bas
-              }}
-            >
-              Update Profile
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={handleCancel}
-              sx={{
-                width: { xs: '100%', sm: '250px' }, // Largeur responsive
-                height: '40px', // Hauteur du bouton
-              }}
-            >
-              Cancel
-            </Button>
-          </Box>
+  sx={{
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' }, // Column for small screens, row for larger screens
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2, // Adds space between the buttons
+    mt: 3,
+  }}
+>
+  <Button
+    type="submit"
+    variant="contained"
+    color="primary"
+    sx={{
+      width: { xs: '100%', sm: '250px' }, // Responsive width
+      height: '40px', // Button height
+      mb: { xs: 2, sm: 0 }, // Margin at the bottom for small screens, no margin for large screens
+    }}
+  >
+    Update Profile
+  </Button>
+  <Button
+    variant="outlined"
+    color="secondary"
+    onClick={handleCancel}
+    sx={{
+      width: { xs: '100%', sm: '250px' }, // Responsive width
+      height: '40px', // Button height
+    }}
+  >
+    Cancel
+  </Button>
+</Box>
         </Box>
       </Box>
     </Container>
