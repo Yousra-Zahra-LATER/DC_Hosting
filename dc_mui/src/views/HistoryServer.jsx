@@ -303,7 +303,7 @@ const ServerTable = () => {
     ),
     renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Edit Server</DialogTitle>
+        <DialogTitle variant="h6">Edit Server</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >

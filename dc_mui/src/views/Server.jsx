@@ -401,7 +401,7 @@ const ServerTable = () => {
     onEditingRowSave: handleSaveServer,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h6">Create New Server</DialogTitle>
+        <DialogTitle variant="h6">Create Server</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}
         >
@@ -415,7 +415,7 @@ const ServerTable = () => {
     ),
     renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Edit Server</DialogTitle>
+        <DialogTitle variant="h6">Edit Server</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >

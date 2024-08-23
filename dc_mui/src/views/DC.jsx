@@ -176,7 +176,7 @@ const DataCenterTable = () => {
     onEditingRowSave: handleSaveDataCenter,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h4">Create New Data Center</DialogTitle>
+        <DialogTitle variant="h6">Create New Data Center</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
@@ -189,7 +189,7 @@ const DataCenterTable = () => {
     ),
     renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Edit Data Center</DialogTitle>
+        <DialogTitle variant="h6">Edit Data Center</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >
