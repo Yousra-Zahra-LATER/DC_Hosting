@@ -165,7 +165,7 @@ const Example = () => {
     ),
     renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h3">Edit User</DialogTitle>
+        <DialogTitle variant="h6">Edit User</DialogTitle>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {internalEditComponents}
         </DialogContent>
@@ -258,8 +258,6 @@ function useCreateUser() {
     },
   });
 }
-
-
 
 
 function useUpdateUser() {
