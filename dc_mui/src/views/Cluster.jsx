@@ -22,9 +22,9 @@ import 'jspdf-autotable'; // For table export with jsPDF
 import Papa from 'papaparse';
 // Liste statique des utilisateurs
 const staticData = [
-  { id: '1', vmname: 'VM-A1', ram: '16GB', disk: '500GB', cpu: 'Intel Xeon', ip: '192.168.0.10', nameclient: 'ClientX', nameserver: 'Server1', site: 'DC-25', os: 'Windows Server 2019', namecluster: 'ClusterA', status: 'Active', role: 'Administrator' },
-  { id: '2', vmname: 'VM-B2', ram: '32GB', disk: '1TB', cpu: 'AMD Ryzen 9', ip: '192.168.0.11', nameclient: 'ClientY', nameserver: 'Server2', site: 'DC-25', os: 'Ubuntu 22.04', namecluster: 'ClusterB', status: 'Inactive', role: 'User' },
-  { id: '3', vmname: 'VM-C3', ram: '64GB', disk: '2TB', cpu: 'Intel i9', ip: '192.168.0.12', nameclient: 'ClientZ', nameserver: 'Server3', site: 'DC-16', os: 'macOS Ventura', namecluster: 'ClusterC', status: 'Active', role: 'User' },
+  { id: '1', name: 'Cluster A', status: 'Active', site: 'DC-25', nbserver: 5, nbvm: 20 },
+  { id: '2', name: 'Cluster B', status: 'Inactive', site: 'DC-16', nbserver: 3, nbvm: 15 },
+  { id: '3', name: 'Cluster C', status: 'Active', site: 'DC-16', nbserver: 8, nbvm: 30 },
 ];
 
 
@@ -38,18 +38,12 @@ const usStates = [
 const exportToCSV = (data) => {
   const csvData = data.map((item) => ({
     Id: item.id,
-    VMName: item.vmname,
-    RAM: item.ram,
-    Disk: item.disk,
-    CPU: item.cpu,
-    IP: item.ip,
-    ClientName: item.nameclient,
-    ServerName: item.nameserver,
-    Site: item.site,
-    OS: item.os,
-    ClusterName: item.namecluster,
+    Name: item.name,
     Status: item.status,
-    Role: item.role,
+    Site: item.site,
+    NBServer: item.nbserver,
+    NBVM: item.nbvm,
+  
   }));
 
   const csv = Papa.unparse(csvData, {
@@ -73,8 +67,15 @@ const exportToPDF = (data) => {
   const doc = new jsPDF();
   doc.text('Server Data', 14, 16);
   doc.autoTable({
-    head: [['Id', 'VM Name', 'RAM', 'Disk', 'CPU', 'IP Address', 'Client Name', 'Server Name', 'Site', 'OS', 'Cluster Name', 'Status', 'Role']],
-    body: data.map((item) => [item.id, item.vmname, item.ram, item.disk, item.cpu, item.ip, item.nameclient, item.nameserver, item.site, item.os, item.namecluster, item.status, item.role]),
+    head: [['Id', 'Name', 'Status', 'Site', 'NBServer', 'NBVM']],
+    body: data.map((item) => [
+      item.id,
+      item.name,
+      item.status,
+      item.site,
+      item.nbserver,
+      item.nbvm,
+      ]),
     startY: 30,
   });
   doc.save('servers.pdf');
@@ -86,19 +87,13 @@ const Example = () => {
 
   const columns = useMemo(
     () => [
-      { accessorKey: 'id', header: 'Id', enableEditing: false, size: 80 },
-      { accessorKey: 'vmname', header: 'VM Name' },
-      { accessorKey: 'ram', header: 'RAM' },
-      { accessorKey: 'disk', header: 'Disk' },
-      { accessorKey: 'cpu', header: 'CPU' },
-      { accessorKey: 'ip', header: 'IP Address' },
-      { accessorKey: 'nameclient', header: 'Client Name' },
-      { accessorKey: 'nameserver', header: 'Server Name' },
-      { accessorKey: 'site', header: 'Site' },
-      { accessorKey: 'os', header: 'OS' },
-      { accessorKey: 'namecluster', header: 'Cluster Name' },
+
+      { accessorKey: 'id', header: 'ID', enableEditing: false, size: 80 },
+      { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'status', header: 'Status' },
-      { accessorKey: 'role', header: 'Role' },
+      { accessorKey: 'site', header: 'Site' },
+      { accessorKey: 'nbserver', header: 'NB Server' },
+      { accessorKey: 'nbvm', header: 'NB VM' }
     ],
     [validationErrors]
   );
@@ -159,7 +154,7 @@ const Example = () => {
     onEditingRowSave: handleSaveUser,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h6">Create VM</DialogTitle>
+        <DialogTitle variant="h6">Create Cluster</DialogTitle>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {internalEditComponents}
         </DialogContent>
@@ -196,7 +191,7 @@ const Example = () => {
     renderTopToolbarCustomActions: ({ table }) => (
       <Box sx={{ display: 'flex', gap: '1rem' }}>
         <Button variant="contained" onClick={() => table.setCreatingRow(true)}>
-          Create VM
+          Create Cluster
         </Button>
         <Button
           variant="outlined"
@@ -297,7 +292,7 @@ const validateUser = (values) => {
 const App = () => {
   return (
    <>
-    <h1 style={{marginBottom:'20px'}}>Virtual machines</h1>
+    <h1 style={{marginBottom:'20px'}}>Cluster</h1>
     <QueryClientProvider client={new QueryClient()}>
       <Example />
     </QueryClientProvider>
