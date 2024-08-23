@@ -10,15 +10,17 @@ const Authentication = React.lazy(() => import('./views/account/Authentication')
 
 //Actel
 const Customers = React.lazy(() => import('./views/actel/Customers'))
+const Tickets = React.lazy(() => import('./views/actel/Tickets'))
 
 //Support
 const Support = React.lazy(() => import('./views/support/Support'))
 
 
 //Service 
-const Service = React.lazy(() => import('./views/service/Service'))
 const HostingWeb = React.lazy(() => import('./views/service/HostingWeb'))
 const Vps = React.lazy(() => import('./views/service/Vps'))
+const Performance = React.lazy(() => import('./views/service/Performance'))
+const Storage = React.lazy(() => import('./views/service/Storage'))
 const Vpc = React.lazy(() => import('./views/service/Vpc'))
 const Backup = React.lazy(() => import('./views/service/Backup'))
 const ObjectStorage = React.lazy(() => import('./views/service/ObjectStorage'))
@@ -74,17 +76,20 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/account', name: 'Account', element: Account },
+  { path: '/account', name: 'Profil', element: Account },
   { path: '/authentication', name: 'Authentication', element: Authentication },
   { path: '/support', name: 'Support', element: Support },
   { path: '/service/hostingweb', name: 'Hosting Web', element: HostingWeb },
-  { path: '/service/vps', name: 'Vps', element: Vps },
+  { path: '/service/vps/standard', name: 'Standard', element: Vps },
+  { path: '/service/vps/performance', name: 'Performance', element: Performance },
+  { path: '/service/vps/storage', name: 'Storage', element: Storage },
   { path: '/service/vpc', name: 'Vpc', element: Vpc },
   { path: '/service/backup', name: 'Backup', element: Backup },
   { path: '/service/objectstorage', name: 'ObjectStorage', element: ObjectStorage },
   { path: '/service/DNS', name: 'DNS', element: DNS },
-  { path: '/service/MAIL', name: 'MAIL', element: MAIL },
-  { path: '/actel/customers', name: 'Customers', element: Customers },
+  { path: '/service/MAIL', name: 'MAILll', element: MAIL },
+  { path: '/customers', name: 'Clients', element: Customers },
+  { path: '/tickets', name: 'Tickets', element: Tickets },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

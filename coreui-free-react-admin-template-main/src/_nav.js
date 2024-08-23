@@ -10,32 +10,42 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { FaRegUserCircle } from "react-icons/fa";
 import { LuUserCog } from "react-icons/lu";
 import { TbShieldLock } from "react-icons/tb";
-
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { IoTicketOutline } from "react-icons/io5";
+import { MdWeb } from "react-icons/md";
+import { IoMdCloudOutline } from "react-icons/io";
+import { LuDatabaseBackup } from "react-icons/lu";
+import { GrStorage } from "react-icons/gr";
+import { MdOutlineDns } from "react-icons/md";
+import { IoMailOutline } from "react-icons/io5";
+import { AiOutlineCloudServer } from "react-icons/ai";
 const services = [
-  { name: 'Hosting Web', to: '/service/hostingweb' },
+  { name: 'Hosting Web', to: '/service/hostingweb',icon: <MdWeb  className='mr-2' size={20} />},
   {
     name: 'VPS',
     to: '/service/vps',
+    icon: <AiOutlineCloudServer  className='mr-2' size={20} />,
     items: [
-      { name: 'Standard', to: '/service/vps' },
+      { name: 'Standard', to: '/service/vps/standard' },
       { name: 'Performance', to: '/service/vps/performance' },
-      { name: 'Storage', to: '/service/vps/premium' },
+      { name: 'Storage', to: '/service/vps/storage' },
     ],
   },
-  { name: 'VPC', to: '/service/vpc' },
-  { name: 'Backup', to: '/service/backup' },
-  { name: 'Object Storage', to: '/service/objectstorage' },
-  { name: 'DNS', to: '/service/DNS' },
-  { name: 'Email', to: '/service/MAIL' },
+  { name: 'VPC', to: '/service/vpc' ,icon: <IoMdCloudOutline  className='mr-2' size={20} />},
+  { name: 'Backup', to: '/service/backup' ,icon: <LuDatabaseBackup   className='mr-2' size={20} />},
+  { name: 'Object Storage', to: '/service/objectstorage' ,icon: <GrStorage className='mr-2' size={20} />},
+  { name: 'DNS', to: '/service/DNS' ,icon: <MdOutlineDns  className='mr-2' size={20} />},
+  { name: 'Email', to: '/service/MAIL' ,icon: <IoMailOutline  className='mr-2' size={20} />},
 ];
 
 const account = [
-  { name: 'Profile', to: '/account', icon: <LuUserCog className='mr-2' size={20} /> },
+  { name: 'Profil', to: '/account', icon: <LuUserCog className='mr-2' size={20} /> },
   { name: 'Authentication', to: '/authentication', icon: <TbShieldLock className='mr-2' size={20} /> },
 ];
 
 const actel = [
-  { name: 'Customers', to: '/actel/customers' },
+  { name: 'Clients', to: '/customers' , icon: <HiOutlineUserGroup  className='mr-2' size={20} />},
+  { name: 'My Tickets', to: '/tickets' , icon: <IoTicketOutline className='mr-2' size={20} /> },
 
 ];
 
@@ -56,11 +66,12 @@ const _nav = [
           component: CNavGroup,
           name: service.name,
           to: service.to,
+          icon: service.icon, // Use the icon defined in the `account` array
           items: service.items.map((subItem) => ({
             component: CNavItem,
             name: subItem.name,
             to: subItem.to,
-            className: '', 
+         
           })),
         };
       } else {
@@ -68,19 +79,16 @@ const _nav = [
           component: CNavItem,
           name: service.name,
           to: service.to,
+          icon: service.icon, // Use the icon defined in the `account` array
         };
       }
     }),
   },
   {
-    component: CNavGroup,
-    name: 'ACTEL',
-    icon: <MdOutlineBusiness className='nav-icon' />,
-    items: actel.map((act) => ({
-      component: CNavItem,
-      name: act.name,
-      to: act.to,
-    })),
+    component: CNavItem,
+    name: 'Support',
+    to: '/support', 
+    icon: <RiCustomerService2Line className='nav-icon' />,
   },
   {
     component: CNavGroup,
@@ -93,11 +101,17 @@ const _nav = [
       icon: acc.icon, // Use the icon defined in the `account` array
     })),
   },
+
   {
-    component: CNavItem,
-    name: 'Support',
-    to: '/support', 
-    icon: <RiCustomerService2Line className='nav-icon' />,
+    component: CNavGroup,
+    name: 'COMMERCIAL',
+    icon: <MdOutlineBusiness className='nav-icon' />,
+    items: actel.map((act) => ({
+      component: CNavItem,
+      name: act.name,
+      to: act.to,
+      icon: act.icon, // Use the icon defined in the `account` array
+    })),
   },
 ];
 
