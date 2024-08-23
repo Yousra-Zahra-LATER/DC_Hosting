@@ -91,7 +91,7 @@ export default function VPSOffers() {
         '16 GB DDR5 RAM',
         '200GB NVMe Storage',
         'Unmetered bandwidth',
-        'cPanel license fee included',
+        'aaPanel license free included',
         '1 dedicated IP',
         'Free migration included',
       ],
@@ -109,7 +109,7 @@ export default function VPSOffers() {
         '32 GB DDR5 RAM',
         '500GB NVMe Storage',
         'Unmetered bandwidth',
-        'cPanel license fee included',
+        'aaPanel license free included',
         '1 dedicated IP',
         'Free migration included',
       ],
@@ -127,7 +127,7 @@ export default function VPSOffers() {
         '8 GB DDR5 RAM',
         '100GB NVMe Storage',
         'Unmetered bandwidth',
-        'cPanel license fee included',
+        'aaPanel license free included',
         '1 dedicated IP',
         'Free migration included',
       ],
@@ -207,15 +207,7 @@ export default function VPSOffers() {
         </CRow>
       </CContainer>
 
-      {/* Additional Info Section */}
-      <CContainer className="my-8 ">
-        <div className="flex flex-col lg:flex-row items-center text-black text-base font-semibold  shadow-lg  border-l-4 border-blue-500 ">
-          <span className="m-3 text-center lg:text-left">
-            We offer a variety of VPS configurations. Customize yours to fit your needs and get the
-            best performance for your applications.
-          </span>
-        </div>
-      </CContainer>
+     
       
      
     </>

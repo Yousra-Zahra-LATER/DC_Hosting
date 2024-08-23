@@ -45,7 +45,7 @@ const account = [
 
 const actel = [
   { name: 'Clients', to: '/customers' , icon: <HiOutlineUserGroup  className='mr-2' size={20} />},
-  { name: 'My Tickets', to: '/tickets' , icon: <IoTicketOutline className='mr-2' size={20} /> },
+  { name: 'Tickets', to: '/tickets' , icon: <IoTicketOutline className='mr-2' size={20} /> },
 
 ];
 

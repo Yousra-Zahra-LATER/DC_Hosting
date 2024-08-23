@@ -97,13 +97,16 @@ const VPSConfiguration = () => {
     >
       <CCardBody>
         <CCardTitle>{option.label}</CCardTitle>
-        <CCardText>+{option.price}€/mois</CCardText>
+        <CCardText>+{option.price}DA/mois</CCardText>
         {selectedValue === option.value && <CheckmarkIcon />}
       </CCardBody>
     </CCard>
   )
 
   return (
+    <>
+     {/* Additional Info Section */}
+    
     <CContainer>
       <CRow>
         <CRow className="justify-content-between align-items-center mb-3">
@@ -119,11 +122,19 @@ const VPSConfiguration = () => {
             ></div>
           </CCol>
         </CRow>
+        <CContainer className="my-8 ">
+     <div className="flex flex-col lg:flex-row items-center text-black text-base font-semibold  shadow-lg  border-l-4 border-blue-500 ">
+       <span className="m-3 text-center lg:text-left">
+         We offer a variety of VPS configurations. Customize yours to fit your needs and get the
+         best performance for your applications.
+       </span>
+     </div>
+   </CContainer>
         <CCol md="8">
           <CCard className='mb-4 shadow-md'>
             <CCardBody>
               <div className="mb-4">
-                <h5>Choose RAM</h5>
+              <h5 className='mb-4'>Choose RAM</h5>
                 <CRow>
                   {ramOptions.map((option) => (
                     <CCol md="4" key={option.value}>
@@ -137,7 +148,7 @@ const VPSConfiguration = () => {
           <CCard className='mb-4 shadow-md'>
             <CCardBody>
               <div className="mb-4">
-                <h5>Choose Storage</h5>
+                <h5 className='mb-4'>Choose Storage</h5>
                 <CRow>
                   {storageOptions.map((option) => (
                     <CCol md="4" key={option.value}>
@@ -151,7 +162,7 @@ const VPSConfiguration = () => {
           <CCard className='mb-4 shadow-md'>
             <CCardBody>
               <div className="mb-4">
-                <h5>Choose CPU</h5>
+                <h5 className='mb-4'>Choose CPU</h5>
                 <CRow>
                   {cpuOptions.map((option) => (
                     <CCol md="4" key={option.value}>
@@ -165,7 +176,7 @@ const VPSConfiguration = () => {
           <CCard className='mb-4 shadow-md'>
             <CCardBody>
               <div className="mb-4">
-                <h5>Choose Location</h5>
+              <h5 className='mb-4'>Choose Location</h5>
                 <CRow>
                   {locationOptions.map((option) => (
                     <CCol md="4" key={option.value}>
@@ -179,7 +190,7 @@ const VPSConfiguration = () => {
           <CCard className='mb-4 shadow-md'>
             <CCardBody>
               <div className="mb-4">
-                <h5>Choose ISO</h5>
+              <h5 className='mb-4'>Choose ISO</h5>
                 <CRow>
                   {isoOptions.map((option) => (
                     <CCol md="4" key={option.value}>
@@ -195,7 +206,7 @@ const VPSConfiguration = () => {
               <div className="mb-4">
                 <CFormCheck
                   id="autoBackup"
-                  label="Enable Auto Backup (+1€/mois)"
+                  label="Enable Auto Backup (+1DA/mois)"
                   checked={autoBackup}
                   onChange={(e) => setAutoBackup(e.target.checked)}
                 />
@@ -209,15 +220,15 @@ const VPSConfiguration = () => {
               <CCardHeader>Summary</CCardHeader>
               <CCardBody>
                 <p>
-                  <strong>Total Price:</strong> {calculatePrice()}€/mois
+                  <strong className='mb-4'>Total Price:</strong> {calculatePrice()} DA/mois
                 </p>
                 <div className="mb-3">
-                  <h5>Quantity</h5>
+                <h5 className='mb-4'>Quantity</h5>
                   <CButton color="light" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
                     -
                   </CButton>
                   <span style={{ padding: '0 15px' }}>{quantity}</span>
-                  <CButton color="light" onClick={() => setQuantity(quantity + 1)}>
+                  <CButton color="light" onClick={() => setQuantity(quantity + 1)} >
                     +
                   </CButton>
                 </div>
@@ -234,6 +245,7 @@ const VPSConfiguration = () => {
         </CCol>
       </CRow>
     </CContainer>
+    </>
   )
 }
 
