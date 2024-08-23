@@ -43,7 +43,7 @@ const VPSConfiguration = () => {
   const [quantity, setQuantity] = useState(1)
 
   const ramOptions = [
-    { value: 2, label: '2 GB', price: 0 },
+    { value: 2, label: '2 GB', price: 2 },
     { value: 4, label: '4 GB', price: 4 },
     { value: 8, label: '8 GB', price: 8 },
   ]
