@@ -4,45 +4,25 @@ const BlogData: Blog[] = [
   {
     _id: 1,
     mainImage: "/images/blog/blog-01.png",
-    title: "Free advertising for your online business",
+    title: "5 Essential Tips for Choosing the Right Hosting Provider",
     metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
+      "Optimize your online presence by selecting the best hosting provider for your needs. These practical tips will guide you through evaluating features, performance, and support options, ensuring you make an informed choice for a reliable and scalable hosting solution.",
   },
   {
     _id: 2,
     mainImage: "/images/blog/blog-02.png",
-    title: "9 simple ways to improve your design skills",
+    title: "Tips to Boost Your Coding Efficiency",
     metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
+      "Enhance your programming skills with these actionable tips to increase your coding speed and productivity. Discover strategies to streamline your workflow, reduce errors, and write cleaner, more efficient code.",
   },
   {
-    _id: 2,
+    _id: 3,
     mainImage: "/images/blog/blog-03.png",
-    title: "Tips to quickly improve your coding speed.",
+    title: "9 Simple Ways to Improve Your Design Skills",
     metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
+      "Enhance your design expertise with these practical tips and techniques. From mastering basic principles to exploring advanced strategies, these insights will help you elevate your design projects and create more compelling visual experiences.",
   },
-  {
-    _id: 1,
-    mainImage: "/images/blog/blog-03.png",
-    title: "Free advertising for your online business",
-    metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
-  },
-  {
-    _id: 2,
-    mainImage: "/images/blog/blog-04.png",
-    title: "9 simple ways to improve your design skills",
-    metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
-  },
-  {
-    _id: 2,
-    mainImage: "/images/blog/blog-01.png",
-    title: "Tips to quickly improve your coding speed.",
-    metadata:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit convallis tortor.",
-  },
+ 
 ];
 
 export default BlogData;

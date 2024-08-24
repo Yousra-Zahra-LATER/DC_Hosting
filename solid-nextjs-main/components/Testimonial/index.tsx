@@ -21,8 +21,8 @@ const Testimonial = () => {
             <SectionHeader
               headerInfo={{
                 title: `TESTIMONIALS`,
-                subtitle: `Client’s Testimonials`,
-                description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+                subtitle: `Client Testimonials What Our Clients Are Saying`,
+                description: `Discover how Algerie Telecom’s hosting solutions have made a difference for our clients. Read their experiences and see how we’ve helped businesses thrive with our reliable and innovative services.`,
               }}
             />
           </div>

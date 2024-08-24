@@ -13,8 +13,8 @@ const Pricing = () => {
             <SectionHeader
               headerInfo={{
                 title: `PRICING PLANS`,
-                subtitle: `Simple Pricing`,
-                description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+                subtitle: `Transparent and Simple Pricing`,
+                description: `Explore our straightforward pricing plans designed to fit your needs. With clear and competitive rates, you can easily choose the plan that best suits your business requirements without any hidden fees.`,
               }}
             />
           </div>
@@ -34,7 +34,7 @@ const Pricing = () => {
             {/* <!-- Pricing Item --> */}
             <div className="animate_top group relative rounded-lg border border-stroke bg-white p-7.5 shadow-solid-10 dark:border-strokedark dark:bg-blacksection dark:shadow-none md:w-[45%] lg:w-1/3 xl:p-12.5">
               <h3 className="mb-7.5 text-3xl font-bold text-black dark:text-white xl:text-sectiontitle3">
-                $10{" "}
+                1000 DA{" "}
                 <span className="text-regular text-waterloo dark:text-manatee">
                   /month
                 </span>
@@ -42,15 +42,15 @@ const Pricing = () => {
               <h4 className="mb-2.5 text-para2 font-medium text-black dark:text-white">
                 Small Pack
               </h4>
-              <p>Lorem ipsum dolor sit amet, consec adipisicing elit.</p>
+           
 
               <div className="mt-9 border-t border-stroke pb-12.5 pt-9 dark:border-strokedark">
                 <ul>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
-                    300 GB Storage
+                  100 GB Storage
                   </li>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
-                    Unlimited Photos and Videos
+                    8GB ram
                   </li>
                   <li className="mb-4 text-black opacity-40 last:mb-0 dark:text-manatee">
                     Exclusive Support
@@ -89,7 +89,7 @@ const Pricing = () => {
               </div>
 
               <h3 className="mb-7.5 text-3xl font-bold text-black dark:text-white xl:text-sectiontitle3">
-                $59{" "}
+                5900 DA{" "}
                 <span className="text-regular text-waterloo dark:text-manatee">
                   /month
                 </span>
@@ -97,7 +97,7 @@ const Pricing = () => {
               <h4 className="mb-2.5 text-para2 font-medium text-black dark:text-white">
                 Medium Pack
               </h4>
-              <p>Lorem ipsum dolor sit amet, consec adipisicing elit.</p>
+          
 
               <div className="mt-9 border-t border-stroke pb-12.5 pt-9 dark:border-strokedark">
                 <ul>
@@ -105,7 +105,7 @@ const Pricing = () => {
                     300 GB Storage
                   </li>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
-                    Unlimited Photos and Videos
+                    16GB ram
                   </li>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
                     Exclusive Support
@@ -140,7 +140,7 @@ const Pricing = () => {
             {/* <!-- Pricing Item --> */}
             <div className="animate_top group relative rounded-lg border border-stroke bg-white p-7.5 shadow-solid-10 dark:border-strokedark dark:bg-blacksection dark:shadow-none md:w-[45%] lg:w-1/3 xl:p-12.5">
               <h3 className="mb-7.5 text-3xl font-bold text-black dark:text-white xl:text-sectiontitle3">
-                $189{" "}
+                10000 DA{" "}
                 <span className="text-regular text-waterloo dark:text-manatee">
                   /month
                 </span>
@@ -148,15 +148,15 @@ const Pricing = () => {
               <h4 className="mb-2.5 text-para2 font-medium text-black dark:text-white">
                 Large Pack
               </h4>
-              <p>Lorem ipsum dolor sit amet, consec adipisicing elit.</p>
+             
 
               <div className="mt-9 border-t border-stroke pb-12.5 pt-9 dark:border-strokedark">
                 <ul>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
-                    300 GB Storage
+                    500 GB Storage
                   </li>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
-                    Unlimited Photos and Videos
+                    32GB ram
                   </li>
                   <li className="mb-4 text-black last:mb-0 dark:text-manatee">
                     Exclusive Support

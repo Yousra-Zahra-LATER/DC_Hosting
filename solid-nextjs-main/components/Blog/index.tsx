@@ -12,8 +12,9 @@ const Blog = async () => {
           <SectionHeader
             headerInfo={{
               title: `NEWS & BLOGS`,
-              subtitle: `Latest News & Blogs`,
-              description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+              subtitle: `Latest News & Insights
+Stay Updated with Algerie Telecom`,
+              description: `Explore our news and blog section to keep up with the latest updates, industry trends, and expert insights from Algerie Telecom. Stay informed and see how we’re driving innovation in the hosting industry.`,
             }}
           />
         </div>

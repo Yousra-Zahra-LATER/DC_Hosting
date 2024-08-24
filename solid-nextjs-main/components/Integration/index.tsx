@@ -12,8 +12,8 @@ const Integration = () => {
           <SectionHeader
             headerInfo={{
               title: `INTEGRATIONS`,
-              subtitle: `Remotely Maintain Your Data, From Anywhere, Anytime.`,
-              description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor eros. Donec vitae tortor lacus. Phasellus aliquam ante in maximus.`,
+              subtitle: `Access and Manage Your Data Anywhere Remote Management, Anytime`,
+              description: `With Algerie Telecom's hosting platform, you can securely maintain and access your data from anywhere, at any time. Our advanced remote management tools ensure your business stays connected and in control, no matter where you are.`,
             }}
           />
 
