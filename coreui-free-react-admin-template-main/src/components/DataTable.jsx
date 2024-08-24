@@ -14,13 +14,14 @@ import { AddBox, ArrowDownward,Check,
 const DataTable = (props ) => {
 
   let [data, setData] = useState(props.DataList);
-
+  
   const [columns, setcolumns] = useState(props.columns);
   const [collection, setcollection] = useState(props.collections);
   const [noAdd, setnoAdd] = useState(props.noAdds);
   const [noEdit, setnoEdit] = useState(props.noEdit);
   const [selectedRow, setSelectedRow] = useState(null);
   
+
   
   const typeUser = props.type;
   
@@ -71,7 +72,24 @@ const DataTable = (props ) => {
     
       
 <ThemeProvider theme={theme}>
-      <MaterialTable
+    <MaterialTable
+    actions={[
+      {
+        icon: Check,
+        tooltip: 'Approuved',
+        hidden : !props.isCheck,
+        onClick: (event, rowData) => {
+          alert("You want approuved " + rowData.name) ;
+          const index = rowData.tableData.id;
+          const updatedRows = [...data]
+          updatedRows.splice(index, 1)
+          deleteRowfromCollection(rowData);
+          setData(updatedRows)
+          
+        }
+      } 
+      
+    ]}
       icons={tableIcons}
       title={""}
       columns={columns}
@@ -115,6 +133,8 @@ const DataTable = (props ) => {
           setSelectedRow(selectedRow.tableData.id);
           props.onRowSelect(selectedRow.id);
          })}
+
+         
         options={{
           actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true,  grouping: props.isgrouping, exportButton: true, sorting: true,
           rowStyle: rowData => ({

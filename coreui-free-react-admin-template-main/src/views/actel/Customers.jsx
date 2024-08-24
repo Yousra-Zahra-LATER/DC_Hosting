@@ -67,7 +67,7 @@ return (
         <ModalContent open={open} onClose={handleClose} title = {"Customer detail"} content = {<CustomerDetail/>} withActionBtn = {true}/>
       </div>
       
-      <DataTable DataList ={data} columns ={columns} collections = {""} isEditable = {true} noAdds={false} noEdit={false} onRowSelect = { handleRowSelect }/>
+      <DataTable isCheck = {false} DataList ={data} columns ={columns} collections = {""} isEditable = {true} noAdds={false} noEdit={false} onRowSelect = { handleRowSelect }/>
     
   </>
 );

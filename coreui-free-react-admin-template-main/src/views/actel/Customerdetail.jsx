@@ -87,7 +87,7 @@ const CustomerDetail = () =>  {
     {
       id: 'tab2',
       title: 'Services',
-      content:<Box p={1}><DataTable DataList ={data} columns ={columns} collections = {""} noAdds={true} noEdit={true} />,</Box>
+      content:<Box p={1}><DataTable isCheck = {false} DataList ={data} columns ={columns} collections = {""} noAdds={true} noEdit={true} />,</Box>
       
       
     },
@@ -95,7 +95,7 @@ const CustomerDetail = () =>  {
       id: 'tab3',
       title: 'Tickets',
       content: <Box p={1}>
-      <DataTable DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
+      <DataTable isCheck = {false} DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
       </Box>
     
     },

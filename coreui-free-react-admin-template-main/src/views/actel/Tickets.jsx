@@ -36,7 +36,7 @@ const Support = () => {
       id: 'tab1',
       title: 'Not Approuved Tickets',
       content:  <>
-       <DataTable DataList ={dataArray} columns ={xcolumns} collections = {""} noAdds={true} noEdit={false} isEditable={true}/>
+       <DataTable isCheck = {true} DataList ={dataArray} columns ={xcolumns} collections = {""} noAdds={true} noEdit={false} isEditable={true}/>
       </>
 
      ,
@@ -44,19 +44,19 @@ const Support = () => {
     {
       id: 'tab2',
       title: 'Approuved Tickets',
-      content: <DataTable DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
+      content: <DataTable isCheck = {false} DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
     },
     {
       id: 'tab3',
       title: 'Opened Tickets',
-      content:<DataTable DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
+      content:<DataTable isCheck = {false} DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
 
     },
 
     {
       id: 'tab4',
       title: 'Closed Tickets',
-      content:<DataTable DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
+      content:<DataTable isCheck = {false} DataList ={xdata} columns ={xcolumns} collections = {""} noAdds={true} noEdit={true}/>,
 
     },
   ]);

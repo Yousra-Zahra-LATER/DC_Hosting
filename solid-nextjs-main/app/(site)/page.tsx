@@ -14,7 +14,7 @@ import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
 
 export const metadata: Metadata = {
-  title: "ATttt | Cloud Et Hebergement",
+  title: "AT | Cloud Et Hebergement",
   description: "This is Home for Solid Pro",
   // other metadata
 };
@@ -23,9 +23,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Brands />
       <Feature />
-      <About />
       <FeaturesTab />
       <FunFact />
       <Integration />

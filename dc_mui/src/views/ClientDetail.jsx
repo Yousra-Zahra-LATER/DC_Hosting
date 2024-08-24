@@ -3,7 +3,7 @@ import DataTable from "../components/DataTable";
 import TabController from "../components/TabController";
 import DynamicForm from "../components/DynamicForm";
 import dayjs from 'dayjs';
-import ClientService from "./ClientService";
+
 import ClientTicket from "./ClientTicket";
 
 import {Box,Paper,Grid,TextField ,Button,Container, Typography} from '@mui/material';
@@ -43,8 +43,8 @@ const ServerDetail = () =>  {
 
   
   const tabsData = [
-    { label: 'History Service', content: <ClientService/>},
-    { label: 'History Ticket', content: <ClientTicket/>},
+    { label: 'History Services', content: <ClientTicket/>},
+    { label: 'History Tickets', content: <ClientTicket/>},
    
   ];
  

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import DetailIcon from "@mui/icons-material/ZoomIn";
-import ServerDetail from "./ServerDetails";
+
 
 import {
   MRT_EditActionButtons,

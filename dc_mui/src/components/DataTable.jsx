@@ -4,81 +4,38 @@ import MaterialTable,{MTableEditField,AutoComplete} from 'material-table';
 import { ThemeProvider } from '@mui/styles'
 import { createTheme } from '@mui/material';
 
-
 import { AddBox, ArrowDownward,Check, 
-  ChevronLeft, ChevronRight, Clear, 
+  ChevronLeft, ChevronRight, Clear, DeleteOutline, 
    Edit,  FilterList,  FirstPage, LastPage,
-    Remove, SaveAlt,  Search , ViewColumn ,Delete as DeleteIcon,} from "@material-ui/icons";
+    Remove, SaveAlt,  Search , ViewColumn } from "@material-ui/icons";
+
 
 
 const DataTable = (props ) => {
 
   let [data, setData] = useState(props.DataList);
-
+  
   const [columns, setcolumns] = useState(props.columns);
   const [collection, setcollection] = useState(props.collections);
   const [noAdd, setnoAdd] = useState(props.noAdds);
   const [noEdit, setnoEdit] = useState(props.noEdit);
+  const [isCheck, setisCheck] = useState(props.isCheck);
   const [selectedRow, setSelectedRow] = useState(null);
+  
+
+  
   const typeUser = props.type;
   
   
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#1976d2', // Primary color
-      },
-      secondary: {
-        main: '#dc004e', // Secondary color
-      },
-    },
-    typography: {
-      fontFamily: 'Arial, sans-serif',
-      h6: {
-        fontSize: '1.25rem', // Adjust Typography for table headers
-      },
-    },
-    components: {
-      MuiTableCell: {
-        styleOverrides: {
-          root: {
-            fontSize: '14px', // Adjust font size for table cells
-          },
-        },
-      },
-      MuiTableHead: {
-        styleOverrides: {
-          root: {
-            backgroundColor: '#f5f5f5', // Header background color
-          },
-        },
-      },
-      MuiTableSortLabel: {
-        styleOverrides: {
-          root: {
-            color: '#1976d2', // Sort label color
-          },
-        },
-      },
-      MuiTableContainer: {
-        styleOverrides: {
-          root: {
-            border: '1px solid #ddd', // Table container border
-          },
-        },
-      },
-    },
-  });
+  const theme = createTheme({});
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => (
-      <DeleteIcon {...props} ref={ref} style={{ color: '#D32F2F' }} />  // Colorier le bouton delete en rouge
-    )),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
     DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} style={{ color: '#666666' }}/>),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
     Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
     FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
@@ -89,8 +46,8 @@ const DataTable = (props ) => {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
-      };
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+  };
 
   const addRowToCollection =(newRow)=> {
     try {
@@ -117,11 +74,27 @@ const DataTable = (props ) => {
       
 <ThemeProvider theme={theme}>
       <MaterialTable
+      actions={[
+        isCheck ? {
+          icon: Check,
+          tooltip: 'Approuved',
+          onClick: (event, rowData) => {
+            alert("You want approuved " + rowData.name) ;
+            const index = rowData.tableData.id;
+            const updatedRows = [...data]
+            updatedRows.splice(index, 1)
+            deleteRowfromCollection(rowData);
+            setData(updatedRows)
+            
+          }
+        } : {},
+        
+      ]}
       icons={tableIcons}
       title={""}
       columns={columns}
       data={data} 
-        editable={{
+      editable={ props.isEditable ? {
           
           onRowAdd:  noAdd == false ? (newRow) => new Promise((resolve, reject) => {
             const updatedRows = [...data, { ...newRow }]
@@ -153,22 +126,25 @@ const DataTable = (props ) => {
             }, 2000)
           }) : null,
 
-        }}
+        }: {}}
 
-        onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
+      
+         onRowClick={((evt, selectedRow) => {
+          setSelectedRow(selectedRow.tableData.id);
+          props.onRowSelect(selectedRow.id);
+         })}
+
+         
         options={{
-
-          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true, grouping: props.isgrouping,exportButton: true, sorting: true,
-          
+          actionsColumnIndex: -1, addRowPosition: "first",columnsButton: true,  grouping: props.isgrouping, exportButton: true, sorting: true,
           rowStyle: rowData => ({
             backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
           }),
           headerStyle: {
-            backgroundColor: '#D1E9F6',
-            color: '#55679C'
+            backgroundColor: '#01579b',
+            color: '#FFF'
           }
         }}
-       
     //     localization={{
     //       body: {
     //           emptyDataSourceMessage: "Pas d'enregistreent à afficher",

@@ -33,7 +33,7 @@ function App() {
             <Route path="/vm" element={<VM/>} /> 
             <Route path="/cluster" element={<Cluster/>} /> 
             <Route path="/auth" element={<Authentication/>} /> 
-            <Route path="/serverDetail" element={<ServerDetail/>} /> 
+            
             <Route path="/clientDetail" element={<ClientDetail/>} /> 
           </Routes>
         </Box>

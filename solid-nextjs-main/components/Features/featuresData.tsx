@@ -4,44 +4,44 @@ const featuresData: Feature[] = [
   {
     id: 1,
     icon: "/images/icon/icon-01.svg",
-    title: "Crafted for SaaS",
+    title: "Seamless Scalability",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Easily scale your resources up or down with our flexible cloud hosting solutions. Enjoy high availability and performance without the need for physical hardware.",
   },
   {
     id: 2,
     icon: "/images/icon/icon-02.svg",
-    title: "High-quality Design",
+    title: "Dedicated Resources",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Get the power of dedicated servers with the flexibility of virtual private servers. Ideal for growing businesses needing custom configurations and root access.",
   },
   {
     id: 3,
     icon: "/images/icon/icon-03.svg",
-    title: "Next.js 13 + TypeScript",
+    title: "Reliable Data Protection",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Secure your critical data with our automated backup solutions. Ensure peace of mind with regular, encrypted backups and easy restoration options.",
   },
   {
     id: 4,
     icon: "/images/icon/icon-04.svg",
-    title: "Sanity Blog and Docs",
+    title: "Expert Management",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Focus on your business while we handle the complexities of cloud management. Our team provides 24/7 support and proactive monitoring to keep your services running smoothly.",
   },
   {
     id: 5,
     icon: "/images/icon/icon-05.svg",
-    title: "DBdddd, Auth and Stripe",
+    title: "Rapid Recovery",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Minimize downtime with our robust disaster recovery plans. Quickly recover your data and applications in the event of a failure, ensuring business continuity.",
   },
   {
     id: 6,
     icon: "/images/icon/icon-06.svg",
-    title: "Regular Free Updates",
+    title: "Enhanced Speed and Efficiency",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis tortor.",
+      "Boost your website’s performance with our optimization services. From load balancing to caching, we ensure your applications run at peak efficiency.",
   },
 ];
 
