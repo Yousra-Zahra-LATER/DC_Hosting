@@ -18,27 +18,9 @@ import Clients from './views/Clients';
 
 function App() {
   return (
-  <Router>
-      <Box sx={{ display: 'flex' }}>
+  <Box sx={{backgroundColor:'#FFFFFF'}}>
        <MiniDrawer />
-        <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop:'65px',overflow:'auto'}}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/tasks" element={<Tasks />} /> 
-            <Route path="/client" element={<Clients/>} /> 
-            <Route path="/profile" element={<Profile />} /> 
-            <Route path="/dc" element={<DC/>} />
-            <Route path="/server" element={<Server/>}/> 
-            <Route path="/router" element={<Routeur/>}/> 
-            <Route path="/vm" element={<VM/>} /> 
-            <Route path="/cluster" element={<Cluster/>} /> 
-            <Route path="/auth" element={<Authentication/>} /> 
-            
-            <Route path="/clientDetail" element={<ClientDetail/>} /> 
-          </Routes>
-        </Box>
-      </Box>
-    </Router>
+       </Box> 
   );
 }
 
