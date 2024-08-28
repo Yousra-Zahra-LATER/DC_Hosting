@@ -44,7 +44,7 @@ def LoginView(request):
         
         try:
             user1 = User.objects.get(email=email)
-            print(f"User found: {user1.password}")  # Affiche le prénom de l'utilisateur trouvé
+            print(f"User found: {user1.email}")  # Affiche le prénom de l'utilisateur trouvé
         except User.DoesNotExist:
             print("User with this email does not exist")  # Si l'utilisateur n'existe pas
             return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)

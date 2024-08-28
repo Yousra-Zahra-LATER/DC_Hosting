@@ -16,24 +16,27 @@ const Signin = () => {
     e.preventDefault();
     
     try {
-      // Send a POST request to the login endpoint
-      console.log("avant request")
+      console.log("avant request");
       const response = await axios.post('http://localhost:8000/hosting/login/', data);
-      console.log("b3at request ")
+      console.log("b3at request");
       const { role } = response.data;
-      console.log("jab data w role howa", role)
-      // Redirect based on the role
+      console.log("jab data w role howa", role);
+    
       if (role === 'client') {
-        console.log("dkhal raho client ")
-        router.push('/client'); // Replace with the actual route for Component 1
+        console.log("dkhal raho client");
+    
+        // Stocker les données de l'utilisateur dans un cookie
+        document.cookie = `userData=${encodeURIComponent(JSON.stringify(response.data))}; path=/;`;
+    
+        window.location.href = 'http://localhost:3001/';
       } else {
-        console.log("Noooo ")
-        router.push('/client'); // Replace with the actual route for Component 2
+        console.log("Noooo ");
+        router.push('/auth/signin'); // Remplacez par la route appropriée
       }
     } catch (err: any) {
-      // Handle any errors that occur during the request
       setError(err.response?.data?.detail || 'An error occurred.');
     }
+    
   };
 
   return (
