@@ -41,7 +41,9 @@ export default function Sidebar() {
 
   const menuItems = [
     { text: "DataCenter ADMIN", icon: <GiServerRack />, id: "DataCenterADMIN",path:"/"},
-   
+    { text: "Cloud ADMIN", icon: <FaSoundcloud />, id: "Cloud", path: "/clouddashboard" },
+    { text: "Support", icon: <BiSupport />, id: "support", path: "/support" },
+    { text: "User Manager", icon: <FaUsersLine />, id: "user_manager", path: "/user-manager" },
     { text: "Account", icon: <RiAccountPinCircleFill />, id: "account",path:"/profile" },
 
 
@@ -134,6 +136,75 @@ export default function Sidebar() {
           icon: <PiCreditCard />,
           subItems: [],
           path: "/payment",
+        },
+      ],
+    },
+    account: {
+      bigTitle: "My Account",
+      items: [
+        {
+          title: "Profile",
+          icon: <PiUserCircleGear />,
+          subItems: [],
+          path: "/profile",
+        },
+        {
+          title: "Authentication",
+          icon: <RiLockPasswordLine />,
+          subItems: [],
+          path: "/authentication",
+        },
+        {
+          title: "Make Payment",
+          icon: <PiCreditCard />,
+          subItems: [],
+          path: "/payment",
+        },
+      ],
+    },
+    support: {
+      bigTitle: "Support",
+      items: [
+        {
+          title: "item1",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/support/item1",
+        },
+        {
+          title: "item2",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/support/item2",
+        },
+        {
+          title: "item3",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/support/item3",
+        },
+      ],
+    },
+    user_manager: {
+      bigTitle: "User Manager",
+      items: [
+        {
+          title: "item1",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/user-manager/item1",
+        },
+        {
+          title: "item2",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/user-manager/item2",
+        },
+        {
+          title: "item3",
+          icon: <NetworkIcon />,
+          subItems: [],
+          path: "/user-manager/item3",
         },
       ],
     },
