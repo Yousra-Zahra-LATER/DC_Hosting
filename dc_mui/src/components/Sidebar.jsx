@@ -152,7 +152,7 @@ export default function Sidebar() {
           title: "Authentication",
           icon: <RiLockPasswordLine />,
           subItems: [],
-          path: "/authentication",
+          path: "/auth",
         },
         {
           title: "Make Payment",
