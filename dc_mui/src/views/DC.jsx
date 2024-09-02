@@ -14,6 +14,10 @@ import {
   DialogTitle,
   IconButton,
   Tooltip,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -24,10 +28,9 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { generateCsv } from "export-to-csv"; // CSV export library
-import jsPDF from "jspdf"; // PDF export library
-import "jspdf-autotable"; // For table export with jsPDF
 import Papa from "papaparse";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 // Liste statique des centres de données
 const staticData = [
@@ -77,7 +80,7 @@ const exportToPDF = (data) => {
   doc.save("data_centers.pdf");
 };
 
-const DataCenterTable = () => {
+const DataCenterTable = ({ selectedLocation }) => {
   const [validationErrors, setValidationErrors] = useState({});
 
   const columns = useMemo(
@@ -118,16 +121,27 @@ const DataCenterTable = () => {
     [validationErrors]
   );
 
-  const { mutateAsync: createDataCenter, isPending: isCreatingDataCenter } =
-    useCreateDataCenter();
   const {
-    data: fetchedDataCenters = [],
+    data: fetchedDataCenters = [], // Default to empty array if data is undefined
     isError: isLoadingDataCentersError,
     isFetching: isFetchingDataCenters,
     isLoading: isLoadingDataCenters,
   } = useGetDataCenters();
+
+  const filteredDataCenters = useMemo(() => {
+    return selectedLocation
+      ? fetchedDataCenters.filter(
+          (dataCenter) => dataCenter.location === selectedLocation
+        )
+      : fetchedDataCenters;
+  }, [fetchedDataCenters, selectedLocation]);
+
+  const { mutateAsync: createDataCenter, isPending: isCreatingDataCenter } =
+    useCreateDataCenter();
+
   const { mutateAsync: updateDataCenter, isPending: isUpdatingDataCenter } =
     useUpdateDataCenter();
+
   const { mutateAsync: deleteDataCenter, isPending: isDeletingDataCenter } =
     useDeleteDataCenter();
 
@@ -161,7 +175,7 @@ const DataCenterTable = () => {
 
   const table = useMaterialReactTable({
     columns,
-    data: fetchedDataCenters,
+    data: filteredDataCenters,
     createDisplayMode: "modal",
     editDisplayMode: "modal",
     enableEditing: true,
@@ -169,7 +183,7 @@ const DataCenterTable = () => {
     muiToolbarAlertBannerProps: isLoadingDataCentersError
       ? { color: "error", children: "Error loading data" }
       : undefined,
-    muiTableContainerProps: { sx: { minHeight: "300px" } },
+    muiTableContainerProps: { sx: { minHeight: "290px" } },
     onCreatingRowCancel: () => setValidationErrors({}),
     onCreatingRowSave: handleCreateDataCenter,
     onEditingRowCancel: () => setValidationErrors({}),
@@ -221,14 +235,14 @@ const DataCenterTable = () => {
         </Button>
         <Button
           variant="outlined"
-          onClick={() => exportToCSV(fetchedDataCenters)}
+          onClick={() => exportToCSV(filteredDataCenters)}
         >
           Export as CSV
         </Button>
 
         <Button
           variant="outlined"
-          onClick={() => exportToPDF(fetchedDataCenters)}
+          onClick={() => exportToPDF(filteredDataCenters)}
           startIcon={<FileDownloadIcon />}
         >
           Export as PDF
@@ -251,15 +265,16 @@ function useGetDataCenters() {
   return useQuery({
     queryKey: ["dataCenters"],
     queryFn: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simuler une API
-      return Promise.resolve(staticData); // Utiliser les données fictives
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+      return Promise.resolve(staticData); // Use mock data
     },
     refetchOnWindowFocus: false,
+    initialData: [], // Ensure initial data is an empty array
   });
 }
 
 function useCreateDataCenter() {
-  const queryClient = useQueryClient(); // Ajoutez cette ligne pour obtenir queryClient
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (dataCenter) => {
@@ -267,8 +282,8 @@ function useCreateDataCenter() {
       return Promise.resolve();
     },
     onMutate: (newDataCenterInfo) => {
-      queryClient.setQueryData(["dataCenters"], (prevDataCenters) => {
-        // Ensure prevUsers is an array or default to an empty array if it's undefined
+      queryClient.setQueryData(["dataCenters"], (prevDataCenters = []) => {
+        // Ensure prevDataCenters is an array or default to an empty array if it's undefined
         const dataCentersArray = Array.isArray(prevDataCenters)
           ? prevDataCenters
           : [];
@@ -301,7 +316,7 @@ function useUpdateDataCenter() {
       return Promise.resolve();
     },
     onMutate: (updatedDataCenterInfo) => {
-      queryClient.setQueryData(["dataCenters"], (prevDataCenters) => {
+      queryClient.setQueryData(["dataCenters"], (prevDataCenters = []) => {
         const dataCentersArray = Array.isArray(prevDataCenters)
           ? prevDataCenters
           : [];
@@ -324,71 +339,77 @@ function useDeleteDataCenter() {
       return Promise.resolve();
     },
     onMutate: (deletedDataCenterId) => {
-      queryClient.setQueryData(["dataCenters"], (prevDataCenters) => {
+      queryClient.setQueryData(["dataCenters"], (prevDataCenters = []) => {
         const dataCentersArray = Array.isArray(prevDataCenters)
-          ? prevDataCenters
-          : [];
-        return dataCentersArray.filter(
-          (dataCenter) => dataCenter.id !== deletedDataCenterId
-        );
-      });
-    },
-  });
-}
+        ? prevDataCenters
+        : [];
 
-function validateDataCenter(values) {
-  const errors = {};
-  if (!values.name) errors.name = "Name is required";
-  if (!values.location) errors.location = "Location is required";
-  if (!values.status) errors.status = "Status is required";
-  return errors;
-}
-// Créez un thème avec vos personnalisations
-const theme = createTheme({
-  components: {
-    MuiTable: {
-      styleOverrides: {
-        root: {
-          // Personnalisez ici les styles de la table
-          backgroundColor: "#ffeeed", // Exemple: couleur de fond de la table
-        },
-      },
-    },
-    MuiTableCell: {
-      styleOverrides: {
-        head: {
-          backgroundColor: "", // Exemple: couleur de fond des en-têtes
-          color: "black", // Exemple: couleur du texte des en-têtes
-        },
-        body: {
-          backgroundColor: "", // Exemple: couleur de fond des cellules du corps
-          color: "black", // Exemple: couleur du texte des cellules du corps
-        },
-      },
-    },
-    MuiTableSortLabel: {
-      styleOverrides: {
-        root: {
-          color: "", // Exemple: couleur du tri des en-têtes
-        },
-      },
-    },
+      return dataCentersArray.filter(
+        (dataCenter) => dataCenter.id !== deletedDataCenterId
+      );
+    });
   },
 });
-
-const queryClient = new QueryClient();
-
-function App() {
-  return (
-    <>
-      <h2>Data Center</h2>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <DataCenterTable />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </>
-  );
 }
 
+const validateDataCenter = (dataCenter) => {
+const errors = {};
+
+if (!dataCenter.name || dataCenter.name.trim() === "") {
+  errors.name = "Name is required.";
+}
+
+if (!dataCenter.location || dataCenter.location.trim() === "") {
+  errors.location = "Location is required.";
+}
+
+if (!dataCenter.status || dataCenter.status.trim() === "") {
+  errors.status = "Status is required.";
+}
+
+return errors;
+};
+
+const App = () => {
+const [selectedLocation, setSelectedLocation] = useState("");
+
+return (
+  <QueryClientProvider client={new QueryClient()}>
+    <ThemeProvider theme={createTheme()}>
+    <Box
+  sx={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center", // Aligns items vertically in the center
+    marginBottom: "1rem",
+  }}
+>
+  <h2>Data Center</h2>
+  <FormControl sx={{ minWidth: 220 }}> {/* Adjust minWidth as needed */}
+  <InputLabel id="location-select-label" shrink>Search By Location</InputLabel>
+    <Select
+      labelId="location-select-label"
+      id="location-select"
+      value={selectedLocation}
+      label="Location"
+      onChange={(e) => setSelectedLocation(e.target.value)}
+      
+    >
+      <MenuItem value="">
+        <em>All Locations</em>
+      </MenuItem>
+      <MenuItem value="Constantine">Constantine</MenuItem>
+      <MenuItem value="Alger">Alger</MenuItem>
+      <MenuItem value="Oran">Oran</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+        <DataCenterTable selectedLocation={selectedLocation} />
+      
+    </ThemeProvider>
+  </QueryClientProvider>
+);
+};
+
 export default App;
+
