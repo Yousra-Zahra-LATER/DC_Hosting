@@ -46,7 +46,7 @@ import { MdDns } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
 import { LuDatabaseBackup } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 export default function Sidebar() {
   const drawerWidth = 85;
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -56,15 +56,38 @@ export default function Sidebar() {
   const [hoveredTitle, setHoveredTitle] = useState(null);
 
   const menuItems = [
-    { text: "Task Manager", icon:<MdOutlineAddTask/>, id: "tasks",path: "/taskspath" }, 
-    { text: "DataCenter ADMIN", icon: <GiServerRack />, id: "DataCenterADMIN",path:"/"},
-    { text: "Cloud ADMIN", icon: <FaSoundcloud />, id: "Cloud", path: "/clouddashboard" },
-   
+    {
+      text: "Task Manager",
+      icon: <MdOutlineAddTask />,
+      id: "tasks",
+      path: "/taskspath",
+    },
+    {
+      text: "DataCenter ADMIN",
+      icon: <GiServerRack />,
+      id: "DataCenterADMIN",
+      path: "/",
+    },
+    {
+      text: "Cloud ADMIN",
+      icon: <FaSoundcloud />,
+      id: "Cloud",
+      path: "/clouddashboard",
+    },
+
     { text: "Support", icon: <BiSupport />, id: "support", path: "/support" },
-    { text: "User Manager", icon: <FaUsersLine />, id: "user_manager", path: "/user-manager" },
-    { text: "Account", icon: <RiAccountPinCircleFill />, id: "account",path:"/profile" },
-
-
+    {
+      text: "User Manager",
+      icon: <FaUsersLine />,
+      id: "user_manager",
+      path: "/user-manager",
+    },
+    {
+      text: "Account",
+      icon: <RiAccountPinCircleFill />,
+      id: "account",
+      path: "/profile",
+    },
   ];
 
   const menuContent = {
@@ -82,7 +105,7 @@ export default function Sidebar() {
           title: "Datacenter Manager",
           icon: <LuServerCog />,
           subItems: [
-            { title: "SITE", icon: <BackupIcon />, path: "/server" },
+            { title: "SITE", icon: <BackupIcon />, path: "/datacenter" },
             { title: "RACK", icon: <ScriptIcon />, path: "/router" },
             { title: "SERVER", icon: <BackupIcon />, path: "/server" },
             { title: "ROUTER", icon: <ScriptIcon />, path: "/router" },
@@ -110,7 +133,7 @@ export default function Sidebar() {
             { title: "INTERNET Access", icon: <BackupIcon />, path: "/vm" },
             { title: "ERP Access ", icon: <ScriptIcon />, path: "/cluster" },
             { title: "HR  Access", icon: <ScriptIcon />, path: "/cluster" },
-	    { title: "PAM  Access", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "PAM  Access", icon: <ScriptIcon />, path: "/cluster" },
           ],
         },
         {
@@ -143,7 +166,7 @@ export default function Sidebar() {
           subItems: [],
           path: "/clouddashboard",
         },
-{
+        {
           title: "Web Hosting",
           icon: <MdOutlineWeb />,
           subItems: [],
@@ -184,7 +207,6 @@ export default function Sidebar() {
               path: "/vps",
             },
           ],
-        
         },
         {
           title: "Dedicated Server",
@@ -244,40 +266,50 @@ export default function Sidebar() {
           subItems: [],
           path: "/supportmanager",
         },
-              ],
+      ],
     },
 
-
-
-tasks: {
-
+    tasks: {
       bigTitle: "Task Manager",
 
       items: [
+        {
+          title: "TASKs",
+          icon: <GoTasklist />,
+          subItems: [
+            { title: "NEW  TASK", icon: <BackupIcon />, path: "/ip" },
+            { title: "MY TASKS", icon: <BackupIcon />, path: "/ip" },
+            { title: "TEAM TASKS", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "TASKS PENDING", icon: <BackupIcon />, path: "/ip" },
+            { title: "TASKS OPEN", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "TASKS ISSUE", icon: <ScriptIcon />, path: "/ip" },
+            { title: "TASKS COMPLETE", icon: <ScriptIcon />, path: "/ip" },
+          ],
+          path: "/path1",
+        },
+        {
+          title: "TASKs TEAM ",
+          icon: <RiTeamFill />,
+          subItems: [
+            { title: "TASK TEAM", icon: <BackupIcon />, path: "/ip" },
+            { title: "TASK MEMBERS", icon: <ScriptIcon />, path: "/rangeip" },
+          ],
+          path: "/path2",
+        },
 
-        {title: "TASKs", icon: <GoTasklist/>, subItems: [           
-          { title: "NEW  TASK", icon: <BackupIcon />, path: "/ip" },
-	  { title: "MY TASKS", icon: <BackupIcon />, path: "/ip" },
-          { title: "TEAM TASKS", icon: <ScriptIcon />, path: "/rangeip" },
-          { title: "TASKS PENDING", icon: <BackupIcon />, path: "/ip" },
-          { title: "TASKS OPEN", icon: <ScriptIcon />, path: "/rangeip" },
-          { title: "TASKS ISSUE", icon: <ScriptIcon />, path: "/ip" },
-          { title: "TASKS COMPLETE", icon: <ScriptIcon />, path: "/ip" },],
-                                                                               path: "/path1",},
-        {title: "TASKs TEAM ",icon: <RiTeamFill/>,subItems: [  
-          { title: "TASK TEAM", icon: <BackupIcon />, path: "/ip" },
-          { title: "TASK MEMBERS", icon: <ScriptIcon />, path: "/rangeip" },], 
-                                                                               path: "/path2",},
-
-        {title: "TASK HISTORY ",icon: <FaHistory/>,subItems: [            
-          { title: "TASKS HISTORY", icon: <BackupIcon />, path: "/ip" },
-          { title: "MEMBERS TASK'S", icon: <ScriptIcon />, path: "/rangeip" },],
-                                                                               path: "/path3",},
+        {
+          title: "TASK HISTORY ",
+          icon: <FaHistory />,
+          subItems: [
+            { title: "TASKS HISTORY", icon: <BackupIcon />, path: "/ip" },
+            { title: "MEMBERS TASK'S", icon: <ScriptIcon />, path: "/rangeip" },
+          ],
+          path: "/path3",
+        },
       ],
-
     },
 
-account: {
+    account: {
       bigTitle: "My Account",
       items: [
         {
@@ -371,8 +403,6 @@ account: {
     },
   };
 
-
-
   const handleToggle = (title) => {
     setActiveTitle(title);
     setOpenItems((prev) => ({
@@ -387,7 +417,11 @@ account: {
   useEffect(() => {
     // Initialisation: dÃ©finir le premier Ã©lÃ©ment de la section active comme actif et le routage appropriÃ©
     const defaultItem = menuContent[activeItem]?.items[0];
-    if (defaultItem && location.pathname === "/" && !location.pathname.includes(defaultItem.path)) {
+    if (
+      defaultItem &&
+      location.pathname === "/" &&
+      !location.pathname.includes(defaultItem.path)
+    ) {
       navigate(defaultItem.path); // Redirige vers le chemin du premier Ã©lÃ©ment si nÃ©cessaire
     }
   }, [activeItem, location.pathname, navigate]);
@@ -402,7 +436,6 @@ account: {
     }
   };
 
-  
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       <Drawer
@@ -485,13 +518,12 @@ account: {
         </List>
       </Drawer>
 
-      
-
       <Box
         sx={{
           width: 220,
           backgroundColor: "#F9FAFB",
           border: "1px solid #ddd",
+          overflowY: "auto", // Activer le défilement vertical
         }}
       >
         <Box
@@ -511,8 +543,8 @@ account: {
           {menuContent[activeItem].items.map((item) => (
             <React.Fragment key={item.title}>
               <ListItem
-              component={Link}
-              to={item.path}
+                component={Link}
+                to={item.path}
                 button
                 onClick={() => {
                   handleToggle(item.title);
@@ -576,9 +608,6 @@ account: {
           ))}
         </List>
       </Box>
-
-
-
     </Box>
   );
 }
