@@ -29,6 +29,22 @@ import { BiNetworkChart } from "react-icons/bi";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { MdOutlineAddTask } from "react-icons/md";
 import { RiAccountPinCircleFill } from "react-icons/ri";
+import { MdOutlineVpnLock } from "react-icons/md";
+import { RiTeamFill } from "react-icons/ri";
+import { SiOpenaccess } from "react-icons/si";
+import { GoTasklist } from "react-icons/go";
+import { MdOutlineWeb } from "react-icons/md";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { VscVmActive } from "react-icons/vsc";
+import { FaServer } from "react-icons/fa";
+import { BsHouseAddFill } from "react-icons/bs";
+import { FaCloud } from "react-icons/fa";
+import { SiOpenstack } from "react-icons/si";
+import { MdBackup } from "react-icons/md";
+import { AiOutlineCloudServer } from "react-icons/ai";
+import { MdDns } from "react-icons/md";
+import { FaHistory } from "react-icons/fa";
+import { LuDatabaseBackup } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import {  useLocation, useNavigate } from "react-router-dom";
 export default function Sidebar() {
@@ -40,8 +56,10 @@ export default function Sidebar() {
   const [hoveredTitle, setHoveredTitle] = useState(null);
 
   const menuItems = [
+    { text: "Task Manager", icon:<MdOutlineAddTask/>, id: "tasks",path: "/taskspath" }, 
     { text: "DataCenter ADMIN", icon: <GiServerRack />, id: "DataCenterADMIN",path:"/"},
     { text: "Cloud ADMIN", icon: <FaSoundcloud />, id: "Cloud", path: "/clouddashboard" },
+   
     { text: "Support", icon: <BiSupport />, id: "support", path: "/support" },
     { text: "User Manager", icon: <FaUsersLine />, id: "user_manager", path: "/user-manager" },
     { text: "Account", icon: <RiAccountPinCircleFill />, id: "account",path:"/profile" },
@@ -59,14 +77,20 @@ export default function Sidebar() {
           subItems: [],
           path: "/",
         },
+
         {
-          title: "Device Manager",
+          title: "Datacenter Manager",
           icon: <LuServerCog />,
           subItems: [
-            { title: "Server", icon: <BackupIcon />, path: "/server" },
-            { title: "Router", icon: <ScriptIcon />, path: "/router" },
-            { title: "Switch", icon: <BackupIcon />, path: "/switch" },
-            { title: "Firewall", icon: <ScriptIcon />, path: "/firewall" },
+            { title: "SITE", icon: <BackupIcon />, path: "/server" },
+            { title: "RACK", icon: <ScriptIcon />, path: "/router" },
+            { title: "SERVER", icon: <BackupIcon />, path: "/server" },
+            { title: "ROUTER", icon: <ScriptIcon />, path: "/router" },
+            { title: "SWITCH", icon: <BackupIcon />, path: "/switch" },
+            { title: "FIREWALL", icon: <ScriptIcon />, path: "/firewall" },
+            { title: "SAN", icon: <BackupIcon />, path: "/switch" },
+            { title: "LS", icon: <ScriptIcon />, path: "/firewall" },
+            { title: "PDU", icon: <ScriptIcon />, path: "/firewall" },
           ],
         },
         {
@@ -75,14 +99,37 @@ export default function Sidebar() {
           subItems: [
             { title: "VM", icon: <BackupIcon />, path: "/vm" },
             { title: "CLUSTER", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "vAPP", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "SFTP", icon: <ScriptIcon />, path: "/cluster" },
           ],
         },
         {
-          title: "Ipam Manager",
+          title: "Access MANAGER",
+          icon: <SiOpenaccess />,
+          subItems: [
+            { title: "INTERNET Access", icon: <BackupIcon />, path: "/vm" },
+            { title: "ERP Access ", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "HR  Access", icon: <ScriptIcon />, path: "/cluster" },
+	    { title: "PAM  Access", icon: <ScriptIcon />, path: "/cluster" },
+          ],
+        },
+        {
+          title: "IPAM Manager",
           icon: <BiNetworkChart />,
           subItems: [
-            { title: "IP", icon: <BackupIcon />, path: "/ip" },
-            { title: "Range IP", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "VLAN", icon: <BackupIcon />, path: "/ip" },
+            { title: "NETWORK", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "VRF", icon: <BackupIcon />, path: "/ip" },
+            { title: "IP", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "BGP", icon: <ScriptIcon />, path: "/ip" },
+          ],
+        },
+        {
+          title: "VPN Manager",
+          icon: <MdOutlineVpnLock />,
+          subItems: [
+            { title: "VPN TUNNEL", icon: <BackupIcon />, path: "/ip" },
+            { title: "VPN CLIENT", icon: <ScriptIcon />, path: "/rangeip" },
           ],
         },
       ],
@@ -96,27 +143,141 @@ export default function Sidebar() {
           subItems: [],
           path: "/clouddashboard",
         },
+{
+          title: "Web Hosting",
+          icon: <MdOutlineWeb />,
+          subItems: [],
+          path: "/clouddashboard",
+        },
+        {
+          title: "Business Email",
+          icon: <MdMarkEmailUnread />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+        {
+          title: "VPS Server",
+          icon: <VscVmActive />,
+          subItems: [
+            {
+              title: "VPS Standard",
+              subItems: [],
+              path: "/vps/standard",
+            },
+            {
+              title: "VPS Performance",
+
+              subItems: [],
+              path: "/vps/performance",
+            },
+            {
+              title: "VPS Storage",
+
+              subItems: [],
+              path: "/vps",
+            },
+
+            {
+              title: "VPS HCI",
+
+              subItems: [],
+              path: "/vps",
+            },
+          ],
+        
+        },
+        {
+          title: "Dedicated Server",
+          icon: <FaServer />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+        {
+          title: "Server Housing",
+          icon: <BsHouseAddFill />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+        {
+          title: "OpenStack Cloud",
+          icon: <SiOpenstack />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+
+        {
+          title: "Hosted Private Cloud",
+          icon: <FaCloud />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+
+        {
+          title: "Cloud Backup",
+          icon: <MdBackup />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+
+        {
+          title: "Cloud Storage",
+          icon: <AiOutlineCloudServer />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+        {
+          title: "Backup As service",
+          icon: <LuDatabaseBackup />,
+          subItems: [],
+          path: "/supportmanager",
+        },
+
+        {
+          title: "DNS",
+          icon: <MdDns />,
+          subItems: [],
+          path: "/supportmanager",
+        },
         {
           title: "Support Manager",
           icon: <MdOutlineContactSupport />,
           subItems: [],
           path: "/supportmanager",
         },
-        {
-          title: "Tasks Manager",
-          icon: <MdOutlineAddTask />,
-          subItems: [],
-          path: "/tasksmanager",
-        },
-        {
-          title: "Cloud Service Manager",
-          icon: <TbCloudCog />,
-          subItems: [],
-          path: "/cloudservicemanager",
-        },
-      ],
+              ],
     },
-    account: {
+
+
+
+tasks: {
+
+      bigTitle: "Task Manager",
+
+      items: [
+
+        {title: "TASKs", icon: <GoTasklist/>, subItems: [           
+          { title: "NEW  TASK", icon: <BackupIcon />, path: "/ip" },
+	  { title: "MY TASKS", icon: <BackupIcon />, path: "/ip" },
+          { title: "TEAM TASKS", icon: <ScriptIcon />, path: "/rangeip" },
+          { title: "TASKS PENDING", icon: <BackupIcon />, path: "/ip" },
+          { title: "TASKS OPEN", icon: <ScriptIcon />, path: "/rangeip" },
+          { title: "TASKS ISSUE", icon: <ScriptIcon />, path: "/ip" },
+          { title: "TASKS COMPLETE", icon: <ScriptIcon />, path: "/ip" },],
+                                                                               path: "/path1",},
+        {title: "TASKs TEAM ",icon: <RiTeamFill/>,subItems: [  
+          { title: "TASK TEAM", icon: <BackupIcon />, path: "/ip" },
+          { title: "TASK MEMBERS", icon: <ScriptIcon />, path: "/rangeip" },], 
+                                                                               path: "/path2",},
+
+        {title: "TASK HISTORY ",icon: <FaHistory/>,subItems: [            
+          { title: "TASKS HISTORY", icon: <BackupIcon />, path: "/ip" },
+          { title: "MEMBERS TASK'S", icon: <ScriptIcon />, path: "/rangeip" },],
+                                                                               path: "/path3",},
+      ],
+
+    },
+
+account: {
       bigTitle: "My Account",
       items: [
         {
@@ -152,7 +313,7 @@ export default function Sidebar() {
           title: "Authentication",
           icon: <RiLockPasswordLine />,
           subItems: [],
-          path: "/authentication",
+          path: "/auth",
         },
         {
           title: "Make Payment",
@@ -224,20 +385,20 @@ export default function Sidebar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Initialisation: définir le premier élément de la section active comme actif et le routage approprié
+    // Initialisation: dÃ©finir le premier Ã©lÃ©ment de la section active comme actif et le routage appropriÃ©
     const defaultItem = menuContent[activeItem]?.items[0];
     if (defaultItem && location.pathname === "/" && !location.pathname.includes(defaultItem.path)) {
-      navigate(defaultItem.path); // Redirige vers le chemin du premier élément si nécessaire
+      navigate(defaultItem.path); // Redirige vers le chemin du premier Ã©lÃ©ment si nÃ©cessaire
     }
   }, [activeItem, location.pathname, navigate]);
 
   const handleMenuClick = (id) => {
     setActiveItem(id);
     const defaultItem = menuContent[id]?.items[0];
-    setActiveTitle(defaultItem?.title || null); // Définit le premier élément comme actif
-    setOpenItems({}); // Ferme tous les éléments
+    setActiveTitle(defaultItem?.title || null); // DÃ©finit le premier Ã©lÃ©ment comme actif
+    setOpenItems({}); // Ferme tous les Ã©lÃ©ments
     if (defaultItem) {
-      navigate(defaultItem.path); // Redirige vers le chemin du premier élément de la section
+      navigate(defaultItem.path); // Redirige vers le chemin du premier Ã©lÃ©ment de la section
     }
   };
 
