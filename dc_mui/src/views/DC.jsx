@@ -386,7 +386,7 @@ return (
 >
   <h2>Data Center</h2>
   <FormControl sx={{ minWidth: 220 }}> {/* Adjust minWidth as needed */}
-  <InputLabel id="location-select-label" shrink>Search By Location</InputLabel>
+  <InputLabel id="location-select-label" >Search By Location</InputLabel>
     <Select
       labelId="location-select-label"
       id="location-select"
