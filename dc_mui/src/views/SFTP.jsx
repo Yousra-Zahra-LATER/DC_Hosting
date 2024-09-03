@@ -6,31 +6,31 @@ import {
 } from "@tanstack/react-query";
 
 
-export default function Cluster() {
+export default function SFTP() {
   
   const fields = [
     { key: "id", header: "Id", enableEditing: false, size: 80 },
     { key: "name", header: "Name", required: true },
-    { key: "dc", header: "Data Center", required: true },
-    { key: "cluster_hyp", header: "Cluster", required: true },
+    { key: "vmname", header: "VM", required: true },
+    { key: "cliname", header: "Client", required: true },
     { key: "ip", header: "Ip Address", required :true },
   ];
 
   const data = [
-    { id: '1', name: 'Cluster A', dc : 'DC-25', cluster_hyp: 'Proxmox', ip: '10.225.10.1'},
-    { id: '2', name: 'Cluster B',dc : 'DC-16', cluster_hyp: 'VmWare', ip: '10.116.10.10' },
-    { id: '3', name: 'Cluster C', dc : 'DC-31',cluster_hyp: 'Proxmox', ip: '10.131.1.5' },
+    { id: '1', name: 'SFTP A', vmname : 'VM 1 DC-25', cliname: 'Client X', ip: '10.125.10.1'},
+    { id: '2', name: 'SFTP B',vmname : 'VM 3 DC-16', cliname: 'Client Y', ip: '10.216.10.10' },
+    { id: '3', name: 'SFTP C', vmname : 'VM 4 DC-31',cliname: 'Client Z', ip: '10.231.1.5' },
   ];
 
  
 
-  const fileName = "Cluster";
+  const fileName = "SFTP";
   const queryClient = new QueryClient(); 
 
 
   return (
     <>
-      <h3>Cluster</h3>
+      <h3>SFTP</h3>
       <QueryClientProvider client={queryClient}>
         <DataTable2 data={data} fields={fields} fileName={fileName} />
       </QueryClientProvider>

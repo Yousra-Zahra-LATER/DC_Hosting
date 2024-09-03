@@ -16,6 +16,8 @@ import Tasks from './views/Tasks';
 import Clients from './views/Clients';
 import CloudDashboard from './views/CloudDashboard';
 import Authentication from './views/Auuthentication';
+import VApp from './views/VApp';
+import SFTP from './views/SFTP';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
               <Route path="/vm" element={<VM />} />
               <Route path="/cluster" element={<Cluster />} />
               <Route path="/datacenter" element={<DC />} />
+              <Route path="/vApp" element={<VApp />} />
+              <Route path="/sFTP" element={<SFTP />} />
               {/* Add more routes as needed */}
             </Routes>
           </Box>

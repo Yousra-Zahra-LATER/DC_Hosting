@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import {
@@ -38,8 +38,10 @@ const DataTable2 = (props) => {
   const [fileName, setFileName] = useState(() => props.fileName || "DataTable");
   const [titleFile, setTitleFile] = useState(() => props.titleFile || "__DataTable__");
   
-  
-  
+  useEffect(() => {
+    // Met à jour les données statiques 'staticData' lorsque les données reçues en props changent
+    setStaticData(props.data);
+  }, [props.data]); 
   const exportToCSV = (data) => {
     const csvData = data.map(item => {
       const result = {};
@@ -141,12 +143,16 @@ const DataTable2 = (props) => {
 
   const { mutateAsync: createDataCenter, isPending: isCreatingDataCenter } =
     useCreateDataCenter();
+
+
   const {
     data: fetchedDataCenters = [],
     isError: isLoadingDataCentersError,
     isFetching: isFetchingDataCenters,
     isLoading: isLoadingDataCenters,
   } = useGetDataCenters();
+
+
   const { mutateAsync: updateDataCenter, isPending: isUpdatingDataCenter } =
     useUpdateDataCenter();
   const { mutateAsync: deleteDataCenter, isPending: isDeletingDataCenter } =
@@ -177,7 +183,7 @@ const DataTable2 = (props) => {
   const openDeleteConfirmModal = (row) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       deleteDataCenter(row.original.id);
-    } 
+    }
   };
 
   function useGetDataCenters() {
@@ -299,10 +305,8 @@ const DataTable2 = (props) => {
     onEditingRowSave: handleSaveDataCenter,
     renderCreateRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h6">Create New Data Center</DialogTitle>
-        <DialogContent
-          sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-        >
+        <DialogTitle variant="h6">Creation</DialogTitle>
+        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {internalEditComponents}
         </DialogContent>
         <DialogActions>
@@ -312,7 +316,7 @@ const DataTable2 = (props) => {
     ),
     renderEditRowDialogContent: ({ table, row, internalEditComponents }) => (
       <>
-        <DialogTitle variant="h6">Edit Data Center</DialogTitle>
+        <DialogTitle variant="h6">Modification</DialogTitle>
         <DialogContent
           sx={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
         >
@@ -349,10 +353,7 @@ const DataTable2 = (props) => {
           Export as CSV
         </Button>
 
-        <Button
-          variant="outlined"
-          onClick={() => exportToPDF(fetchedDataCenters)}
-          startIcon={<FileDownloadIcon />}
+        <Button variant="outlined" onClick={() => exportToPDF(fetchedDataCenters)} startIcon={<FileDownloadIcon />}
         >
           Export as PDF
         </Button>
@@ -371,7 +372,6 @@ const DataTable2 = (props) => {
             <MaterialReactTable table={table} />
          </ThemeProvider>
   
- 
 };
 
 
