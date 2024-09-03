@@ -144,7 +144,7 @@ const DataTable2 = (props) => {
 
 
   const {
-    data: data = [],
+    data: fetchedDataCenters = [],
     isError: isLoadingDataCentersError,
     isFetching: isFetchingDataCenters,
     isLoading: isLoadingDataCenters,
@@ -189,7 +189,7 @@ const DataTable2 = (props) => {
       queryKey: ["dataCenters"],
       queryFn: async () => {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Simuler une API
-        return Promise.resolve(data); // Utiliser les données fictives
+        return Promise.resolve(staticData); // Utiliser les données fictives
       },
       refetchOnWindowFocus: false,
     });
@@ -289,7 +289,7 @@ const DataTable2 = (props) => {
 
   const table = useMaterialReactTable({
     columns,
-  data: staticData, // Passez directement les données filtrées ici
+  data: fetchedDataCenters, // Passez directement les données filtrées ici
     createDisplayMode: "modal",
     editDisplayMode: "modal",
     enableEditing: true,
@@ -347,7 +347,7 @@ const DataTable2 = (props) => {
         </Button>
         <Button
           variant="outlined"
-          onClick={() => exportToCSV(data)}
+          onClick={() => exportToCSV(fetchedDataCenters)}
         >
           Export as CSV
         </Button>
