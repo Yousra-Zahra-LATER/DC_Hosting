@@ -124,9 +124,9 @@ const DataTable2 = (props) => {
     return fields.map(item => ({
       accessorKey: item.key,
       header: item.header,
-      enableEditing: item.editable ?? true,  // Editable by default unless specified
+      enableEditing: item.enableEditing ?? true,  // Editable by default unless specified
       muiEditTextFieldProps: {
-        required: true,
+        required: item.required,
         error: !!validationErrors?.[item.key],
         helperText: validationErrors?.[item.key],
         onFocus: () =>
@@ -177,7 +177,7 @@ const DataTable2 = (props) => {
   const openDeleteConfirmModal = (row) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       deleteDataCenter(row.original.id);
-    }
+    } 
   };
 
   function useGetDataCenters() {

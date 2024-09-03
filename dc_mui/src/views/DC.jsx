@@ -341,75 +341,76 @@ function useDeleteDataCenter() {
     onMutate: (deletedDataCenterId) => {
       queryClient.setQueryData(["dataCenters"], (prevDataCenters = []) => {
         const dataCentersArray = Array.isArray(prevDataCenters)
-        ? prevDataCenters
-        : [];
+          ? prevDataCenters
+          : [];
 
-      return dataCentersArray.filter(
-        (dataCenter) => dataCenter.id !== deletedDataCenterId
-      );
-    });
-  },
-});
+        return dataCentersArray.filter(
+          (dataCenter) => dataCenter.id !== deletedDataCenterId
+        );
+      });
+    },
+  });
 }
 
 const validateDataCenter = (dataCenter) => {
-const errors = {};
+  const errors = {};
 
-if (!dataCenter.name || dataCenter.name.trim() === "") {
-  errors.name = "Name is required.";
-}
+  if (!dataCenter.name || dataCenter.name.trim() === "") {
+    errors.name = "Name is required.";
+  }
 
-if (!dataCenter.location || dataCenter.location.trim() === "") {
-  errors.location = "Location is required.";
-}
+  if (!dataCenter.location || dataCenter.location.trim() === "") {
+    errors.location = "Location is required.";
+  }
 
-if (!dataCenter.status || dataCenter.status.trim() === "") {
-  errors.status = "Status is required.";
-}
+  if (!dataCenter.status || dataCenter.status.trim() === "") {
+    errors.status = "Status is required.";
+  }
 
-return errors;
+  return errors;
 };
 
 const App = () => {
-const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
-return (
-  <QueryClientProvider client={new QueryClient()}>
-    <ThemeProvider theme={createTheme()}>
-    <Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center", // Aligns items vertically in the center
-    marginBottom: "1rem",
-  }}
->
-  <h2>Data Center</h2>
-  <FormControl sx={{ minWidth: 220 }}> {/* Adjust minWidth as needed */}
-  <InputLabel id="location-select-label" >Search By Location</InputLabel>
-    <Select
-      labelId="location-select-label"
-      id="location-select"
-      value={selectedLocation}
-      label="Location"
-      onChange={(e) => setSelectedLocation(e.target.value)}
-      
-    >
-      <MenuItem value="">
-        <em>All Locations</em>
-      </MenuItem>
-      <MenuItem value="Constantine">Constantine</MenuItem>
-      <MenuItem value="Alger">Alger</MenuItem>
-      <MenuItem value="Oran">Oran</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
+  return (
+    <QueryClientProvider client={new QueryClient()}>
+      <ThemeProvider theme={createTheme()}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center", // Aligns items vertically in the center
+            marginBottom: "1rem",
+          }}
+        >
+          <h2>Data Center</h2>
+          <FormControl sx={{ minWidth: 220 }}>
+            {" "}
+            {/* Adjust minWidth as needed */}
+            <InputLabel id="location-select-label">
+              Search By Location
+            </InputLabel>
+            <Select
+              labelId="location-select-label"
+              id="location-select"
+              value={selectedLocation}
+              label="Location"
+              onChange={(e) => setSelectedLocation(e.target.value)}
+            >
+              <MenuItem value="">
+                <em>All Locations</em>
+              </MenuItem>
+              <MenuItem value="Constantine">Constantine</MenuItem>
+              <MenuItem value="Alger">Alger</MenuItem>
+              <MenuItem value="Oran">Oran</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
         <DataCenterTable selectedLocation={selectedLocation} />
-      
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default App;
-
