@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState,useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import {
@@ -38,7 +38,11 @@ const DataTable2 = (props) => {
   const [fileName, setFileName] = useState(() => props.fileName || "DataTable");
   const [titleFile, setTitleFile] = useState(() => props.titleFile || "__DataTable__");
   
-  
+  useEffect(() => {
+    // Met à jour les données statiques 'staticData' lorsque les données reçues en props changent
+    setStaticData(props.data);
+  }, [props.data]);
+
   
   const exportToCSV = (data) => {
     const csvData = data.map(item => {
@@ -142,7 +146,7 @@ const DataTable2 = (props) => {
   const { mutateAsync: createDataCenter, isPending: isCreatingDataCenter } =
     useCreateDataCenter();
   const {
-    data: fetchedDataCenters = [],
+    data: data = [],
     isError: isLoadingDataCentersError,
     isFetching: isFetchingDataCenters,
     isLoading: isLoadingDataCenters,
@@ -185,7 +189,7 @@ const DataTable2 = (props) => {
       queryKey: ["dataCenters"],
       queryFn: async () => {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Simuler une API
-        return Promise.resolve(staticData); // Utiliser les données fictives
+        return Promise.resolve(data); // Utiliser les données fictives
       },
       refetchOnWindowFocus: false,
     });
@@ -224,6 +228,7 @@ const DataTable2 = (props) => {
       },
     });
   }
+  
   
   function useUpdateDataCenter() {
     const queryClient = useQueryClient();
@@ -284,7 +289,7 @@ const DataTable2 = (props) => {
 
   const table = useMaterialReactTable({
     columns,
-    data: fetchedDataCenters,
+  data: staticData, // Passez directement les données filtrées ici
     createDisplayMode: "modal",
     editDisplayMode: "modal",
     enableEditing: true,
@@ -344,14 +349,14 @@ const DataTable2 = (props) => {
         </Button>
         <Button
           variant="outlined"
-          onClick={() => exportToCSV(fetchedDataCenters)}
+          onClick={() => exportToCSV(data)}
         >
           Export as CSV
         </Button>
 
         <Button
           variant="outlined"
-          onClick={() => exportToPDF(fetchedDataCenters)}
+          onClick={() => exportToPDF(data)}
           startIcon={<FileDownloadIcon />}
         >
           Export as PDF

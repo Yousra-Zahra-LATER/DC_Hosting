@@ -7,7 +7,7 @@ import {
 import { Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 export default function Dashboard() {
-  const [selectedLocation, setSelectedLocation] = useState(''); // State pour stocker la location sélectionnée
+  const [selectedLocation, setSelectedLocation] = useState(''); // State for storing the selected location
 
   const field = [
     { key: "id", header: "Id", enableEditing: false, size: 80 },
@@ -16,7 +16,7 @@ export default function Dashboard() {
     { key: "status", header: "Status" }
   ];
 
-  // Liste statique des centres de données
+  // Static list of data centers
   const staticDat = [
     { id: "1", name: "Data Center 25", location: "Constantine", status: "Active" },
     { id: "2", name: "Data Center 16", location: "Alger", status: "Inactive" },
@@ -26,12 +26,10 @@ export default function Dashboard() {
   const fileName = "dashboard";
   const queryClient = new QueryClient(); 
 
-  // Filtrer les données en fonction de la location sélectionnée
+  // Filter the data based on the selected location
   const filteredData = selectedLocation
     ? staticDat.filter(data => data.location === selectedLocation)
     : staticDat;
-
-  console.log('Filtered Data:', filteredData); // Vérifiez si les données sont bien filtrées
 
   return (
     <>
@@ -39,7 +37,7 @@ export default function Dashboard() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center", // Aligns items vertically in the center
+          alignItems: "center",
           marginBottom: "1rem",
         }}
       >
