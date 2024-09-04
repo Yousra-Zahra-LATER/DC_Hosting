@@ -65,13 +65,9 @@ function App() {
           <Box sx={{ flexGrow: 1, backgroundColor: "white", padding: 2 }}>
             <Routes>
               <Route path="/" element={<Dashboard />} exact />
-
               <Route path="/clouddashboard" element={<CloudDashboard />} />
-
               <Route path="/profile" element={<Profile />} />
-
               <Route path="/auth" element={<Authentication />} />
-
               <Route path="/datacenter" element={<DC />} />
               <Route path="/rack" element={<Rack />} />
               <Route path="/server" element={<Server />} />
@@ -81,13 +77,9 @@ function App() {
               <Route path="/san" element={<San />} />
               <Route path="/ls" element={<Ls />} />
               <Route path="/pdu" element={<Pdu />} />
-
               <Route path="/vm" element={<VM />} />
-
               <Route path="/cluster" element={<Cluster />} />
-
               <Route path="/vApp" element={<VApp />} />
-
               <Route path="/sFTP" element={<SFTP />} />
 
               {/* Add more routes as needed */}

@@ -70,7 +70,40 @@ export default function Dashboard() {
       disk: "1TB NVMe",
       note: "High-performance application server",
     },
+    {
+      id: 4,
+      server_name: "Server 04",
+      dc_name: "Alger",
+      rack_name: "Rack 4",
+      rack_u: 6,
+      role_server: "Backup Server",
+      sn: "SN44556",
+      MGMT: "192.168.1.4",
+      model: "Lenovo ThinkSystem SR650",
+      os: "Red Hat Enterprise Linux 8",
+      cpu: "Intel Xeon Silver 4210",
+      ram: "64GB",
+      disk: "10TB SATA",
+      note: "Backup and recovery server",
+    },
+    {
+      id: 5,
+      server_name: "Server 05",
+      dc_name: "Constantine",
+      rack_name: "Rack 5",
+      rack_u: 3,
+      role_server: "DevOps Server",
+      sn: "SN78901",
+      MGMT: "192.168.1.5",
+      model: "Supermicro SuperServer",
+      os: "Debian 11",
+      cpu: "AMD EPYC 7502P",
+      ram: "256GB",
+      disk: "2TB SSD + 8TB HDD",
+      note: "Server for DevOps tools and CI/CD pipelines",
+    }
   ];
+  
 
   const fileName = "rack";
   const queryClient = new QueryClient();

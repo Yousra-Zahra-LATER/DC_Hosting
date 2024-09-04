@@ -12,7 +12,7 @@ export default function Dashboard() {
     { key: "id", header: "ID Server", enableEditing: false, size: 80 },
     { key: "firewall_name", header: "Firewall Name", required: true },
     { key: "dc_name", header: "DC Name", required: true },
-    { key: "rack_name", header: "Switch Name" },
+    { key: "rack_name", header: "Rack Name" },
     { key: "rack_u", header: "Rack U" },
     { key: "role_firewall", header: "Role" },
     { key: "sn", header: "SN" },
