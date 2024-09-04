@@ -17,7 +17,6 @@ import Firewall from './views/Firewall';
 import Cluster from './views/Cluster';
 import CloudDashboard from './views/CloudDashboard';
 import Authentication from './views/Auuthentication';
-import Rack from './views/Rack';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -38,14 +37,6 @@ function App() {
               <Route path="/vm" element={<VM />} />
               <Route path="/cluster" element={<Cluster />} />
               <Route path="/datacenter" element={<DC />} />
-              <Route path="/rack" element={<Rack />} />
-              <Route path="/server" element={<Server />} />
-              <Route path="/router" element={<RouterPage />} />
-              <Route path="/switch" element={<SWITCH/>} />
-              <Route path="/firewall" element={<Firewall />} />
-              <Route path="/san" element={<San />} />
-              <Route path="/ls" element={<Ls />} />
-              <Route path="/pdu" element={<Pdu />} />
               {/* Add more routes as needed */}
             </Routes>
           </Box>

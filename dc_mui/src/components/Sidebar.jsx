@@ -122,8 +122,8 @@ export default function Sidebar() {
           subItems: [
             { title: "VM", icon: <BackupIcon />, path: "/vm" },
             { title: "CLUSTER", icon: <ScriptIcon />, path: "/cluster" },
-            { title: "vAPP", icon: <ScriptIcon />, path: "/cluster" },
-            { title: "SFTP", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "vAPP", icon: <ScriptIcon />, path: "/vApp" },
+            { title: "SFTP", icon: <ScriptIcon />, path: "/sFTP" },
           ],
         },
         {
