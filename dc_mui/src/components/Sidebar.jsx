@@ -106,14 +106,14 @@ export default function Sidebar() {
           icon: <LuServerCog />,
           subItems: [
             { title: "SITE", icon: <BackupIcon />, path: "/datacenter" },
-            { title: "RACK", icon: <ScriptIcon />, path: "/router" },
+            { title: "RACK", icon: <ScriptIcon />, path: "/rack" },
             { title: "SERVER", icon: <BackupIcon />, path: "/server" },
             { title: "ROUTER", icon: <ScriptIcon />, path: "/router" },
             { title: "SWITCH", icon: <BackupIcon />, path: "/switch" },
             { title: "FIREWALL", icon: <ScriptIcon />, path: "/firewall" },
-            { title: "SAN", icon: <BackupIcon />, path: "/switch" },
-            { title: "LS", icon: <ScriptIcon />, path: "/firewall" },
-            { title: "PDU", icon: <ScriptIcon />, path: "/firewall" },
+            { title: "SAN", icon: <BackupIcon />, path: "/san" },
+            { title: "LS", icon: <ScriptIcon />, path: "/ls" },
+            { title: "PDU", icon: <ScriptIcon />, path: "/pdu" },
           ],
         },
         {

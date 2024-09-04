@@ -9,13 +9,15 @@ import Navbar from './components/Navbar';
 import Box from '@mui/material/Box';
 import DC from './views/DC';
 import VM from './views/VM';
+import San from './views/San';
+import Ls from './views/Ls';
+import Pdu from './views/Pdu';
+import SWITCH from './views/Switch';
+import Firewall from './views/Firewall';
 import Cluster from './views/Cluster';
-import ServerDetail from './views/ServerDetails';
-import ClientDetail from './views/ClientDetail';
-import Tasks from './views/Tasks';
-import Clients from './views/Clients';
 import CloudDashboard from './views/CloudDashboard';
 import Authentication from './views/Auuthentication';
+import Rack from './views/Rack';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -29,13 +31,21 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} exact/>
               <Route path="/clouddashboard" element={<CloudDashboard />} />
+              
               <Route path="/profile" element={<Profile />} />
               <Route path="/auth" element={<Authentication/>} />
-              <Route path="/server" element={<Server />} />
-              <Route path="/router" element={<RouterPage />} />
+              
               <Route path="/vm" element={<VM />} />
               <Route path="/cluster" element={<Cluster />} />
               <Route path="/datacenter" element={<DC />} />
+              <Route path="/rack" element={<Rack />} />
+              <Route path="/server" element={<Server />} />
+              <Route path="/router" element={<RouterPage />} />
+              <Route path="/switch" element={<SWITCH/>} />
+              <Route path="/firewall" element={<Firewall />} />
+              <Route path="/san" element={<San />} />
+              <Route path="/ls" element={<Ls />} />
+              <Route path="/pdu" element={<Pdu />} />
               {/* Add more routes as needed */}
             </Routes>
           </Box>
