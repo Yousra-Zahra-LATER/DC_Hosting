@@ -9,7 +9,6 @@ import {
 export default function SFTP() {
   
   const fields = [
-    { key: "id", header: "Id", enableEditing: false, size: 80 },
     { key: "name", header: "Name", required: true },
     { key: "vmname", header: "VM", required: true },
     { key: "cliname", header: "Client", required: true },
@@ -17,9 +16,9 @@ export default function SFTP() {
   ];
 
   const data = [
-    { id: '1', name: 'SFTP A', vmname : 'VM 1 DC-25', cliname: 'Client X', ip: '10.125.10.1'},
-    { id: '2', name: 'SFTP B',vmname : 'VM 3 DC-16', cliname: 'Client Y', ip: '10.216.10.10' },
-    { id: '3', name: 'SFTP C', vmname : 'VM 4 DC-31',cliname: 'Client Z', ip: '10.231.1.5' },
+    { id: '1', name: 'SFTP_User_A', vmname : 'vps 1', cliname: 'Client X', ip: '10.125.10.1'},
+    { id: '2', name: 'SFTP_User_B',vmname : 'Vps 2', cliname: 'Client Y', ip: '10.216.10.10' },
+    { id: '3', name: 'SFTP_User_C', vmname : 'Vps 3',cliname: 'Client Z', ip: '10.231.1.5' },
   ];
 
  

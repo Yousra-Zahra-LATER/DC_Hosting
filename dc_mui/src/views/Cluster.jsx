@@ -9,7 +9,6 @@ import {
 export default function Cluster() {
   
   const fields = [
-    { key: "id", header: "Id", enableEditing: false, size: 80 },
     { key: "name", header: "Name", required: true },
     { key: "dc", header: "Data Center", required: true },
     { key: "cluster_hyp", header: "Cluster", required: true },

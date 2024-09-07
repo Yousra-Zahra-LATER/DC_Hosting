@@ -13,7 +13,7 @@ import NetworkIcon from "@mui/icons-material/SettingsEthernet";
 import BackupIcon from "@mui/icons-material/Backup";
 import ScriptIcon from "@mui/icons-material/Code";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import logo from "../assets/Logo.png";
+import logo from "../assets/Logo-AT-White.png";
 import { FaUsersLine } from "react-icons/fa6";
 import { BiSupport } from "react-icons/bi";
 import { TbCloudCog } from "react-icons/tb";
@@ -130,29 +130,29 @@ export default function Sidebar() {
           title: "Access MANAGER",
           icon: <SiOpenaccess />,
           subItems: [
-            { title: "INTERNET Access", icon: <BackupIcon />, path: "/vm" },
-            { title: "ERP Access ", icon: <ScriptIcon />, path: "/cluster" },
-            { title: "HR  Access", icon: <ScriptIcon />, path: "/cluster" },
-            { title: "PAM  Access", icon: <ScriptIcon />, path: "/cluster" },
+            { title: "INTERNET Access", icon: <BackupIcon />, path: "/InternetAccess" },
+            { title: "ERP Access ", icon: <ScriptIcon />, path: "/ERPAccess" },
+            { title: "HR  Access", icon: <ScriptIcon />, path: "/HRAccess" },
+            { title: "PAM  Access", icon: <ScriptIcon />, path: "/PAMAccess" },
           ],
         },
         {
           title: "IPAM Manager",
           icon: <BiNetworkChart />,
           subItems: [
-            { title: "VLAN", icon: <BackupIcon />, path: "/ip" },
-            { title: "NETWORK", icon: <ScriptIcon />, path: "/rangeip" },
-            { title: "VRF", icon: <BackupIcon />, path: "/ip" },
-            { title: "IP", icon: <ScriptIcon />, path: "/rangeip" },
-            { title: "BGP", icon: <ScriptIcon />, path: "/ip" },
+            { title: "VLAN", icon: <BackupIcon />, path: "/VLAN" },
+            { title: "NETWORK", icon: <ScriptIcon />, path: "/NETWORK" },
+            { title: "VRF", icon: <BackupIcon />, path: "/VRF" },
+            { title: "IP", icon: <ScriptIcon />, path: "/IP" },
+            { title: "BGP", icon: <ScriptIcon />, path: "/BGP" },
           ],
         },
         {
           title: "VPN Manager",
           icon: <MdOutlineVpnLock />,
           subItems: [
-            { title: "VPN TUNNEL", icon: <BackupIcon />, path: "/ip" },
-            { title: "VPN CLIENT", icon: <ScriptIcon />, path: "/rangeip" },
+            { title: "VPN TUNNEL", icon: <BackupIcon />, path: "/VPNTunnel" },
+            { title: "VPN CLIENT", icon: <ScriptIcon />, path: "/VPNClient" },
           ],
         },
       ],

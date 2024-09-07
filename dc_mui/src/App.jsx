@@ -38,12 +38,31 @@ import VApp from "./views/VApp";
 
 import SFTP from "./views/SFTP";
 
+import HRAccess from "./views/HRAccess";
+
+import ERPAccess from "./views/ERPAccess";
+
+import InternetAccess from "./views/InternetAccess";
+
+import PAMAccess from "./views/PAMAccess";
+
+import VLAN from './views/VLAN';
+import NETWORK from './views/NETWORK';
+import VRF from './views/VRF';
+import IP from './views/IP';
+import BGP from './views/BGP';
+
+import VPNTunnel from './views/VPNTunnel';
+import VPNClient from './views/VPNClient';
+
 import San from "./views/San";
 import Ls from "./views/Ls";
 import Pdu from "./views/Pdu";
 import SWITCH from "./views/Switch";
 import Firewall from "./views/Firewall";
 import Rack from './views/Rack';
+
+import DataCenterAdminDashboard from './views/DataCenterAdminDashboard';
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -64,7 +83,7 @@ function App() {
 
           <Box sx={{ flexGrow: 1, backgroundColor: "white", padding: 2 }}>
             <Routes>
-              <Route path="/" element={<Dashboard />} exact />
+              <Route path="/" element={<DataCenterAdminDashboard />} exact />
               <Route path="/clouddashboard" element={<CloudDashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/auth" element={<Authentication />} />
@@ -82,6 +101,19 @@ function App() {
               <Route path="/vApp" element={<VApp />} />
               <Route path="/sFTP" element={<SFTP />} />
 
+              <Route path="/InternetAccess" element={<InternetAccess />} />
+              <Route path="/HRAccess" element={<HRAccess />} />
+              <Route path="/PAMAccess" element={<PAMAccess />} />
+              <Route path="/ERPAccess" element={<ERPAccess />} />
+
+              <Route path="/VLAN" element={<VLAN />} />
+              <Route path="/NETWORK" element={<NETWORK />} />
+              <Route path="/VRF" element={<VRF />} />
+              <Route path="/IP" element={<IP />} />
+              <Route path="/BGP" element={<BGP />} />
+
+              <Route path="/VPNTunnel" element={<VPNTunnel />} />
+              <Route path="/VPNClient" element={<VPNClient />} />
               {/* Add more routes as needed */}
             </Routes>
           </Box>

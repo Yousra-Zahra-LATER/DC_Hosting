@@ -9,7 +9,6 @@ import { Box} from '@mui/material';
 export default function Dashboard() {
  
   const field = [
-    { key: "id", header: "ID Server", enableEditing: false, size: 80 },
     { key: "dc_name", header: "DC Name", required: true },
     { key: "rack_name", header: "Rack Name" },
     { key: "source", header: "Soruce" },
