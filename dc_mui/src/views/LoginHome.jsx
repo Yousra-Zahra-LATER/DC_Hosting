@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,14 +11,15 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";  // Importer axios pour les requêtes HTTP
 import login from "../assets/DC.png";
-
+import { useNavigate } from "react-router-dom"; // Importer useNavigate
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
   image: {
-    backgroundImage: `url(${login})`, // Correctly use the image URL here
+    backgroundImage: `url(${login})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -48,7 +49,33 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");  // État pour l'email
+  const [password, setPassword] = useState("");  // État pour le mot de passe
+  const [error, setError] = useState("");  // État pour gérer les erreurs
+  const navigate = useNavigate(); // Initialiser useNavigate pour rediriger
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+        // Envoyer la requête POST à l'API
+        const response = await axios.post('http://127.0.0.1:8000/api/token/', {
+          email,
+          password,
+        });
+  
+        // Si succès, stocker le token JWT dans le localStorage
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
+  
+        // Rediriger vers la page Hello après la connexion réussie
+        navigate("/dash");
+      } catch (error) {
+        setError("Email ou mot de passe incorrect");
+        console.error(error);
+      }
+    };
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -61,20 +88,20 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
-              
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address" // Label qui flottera
+              label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}  // Mettre à jour l'état
             />
             <TextField
-             
               margin="normal"
               required
               fullWidth
@@ -83,11 +110,14 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}  // Mettre à jour l'état
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {error && <Typography color="error">{error}</Typography>} {/* Afficher l'erreur */}
             <Button
               type="submit"
               fullWidth

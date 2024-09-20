@@ -98,7 +98,7 @@ export default function Sidebar() {
           title: "Dashboard admin",
           icon: <LuLayoutDashboard />,
           subItems: [],
-          path: "/",
+          path: "/dash",
         },
 
         {

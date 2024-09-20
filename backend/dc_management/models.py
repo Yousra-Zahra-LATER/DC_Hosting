@@ -23,44 +23,22 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    ROLE_CHOICES = [
-        ('admin', 'Admin'),
-        ('client', 'Client'),
-        ('commercial', 'Commercial'),
-    ]
+
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    city = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='client')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
    
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'city', 'phone']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         return self.email
-    
 
-'''class User(models.Model):
-   
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
-    city = models.CharField(max_length=50)
-    phone = models.CharField(max_length=15)
-    
-    
-
-
-    def __str__(self):
-        return self.email'''
 """class DataCenter(models.Model):
     Name = models.CharField(max_length=255)
     Localisation = models.CharField(max_length=255)
