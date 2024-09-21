@@ -21,36 +21,37 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import RegisterSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 User = get_user_model()
 
-class RegisterView(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def UserDetails_view(request):
+    user = request.user  # Récupère l'utilisateur authentifié grâce au token JWT
 
+    response_data = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'email': user.email
+    }
+
+    return Response(response_data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-def LoginView(request):
-    print("LoginView called")  # Indique que la vue a été appelée
-    
-    serializer = LoginSerializer(data=request.data)
-    if serializer.is_valid():
-        print("Serializer is valid")  # Indique que les données sont valides
-        
-        email = serializer.validated_data.get('email')
-        password = serializer.validated_data.get('password')
-        print(f"Email: {email}, Password: {password}")  # Affiche l'email et le mot de passe reçus
-        
-        try:
-            user1 = User.objects.get(email=email)
-            print(f"User found: {user1.email}")  # Affiche le prénom de l'utilisateur trouvé
-        except User.DoesNotExist:
-            print("User with this email does not exist")  # Si l'utilisateur n'existe pas
-            return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
-        
-        
-        # Authentifier l'utilisateur
+def logout_view(request):
+    try:
+        logout(request)
+        return Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+'''class RegisterView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer'''
+
+""" # Authentifier l'utilisateur
         user = authenticate(request, email=email, password=password)
         
         if user is None:
@@ -75,15 +76,8 @@ def LoginView(request):
     
     print("Serializer is not valid:", serializer.errors)  # Affiche les erreurs du sérialiseur
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
 
-
-@api_view(['POST'])
-def logout_view(request):
-    try:
-        logout(request)
-        return Response({"detail": "Successfully logged out."}, status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 """class LogoutViewSet(viewsets.ViewSet):
     def create(self, request):

@@ -43,6 +43,7 @@ import {
   Cell
 } from 'recharts';
 import {  FaCheck } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 const DataCenterAdminDashboard = () => {
   // Sample Data
@@ -104,8 +105,13 @@ const DataCenterAdminDashboard = () => {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
+
+  const location = useLocation();
+    const { first_name, last_name } = location.state || {}; // Récupérer les données passées
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', padding: 3, backgroundColor: '#F5F7FA' }}>
+       <h1>Bienvenue, {first_name} {last_name}!</h1>
       <Typography variant="h4" gutterBottom>
         DataCenter Admin Dashboard
       </Typography>

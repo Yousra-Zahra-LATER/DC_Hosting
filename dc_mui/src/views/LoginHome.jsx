@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";  // Importer axios pour les requêtes HTTP
+import axios from "axios"; // Importer axios pour les requêtes HTTP
 import login from "../assets/DC.png";
 import { useNavigate } from "react-router-dom"; // Importer useNavigate
 const useStyles = makeStyles((theme) => ({
@@ -49,33 +49,47 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
-  const [email, setEmail] = useState("");  // État pour l'email
-  const [password, setPassword] = useState("");  // État pour le mot de passe
-  const [error, setError] = useState("");  // État pour gérer les erreurs
+  const [email, setEmail] = useState(""); // État pour l'email
+  const [password, setPassword] = useState(""); // État pour le mot de passe
+  const [error, setError] = useState(""); // État pour gérer les erreurs
   const navigate = useNavigate(); // Initialiser useNavigate pour rediriger
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-        // Envoyer la requête POST à l'API
-        const response = await axios.post('http://127.0.0.1:8000/api/token/', {
-          email,
-          password,
-        });
-  
-        // Si succès, stocker le token JWT dans le localStorage
-        localStorage.setItem("access_token", response.data.access);
-        localStorage.setItem("refresh_token", response.data.refresh);
-  
-        // Rediriger vers la page Hello après la connexion réussie
-        navigate("/dash");
-      } catch (error) {
-        setError("Email ou mot de passe incorrect");
-        console.error(error);
-      }
-    };
-  
+      // Envoyer la requête POST à l'API
+      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
+        email,
+        password,
+      });
+
+      // Si succès, stocker le token JWT dans le localStorage
+      localStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("refresh_token", response.data.refresh);
+      // Récupérer le token depuis le localStorage
+      const token = localStorage.getItem("access_token");
+
+      // Faire la requête pour obtenir les détails de l'utilisateur
+      const userDetailsResponse  = await axios.post(
+        "http://127.0.0.1:8000/hosting/UserDetails_view",
+        {}, // Pas de corps nécessaire pour cette requête
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Inclure le token dans l'en-tête
+          },
+        }
+      );
+       // Extraire les détails de l'utilisateur de la réponse
+       const { first_name, last_name } = userDetailsResponse.data;
+      // Rediriger vers la page Hello après la connexion réussie
+      navigate("/dash", { state: { first_name, last_name } }); // Passer les données à la page
+    } catch (error) {
+      setError("Email ou mot de passe incorrect");
+      console.error(error);
+    }
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -99,7 +113,7 @@ export default function SignInSide() {
               autoComplete="email"
               autoFocus
               value={email}
-              onChange={(e) => setEmail(e.target.value)}  // Mettre à jour l'état
+              onChange={(e) => setEmail(e.target.value)} // Mettre à jour l'état
             />
             <TextField
               margin="normal"
@@ -111,13 +125,14 @@ export default function SignInSide() {
               id="password"
               autoComplete="current-password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}  // Mettre à jour l'état
+              onChange={(e) => setPassword(e.target.value)} // Mettre à jour l'état
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            {error && <Typography color="error">{error}</Typography>} {/* Afficher l'erreur */}
+            {error && <Typography color="error">{error}</Typography>}{" "}
+            {/* Afficher l'erreur */}
             <Button
               type="submit"
               fullWidth
