@@ -71,15 +71,15 @@ export default function SignInSide() {
       const token = localStorage.getItem("access_token");
 
       // Faire la requête pour obtenir les détails de l'utilisateur
-      const userDetailsResponse  = await axios.post(
-        "http://127.0.0.1:8000/hosting/UserDetails_view",
-        {}, // Pas de corps nécessaire pour cette requête
+      const userDetailsResponse = await axios.post(
+        "http://127.0.0.1:8000/hosting/userDetails/",  // Ajoutez la barre oblique
+        {},  // Pas de corps nécessaire pour cette requête
         {
-          headers: {
-            Authorization: `Bearer ${token}`, // Inclure le token dans l'en-tête
-          },
+            headers: {
+                Authorization: `Bearer ${token}`,  // Inclure le token dans l'en-tête
+            },
         }
-      );
+    )
        // Extraire les détails de l'utilisateur de la réponse
        const { first_name, last_name } = userDetailsResponse.data;
       // Rediriger vers la page Hello après la connexion réussie

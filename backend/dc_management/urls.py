@@ -8,13 +8,11 @@ router = DefaultRouter()
 
 
 urlpatterns = [
-      path('login/', UserDetails_view, name='login'),
-      path('logout/', logout_view, name='logout'),
+    path('userDetails/', UserDetails_view, name='user_details'),  
+    path('logout/', logout_view, name='logout'),
 ]
 
 urlpatterns += router.urls
-
-
 
 
 """router.register(r'datacenters', DataCenterViewSet)"""
