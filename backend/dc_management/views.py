@@ -28,8 +28,8 @@ User = get_user_model()
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def UserDetails_view(request):
-    user = request.user  # Récupère l'utilisateur authentifié grâce au token JWT
-
+    user = request.user # Récupère l'utilisateur authentifié grâce au token JWT
+    
     response_data = {
         'first_name': user.first_name,
         'last_name': user.last_name,

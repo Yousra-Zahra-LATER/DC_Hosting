@@ -72,33 +72,12 @@ import Hello from "./views/Hello";
 function App() {
   return (
     <Router>
-      <Routes>
-     
-        <Route path="/" element={<Login />} />
-        </Routes>
-      
-        <Box sx={{ display: "flex", height: "100vh" }}>
-          <Sidebar />
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/dash" element={<DataCenterAdminDashboard />} />
 
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden",
-            }}
-          >
-            <Navbar />
-
-            <Box sx={{ flexGrow: 1, backgroundColor: "white", padding: 2 }}>
-            <Routes>
-                <Route path="/dash" element={<DataCenterAdminDashboard />} />
-                </Routes>
-            </Box>
-          </Box>
-        </Box>
-       
-    </Router>
+    </Routes>
+  </Router>
   );
 }
 
