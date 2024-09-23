@@ -56,40 +56,53 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Envoyer la requête POST à l'API
-      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
-        email,
-        password,
-      });
-
-      // Si succès, stocker le token JWT dans le localStorage
-      localStorage.setItem("access_token", response.data.access);
-      localStorage.setItem("refresh_token", response.data.refresh);
-      // Récupérer le token depuis le localStorage
-      const token = localStorage.getItem("access_token");
-
-      // Faire la requête pour obtenir les détails de l'utilisateur
-      const userDetailsResponse = await axios.post(
-        "http://127.0.0.1:8000/hosting/userDetails/",  // Ajoutez la barre oblique
-        {},  // Pas de corps nécessaire pour cette requête
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,  // Inclure le token dans l'en-tête
-            },
+        // Envoyer la requête POST pour obtenir le token JWT
+        const response = await axios.post("http://127.0.0.1:8000/api/token/", {
+          email,
+          password,
+        });
+      
+        // Stocker le token JWT dans le localStorage si l'authentification réussit
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
+      
+        // Récupérer le token depuis le localStorage
+        const token = localStorage.getItem("access_token");
+      
+        if (token) {
+          // Faire la requête pour obtenir les détails de l'utilisateur
+          const userDetailsResponse = await axios.post(
+            "http://127.0.0.1:8000/hosting/userDetails/",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Inclure le token dans l'en-tête
+              },
+            }
+          );
+      
+          // Si la réponse contient des données utilisateur valides
+          if (userDetailsResponse.data && userDetailsResponse.data.email) {
+            const { first_name, last_name } = userDetailsResponse.data;
+            // Rediriger vers la page principale après authentification réussie
+            navigate("/dash", { state: { first_name, last_name } });
+          } else {
+            // Si la réponse est vide ou incorrecte, rediriger vers la page 401
+            navigate("/401");
+          }
         }
-    )
-       // Extraire les détails de l'utilisateur de la réponse
-       const { first_name, last_name } = userDetailsResponse.data;
-      // Rediriger vers la page Hello après la connexion réussie
-      navigate("/dash", { state: { first_name, last_name } }); // Passer les données à la page
-    } catch (error) {
-      setError("Email ou mot de passe incorrect");
-      console.error(error);
-    }
-  };
+        else{
+            //le token nexsite pas dans localstorage
+            navigate("/401");
+        }
 
+        //le mot de passe ou password erronés 
+       } catch (error) {
+        setError("Email ou mot de passe incorrect");
+        console.error(error);
+      }
+    }
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />

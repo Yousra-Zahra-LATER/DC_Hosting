@@ -67,6 +67,8 @@ import Login from "./views/LoginHome";
 import DataCenterAdminDashboard from "./views/DataCenterAdminDashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Hello from "./views/Hello";
+import Unauth from "./views/Unauth";
+
 // Importez d'autres composants si nécessaire
 
 function App() {
@@ -75,7 +77,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/dash" element={<DataCenterAdminDashboard />} />
-
+      <Route path="/401" element={<Unauth/>} />
     </Routes>
   </Router>
   );

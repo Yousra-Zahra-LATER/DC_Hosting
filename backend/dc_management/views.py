@@ -26,17 +26,23 @@ from rest_framework.decorators import permission_classes
 User = get_user_model()
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])  # Utilise l'authentification pour la vue
 def UserDetails_view(request):
-    user = request.user # Récupère l'utilisateur authentifié grâce au token JWT
-    
-    response_data = {
-        'first_name': user.first_name,
-        'last_name': user.last_name,
-        'email': user.email
-    }
+    try:
+        # Si l'utilisateur est authentifié, renvoie ses détails
+        user = request.user  # Récupère l'utilisateur grâce au token JWT
+        response_data = {
+            
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
+        }
+        return Response(response_data, status=status.HTTP_200_OK)
 
-    return Response(response_data, status=status.HTTP_200_OK)
+    except Exception as e:
+        # Si une erreur d'authentification survient, renvoie une réponse vide
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
+
 
 @api_view(['POST'])
 def logout_view(request):
