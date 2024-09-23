@@ -26,13 +26,12 @@ from rest_framework.decorators import permission_classes
 User = get_user_model()
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])  # Utilise l'authentification pour la vue
 def UserDetails_view(request):
     try:
         # Si l'utilisateur est authentifié, renvoie ses détails
         user = request.user  # Récupère l'utilisateur grâce au token JWT
         response_data = {
-            
+
             'first_name': user.first_name,
             'last_name': user.last_name,
             'email': user.email

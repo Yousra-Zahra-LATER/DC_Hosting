@@ -70,7 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',  
-    
+   'dc_management.middleware.JWTAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'hosting.urls'
