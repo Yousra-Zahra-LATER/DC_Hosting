@@ -58,7 +58,7 @@ export default function SignInSide() {
     e.preventDefault();
 
     try {
-      // Envoyer la requête POST à l'API
+      // Envoyer la requête POST à l'API pour l'authentification
       const response = await axios.post("http://127.0.0.1:8000/api/token/", {
         email,
         password,
@@ -67,50 +67,14 @@ export default function SignInSide() {
       // Si succès, stocker le token JWT dans le localStorage
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
-     // Récupérer le token depuis le localStorage
-     const token = localStorage.getItem("access_token");
-     console.log("token", token);
-     if (token) {
-       // Faire la requête pour obtenir les détails de l'utilisateur
-       console.log("dkhaaaal");
-       const userDetailsResponse = await axios.post(
-         "http://127.0.0.1:8000/hosting/userDetails/",
-         {},
-         {
-           headers: {
-             Authorization: `Bearer ${token}`, // Inclure le token dans l'en-tête
-             
-           },
-         }
-       );
 
-       // Si la réponse contient des données utilisateur valides
-       //jeton== existe et valide
-       console.log("avant verificaation data");
-       if (userDetailsResponse.data && userDetailsResponse.data.email) {
-         const { first_name, last_name } = userDetailsResponse.data;
-         // Rediriger vers la page principale après authentification réussie
-         navigate("/dash", { state: { first_name, last_name } });
-       }
-     }
-     
-   } catch (error) {
-     // Gérer les erreurs de la requête
-     if (error.response) {
-       // Si la requête a échoué avec une réponse  //jeton== existe mais falso
-       if (error.response.data.error1) {
-         console.log("Erreur:", error.response.data.error1); // Afficher le message d'erreur
-         setError(error.response.data.error1); // Stocker le message d'erreur
-       }
-     else {
-      
-        setError("Email ou mot de passe incorrect");
-        console.error(error);
-
-      }
-     }
-   }
- };
+      // Rediriger vers la page principale après authentification réussie
+      navigate("/dash");
+    } catch (error) {
+      // Gérer les erreurs de l'authentification 
+      setError("Email ou mot de passe incorrect");
+    }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>

@@ -66,7 +66,7 @@ export default function Sidebar() {
       text: "DataCenter ADMIN",
       icon: <GiServerRack />,
       id: "DataCenterADMIN",
-      path: "/",
+      path: "/dash",
     },
     {
       text: "Cloud ADMIN",
