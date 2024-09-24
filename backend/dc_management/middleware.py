@@ -21,14 +21,18 @@ class JWTAuthenticationMiddleware:
         auth_header = request.headers.get('Authorization')
         if auth_header and auth_header.startswith('Bearer '):
             token = auth_header.split(' ')[1]  # Extraire le jeton
+            print("token",token)
             try:
+                
+                print('test1')
                 # Valider le jeton
                 AccessToken(token)
+                print('jeton valide')
                 # Si le jeton est valide, continuer la requête
                 return self.get_response(request)
             except (InvalidToken, TokenError):
                 # Jeton invalide ou expiré
-                return JsonResponse({'error': 'Jeton invalide ou expiré'}, status=401)
+                return JsonResponse({'error1': 'Jeton invalide ou expiré'}, status=401)
         else:
             # Aucun jeton fourni
             return JsonResponse({'error': 'Jeton manquant'}, status=401)

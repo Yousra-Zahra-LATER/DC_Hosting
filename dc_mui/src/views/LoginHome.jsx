@@ -56,29 +56,62 @@ export default function SignInSide() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
-       
-        const token = localStorage.getItem("access_token");
-      // Faire une requête GET avec le jeton dans le header Authorization
-axios.get('http://127.0.0.1:8000/hosting/userDetails/', {
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    console.log(response.data); // Traitement des données reçues de l'API
-  })
-  .catch(error => {
-    if (error.response) {
-      // La requête a été faite et le serveur a répondu avec un code d'erreur
-      console.error('Erreur111111111111111:', error.response.data.error); // Afficher le message d'erreur
-    } else {
-      // Erreur lors de la configuration de la requête
-      console.error('Erreur222:', error.message);
-    }
-  });
-}
+
+    try {
+      // Envoyer la requête POST à l'API
+      const response = await axios.post("http://127.0.0.1:8000/api/token/", {
+        email,
+        password,
+      });
+
+      // Si succès, stocker le token JWT dans le localStorage
+      localStorage.setItem("access_token", response.data.access);
+      localStorage.setItem("refresh_token", response.data.refresh);
+     // Récupérer le token depuis le localStorage
+     const token = localStorage.getItem("access_token");
+     console.log("token", token);
+     if (token) {
+       // Faire la requête pour obtenir les détails de l'utilisateur
+       console.log("dkhaaaal");
+       const userDetailsResponse = await axios.post(
+         "http://127.0.0.1:8000/hosting/userDetails/",
+         {},
+         {
+           headers: {
+             Authorization: `Bearer ${token}`, // Inclure le token dans l'en-tête
+             
+           },
+         }
+       );
+
+       // Si la réponse contient des données utilisateur valides
+       //jeton== existe et valide
+       console.log("avant verificaation data");
+       if (userDetailsResponse.data && userDetailsResponse.data.email) {
+         const { first_name, last_name } = userDetailsResponse.data;
+         // Rediriger vers la page principale après authentification réussie
+         navigate("/dash", { state: { first_name, last_name } });
+       }
+     }
+     
+   } catch (error) {
+     // Gérer les erreurs de la requête
+     if (error.response) {
+       // Si la requête a échoué avec une réponse  //jeton== existe mais falso
+       if (error.response.data.error1) {
+         console.log("Erreur:", error.response.data.error1); // Afficher le message d'erreur
+         setError(error.response.data.error1); // Stocker le message d'erreur
+       }
+     else {
+      
+        setError("Email ou mot de passe incorrect");
+        console.error(error);
+
+      }
+     }
+   }
+ };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
