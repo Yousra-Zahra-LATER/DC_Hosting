@@ -45,7 +45,8 @@ const PrivateRoute = ({ children }) => {
           } else {
             setIsAuthenticated(true);
           }
-        } else {
+        } 
+        else {
           console.log('token valide');
           setIsAuthenticated(true);
         }
