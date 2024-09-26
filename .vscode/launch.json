@@ -18,6 +18,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+<<<<<<< HEAD
       {
         "name": "Django",
         "type": "python",
@@ -47,6 +48,15 @@
         "name": "Run Django and React",
         "configurations": ["Django", "React App"]
       }
+=======
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://127.0.0.1:8000/",
+            "webRoot": "${workspaceFolder}"
+        }
+>>>>>>> 5e400996fb7a1fdf15cc4f562c477eefd72db7c6
     ]
   }
   

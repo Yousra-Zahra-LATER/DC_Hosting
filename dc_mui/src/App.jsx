@@ -72,15 +72,82 @@ import Hello from "./views/Hello";
 function App() {
   return (
     <Router>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dash" element={<DataCenterAdminDashboard />} />
+      <Routes>
+        {/* Route publique pour la page de connexion */}
+        <Route path="/" element={<Login />} />
 
-    </Routes>
-  </Router>
+        {/* Routes protégées, toutes sous PrivateRoute */}
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <ProtectedRoutes />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
 // Composant qui encapsule les routes protégées
+const ProtectedRoutes = () => {
+  return (
+    <Box sx={{ display: "flex", height: "100vh" }}>
+    <Sidebar />
 
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <Navbar />
+
+      <Box sx={{ flexGrow: 1, backgroundColor: "white", padding: 2 }}>
+        <Routes>
+          <Route path="/dash" element={<DataCenterAdminDashboard />} exact />
+          <Route path="/clouddashboard" element={<CloudDashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/auth" element={<Authentication />} />
+          <Route path="/datacenter" element={<DC />} />
+          <Route path="/rack" element={<Rack />} />
+          <Route path="/server" element={<Server />} />
+          <Route path="/router" element={<RouterPage />} />
+          <Route path="/switch" element={<SWITCH />} />
+          <Route path="/firewall" element={<Firewall />} />
+          <Route path="/san" element={<San />} />
+          <Route path="/ls" element={<Ls />} />
+          <Route path="/pdu" element={<Pdu />} />
+          <Route path="/vm" element={<VM />} />
+          <Route path="/cluster" element={<Cluster />} />
+          <Route path="/vApp" element={<VApp />} />
+          <Route path="/sFTP" element={<SFTP />} />
+
+          <Route path="/InternetAccess" element={<InternetAccess />} />
+          <Route path="/HRAccess" element={<HRAccess />} />
+          <Route path="/PAMAccess" element={<PAMAccess />} />
+          <Route path="/ERPAccess" element={<ERPAccess />} />
+
+          <Route path="/VLAN" element={<VLAN />} />
+          <Route path="/NETWORK" element={<NETWORK />} />
+          <Route path="/VRF" element={<VRF />} />
+          <Route path="/IP" element={<IP />} />
+          <Route path="/BGP" element={<BGP />} />
+
+          <Route path="/VPNTunnel" element={<VPNTunnel />} />
+          <Route path="/VPNClient" element={<VPNClient />} />
+
+      
+          {/* Add more routes as needed */}
+        </Routes>
+       
+      </Box>
+    </Box>
+  </Box>
+
+  );
+};
 export default App;

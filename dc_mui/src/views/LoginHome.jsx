@@ -58,7 +58,7 @@ export default function SignInSide() {
     e.preventDefault();
 
     try {
-      // Envoyer la requête POST à l'API
+      // Envoyer la requête POST à l'API pour l'authentification
       const response = await axios.post("http://127.0.0.1:8000/api/token/", {
         email,
         password,
@@ -67,26 +67,12 @@ export default function SignInSide() {
       // Si succès, stocker le token JWT dans le localStorage
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
-      // Récupérer le token depuis le localStorage
-      const token = localStorage.getItem("access_token");
 
-      // Faire la requête pour obtenir les détails de l'utilisateur
-      const userDetailsResponse = await axios.post(
-        "http://127.0.0.1:8000/hosting/userDetails/",  // Ajoutez la barre oblique
-        {},  // Pas de corps nécessaire pour cette requête
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,  // Inclure le token dans l'en-tête
-            },
-        }
-    )
-       // Extraire les détails de l'utilisateur de la réponse
-       const { first_name, last_name } = userDetailsResponse.data;
-      // Rediriger vers la page Hello après la connexion réussie
-      navigate("/dash", { state: { first_name, last_name } }); // Passer les données à la page
+      // Rediriger vers la page principale après authentification réussie
+      navigate("/dash");
     } catch (error) {
+      // Gérer les erreurs de l'authentification 
       setError("Email ou mot de passe incorrect");
-      console.error(error);
     }
   };
 
