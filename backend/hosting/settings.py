@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'hosting.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'mydatabase',  # Le nom de votre base de données
+        'NAME': 'demo_db',  # Le nom de votre base de données
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb://localhost:27017/',  # URL de connexion pour MongoDB local
